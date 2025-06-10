@@ -238,6 +238,40 @@
             gap: 15px;
             margin-top: auto;
         }
+
+        /* Styles for authentication section */
+        .auth-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed var(--border-color);
+            align-items: center;
+        }
+        .auth-controls span {
+            font-size: 0.9em;
+            color: var(--text-muted-color);
+            text-align: center;
+        }
+        .auth-controls button {
+            width: 100%; /* Make auth buttons take full width */
+            box-sizing: border-box;
+            font-weight: normal; /* Override bold for general buttons */
+        }
+        /* Specific style for Google Sign-in button */
+        #sign-in-google-btn {
+            background-color: #4285F4; /* Google Blue */
+            border-color: #4285F4;
+            color: white;
+        }
+        #sign-in-google-btn:hover {
+            background-color: #357ae8;
+            border-color: #357ae8;
+        }
+        /* End Auth Styles */
+
+
         .theme-selector label {
             display: block;
             margin-bottom: 5px;
@@ -1048,6 +1082,14 @@
                 <!-- Lists will be dynamically rendered here -->
             </div>
             <div class="sidebar-footer">
+                <!-- Authentication Controls -->
+                <div class="auth-controls">
+                    <span id="auth-status">Checking status...</span>
+                    <button id="sign-in-google-btn" style="display: none;">Sign In with Google</button>
+                    <button id="sign-out-btn" class="outline" style="display: none;">Sign Out</button>
+                </div>
+                <!-- End Authentication Controls -->
+                
                 <button id="delete-list-btn" class="danger" style="display: none;">Delete Current List</button>
                 <button id="rename-list-btn" class="outline" style="display: none;">Rename Current List</button>
                 <div class="theme-selector">
@@ -1220,6 +1262,11 @@
         const saveNoteBtnModal = document.getElementById('save-note-btn-modal');
         const deleteNoteBtnModal = document.getElementById('delete-note-btn-modal');
 
+        // Authentication DOM elements (NEW)
+        const authStatusSpan = document.getElementById('auth-status');
+        const signInGoogleBtn = document.getElementById('sign-in-google-btn');
+        const signOutBtn = document.getElementById('sign-out-btn');
+
 
         // --- Global State Variables ---
         let currentUserId = null;
@@ -1348,20 +1395,81 @@
         auth.onAuthStateChanged(user => {
             if (user) {
                 currentUserId = user.uid;
-                console.log("Firebase user logged in:", currentUserId);
-                loadLists();
+                console.log("Firebase user logged in:", user.uid);
+                authStatusSpan.textContent = `Logged in as: ${user.displayName || user.email || 'Anonymous'}`;
+                signInGoogleBtn.style.display = 'none';
+                signOutBtn.style.display = 'inline-block';
+                loadLists(); // Load data for the logged-in user
+                // Show list related buttons
+                createListBtn.style.display = 'inline-flex'; // Assuming this is an icon-btn
             } else {
-                auth.signInAnonymously()
-                    .catch(error => {
-                        console.error("Anonymous authentication failed:", error);
-                        if (error.code === 'auth/operation-not-allowed') {
-                            showMessage("Authentication failed: Anonymous sign-in is not enabled in your Firebase project. Please enable it in Firebase Console > Authentication > Sign-in method.", 'error', 7000);
-                        } else {
-                            showMessage(`Authentication failed: ${error.message}.`, 'error');
-                        }
-                    });
+                currentUserId = null;
+                currentListId = null; // Clear selected list
+                currentListName = null;
+                console.log("No user logged in.");
+                authStatusSpan.textContent = 'Not logged in';
+                signInGoogleBtn.style.display = 'inline-block'; // Show sign-in button
+                signOutBtn.style.display = 'none';
+                
+                // Clear UI and show messages
+                listsContainer.innerHTML = '<p style="text-align: center; color: var(--text-color); padding: 20px;">Please sign in to manage your lists.</p>';
+                videoGridContainer.innerHTML = '<p style="text-align: center; color: var(--text-color); grid-column: 1 / -1;">Please sign in to view videos.</p>';
+                
+                // Hide list management buttons
+                createListBtn.style.display = 'none';
+                deleteListBtn.style.display = 'none';
+                renameListBtn.style.display = 'none';
+                
+                // Destroy Sortable.js instance if any
+                if (sortableInstance) {
+                    sortableInstance.destroy();
+                    sortableInstance = null;
+                }
             }
         });
+
+        // New Google Sign-In Function
+        function signInWithGoogle() {
+            showLoading();
+            const provider = new firebase.auth.GoogleAuthProvider();
+            // Optional: You can add scopes if you need access to user's Google data beyond basic profile
+            // provider.addScope('https://www.googleapis.com/auth/youtube.readonly'); 
+            firebase.auth().signInWithPopup(provider)
+                .then((result) => {
+                    // Sign-in successful, onAuthStateChanged will handle the rest
+                    const user = result.user;
+                    console.log("Google Sign-in successful:", user.uid);
+                    showMessage(`Welcome, ${user.displayName || user.email}!`, 'success', 3000);
+                })
+                .catch((error) => {
+                    // Handle Errors here.
+                    const errorMessage = error.message;
+                    console.error("Google Sign-in failed:", errorMessage);
+                    showMessage(`Google Sign-in failed: ${errorMessage}. Please check console for details.`, 'error', 5000);
+                })
+                .finally(() => {
+                    hideLoading();
+                });
+        }
+
+        // New Sign Out Function
+        function signOutUser() {
+            showLoading();
+            firebase.auth().signOut()
+                .then(() => {
+                    console.log("User signed out.");
+                    showMessage("You have been signed out.", 'success', 2000);
+                    // onAuthStateChanged will handle UI updates
+                })
+                .catch((error) => {
+                    console.error("Error signing out:", error);
+                    showMessage("Error signing out.", 'error');
+                })
+                .finally(() => {
+                    hideLoading();
+                });
+        }
+
 
         // --- List Management ---
         function loadLists() {
@@ -1539,7 +1647,7 @@
             // Show delete and rename buttons only if there's more than one list and one is selected
             // Use listsContainer.children.length to accurately count rendered lists
             const numLists = listsContainer.querySelectorAll('.list-item').length; 
-            if (numLists > 0 && currentListId) { 
+            if (currentUserId && numLists > 0 && currentListId) { // Ensure user is logged in
                 deleteListBtn.style.display = numLists > 1 ? 'inline-block' : 'none'; // Only show delete if > 1 list
                 renameListBtn.style.display = 'inline-block'; 
             } else {
@@ -2179,6 +2287,10 @@
 
         // Add Video button in header
         addVideoButtonHeader.addEventListener('click', () => {
+            if (!currentUserId) {
+                showMessage("Please sign in to add videos.", 'error');
+                return;
+            }
             videoLinkInput.value = ''; // Clear input on open
             showModal(addVideoModal);
             videoLinkInput.focus(); // Focus input for quick paste
@@ -2201,6 +2313,10 @@
 
         // Create List button
         createListBtn.addEventListener('click', () => {
+            if (!currentUserId) {
+                showMessage("Please sign in to create lists.", 'error');
+                return;
+            }
             listNameInput.value = ''; // Clear input on open
             showModal(createListModal);
             listNameInput.focus();
@@ -2251,6 +2367,10 @@
             }
         });
         deleteNoteBtnModal.addEventListener('click', deleteNoteFromModal);
+
+        // Event Listeners for NEW authentication buttons
+        signInGoogleBtn.addEventListener('click', signInWithGoogle);
+        signOutBtn.addEventListener('click', signOutUser);
 
 
         // --- Global Paste Listener (Ctrl+V functionality) ---
