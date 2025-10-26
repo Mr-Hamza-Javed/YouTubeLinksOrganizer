@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,94 +14,106 @@
     <style>
         /* --- Root Variables for Theming --- */
         :root {
-            /* Dark Theme Colors (Default values for generic vars) */
-            --primary-color: #6200EE; /* Deep Purple */
-            --primary-light: #BB86FC; /* Lighter Purple */
-            --secondary-color: #03DAC6; /* Teal */
-            --error-color: #CF6679; /* Red */
+            --primary-color: #6366F1;
+            /* Indigo 500 */
+            --primary-light: #A5B4FC;
+            /* Indigo 300 */
+            --secondary-color: #06B6D4;
+            /* Cyan 500 */
+            --error-color: #EF4444;
+            /* Archived accent (dark) */
+            --archived-accent: #EF4444;
 
-            --bg-color: #121212; /* Dark background */
-            --surface-color: #1F1F1F; /* Dark surfaces */
-            --text-color: #E0E0E0; /* Light text */
-            --text-muted-color: #A0A0A0; /* Muted light text */
-            --border-color: #333333; /* Dark border */
+            --bg-color: #0F172A;
+            /* Slate 900 */
+            --surface-color: #111827;
+            /* Gray 900 */
+            --text-color: #E5E7EB;
+            /* Gray 200 */
+            --text-muted-color: #9CA3AF;
+            /* Gray 400 */
+            --border-color: #1F2937;
+            /* Gray 800 */
 
-            --card-shadow: rgba(0, 0, 0, 0.4);
-            --modal-shadow: rgba(0, 0, 0, 0.5);
-            --input-focus-shadow: rgba(98, 0, 238, 0.5); /* primary-color with transparency */
-            --youtube-thumbnail-border: transparent; /* Thumbnail border in dark mode */
-            --three-dots-color: #777; /* Default color for 3-dots icon */
-            --three-dots-hover-bg: rgba(255, 255, 255, 0.1);
+            --card-shadow: rgba(0, 0, 0, 0.35);
+            --modal-shadow: rgba(0, 0, 0, 0.45);
+            --input-focus-shadow: rgba(99, 102, 241, 0.35);
+            --youtube-thumbnail-border: transparent;
+            --three-dots-color: #E5E7EB;
+            --three-dots-hover-bg: rgba(255, 255, 255, 0.06);
 
-            /* Note Button Colors for Dark Theme (Icon specific) */
-            /* Add Note: Transparent background, muted text for border/icon */
             --note-add-bg: transparent;
             --note-add-text: var(--text-muted-color);
-            /* Open Note: Solid Teal, white icon */
---note-open-bg: #000000; /* Solid Black */
---note-open-text: white; /* White icon */
---note-open-hover-bg: var(--secondary-color); /* Teal for hover */
+            --note-open-bg: #0B1220;
+            --note-open-text: white;
+            --note-open-hover-bg: var(--secondary-color);
 
-            /* Card Size Variable (controlled by slider) */
-            --card-base-width: 320px; /* Default card width */
+            --card-base-width: 320px;
         }
 
         /* --- Light Theme Class --- */
         body.light-theme {
-            --bg-color: #F8F8F8; /* Lighter background */
-            --surface-color: #FFFFFF;    /* White surfaces */
-            --text-color: #333333;        /* Dark text on light backgrounds */
-            --text-muted-color: #666666; /* Muted text on light backgrounds */
-            --border-color: #E0E0E0;     /* Lighter border */
-            --card-shadow: rgba(0, 0, 0, 0.15);
-            --modal-shadow: rgba(0, 0, 0, 0.25);
-            --input-focus-shadow: rgba(98, 0, 238, 0.3); /* primary-color with transparency */
+            --bg-color: #F7F8FA;
+            --surface-color: #FFFFFF;
+            --text-color: #0F172A;
+            --text-muted-color: #64748B;
+            /* Slate 500 */
+            --border-color: #E5E7EB;
+            /* Gray 200 */
+            --card-shadow: rgba(15, 23, 42, 0.08);
+            --modal-shadow: rgba(15, 23, 42, 0.12);
+            --input-focus-shadow: rgba(99, 102, 241, 0.25);
             --youtube-thumbnail-border: var(--border-color);
-            --three-dots-color: #909090;
-            --three-dots-hover-bg: rgba(0, 0, 0, 0.05);
+            --three-dots-color: #0F172A;
+            --three-dots-hover-bg: rgba(15, 23, 42, 0.06);
+            --archived-accent: #DC2626;
+            /* Archived accent (light) */
 
-            /* Note Button Colors for Light Theme (Icon specific) */
             --note-add-bg: transparent;
             --note-add-text: var(--text-muted-color);
---note-open-bg: #000000; /* Solid Black */
-            --note-open-text: white; /* White icon */
-            --note-open-hover-bg: #00A38E; /* Darker solid teal for hover */
+            --note-open-bg: #0F172A;
+            --note-open-text: white;
+            --note-open-hover-bg: #0E7490;
+            /* Cyan 700 */
         }
 
         /* --- System Theme (prefers light) --- */
         @media (prefers-color-scheme: light) {
-            body:not(.dark-theme):not(.light-theme) { /* Only apply if no explicit theme is set */
-                --bg-color: #F8F8F8;
+            body:not(.dark-theme):not(.light-theme) {
+                --bg-color: #F7F8FA;
                 --surface-color: #FFFFFF;
-                --text-color: #333333;
-                --text-muted-color: #666666;
-                --border-color: #E0E0E0;
-                --card-shadow: rgba(0, 0, 0, 0.15);
-                --modal-shadow: rgba(0, 0, 0, 0.25);
-                --input-focus-shadow: rgba(98, 0, 238, 0.3);
+                --text-color: #0F172A;
+                --text-muted-color: #64748B;
+                --border-color: #E5E7EB;
+                --card-shadow: rgba(15, 23, 42, 0.08);
+                --modal-shadow: rgba(15, 23, 42, 0.12);
+                --input-focus-shadow: rgba(99, 102, 241, 0.25);
                 --youtube-thumbnail-border: var(--border-color);
-                --three-dots-color: #909090;
-                --three-dots-hover-bg: rgba(0, 0, 0, 0.05);
+                --three-dots-color: #0F172A;
+                --three-dots-hover-bg: rgba(15, 23, 42, 0.06);
+                --archived-accent: #DC2626;
+                /* Archived accent (system light) */
 
-                /* Note Button Colors for System Light Theme */
                 --note-add-bg: transparent;
                 --note-add-text: var(--text-muted-color);
                 --note-open-bg: var(--secondary-color);
                 --note-open-text: white;
-                --note-open-hover-bg: #00A38E;
+                --note-open-hover-bg: #0E7490;
             }
         }
 
         /* --- General Styles --- */
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
             margin: 0;
-            background-color: var(--bg-color); 
-            color: var(--text-color);           
+            background-color: var(--bg-color);
+            color: var(--text-color);
             transition: background-color 0.3s ease, color 0.3s ease;
             display: flex;
-            min-height: 100vh; /* Ensure body takes full height for mobile scroll */
-            font-size: 14px; /* Base font size */
+            min-height: 100vh;
+            /* Ensure body takes full height for mobile scroll */
+            font-size: 14px;
+            /* Base font size */
         }
 
         /* Scrollbar styles for better aesthetics */
@@ -108,17 +121,21 @@
             width: 8px;
             height: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--surface-color);
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb {
             background: var(--primary-light);
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-color);
         }
+
         /* Firefox */
         html {
             scrollbar-color: var(--primary-light) var(--surface-color);
@@ -126,11 +143,280 @@
         }
 
         /* --- App Layout --- */
+
+        /* Footer toolbar (themes + auth icons in one row) */
+        .footer-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .icon-toggle {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color .2s ease, border-color .2s ease, transform .1s ease;
+            color: var(--text-color);
+        }
+
+        .icon-toggle:hover {
+            background-color: var(--three-dots-hover-bg);
+            border-color: var(--primary-light);
+        }
+
+        .icon-toggle:active {
+            transform: scale(.98);
+        }
+
+        .icon-toggle.active {
+            outline: 2px solid var(--primary-light);
+        }
+
+        .footer-spacer {
+            flex: 1;
+        }
+
+        /* pushes auth icons to right */
+        #auth-status {
+            gap: 6px;
+            padding: 6px 10px;
+        }
+
+        /* make chip compact */
+        #auth-status span {
+            display: none;
+        }
+
+        .list-emoji {
+            font-size: 1.65em;
+            /* bigger emoji */
+            line-height: 1;
+            /* avoid extra vertical space */
+            flex-shrink: 0;
+            /* keep size when the row is tight */
+        }
+
+
+
+
+
+
+
+        /* hide text, icon-only look */
+
+
+        /* --- Sidebar actions & list reordering --- */
+        .list-actions-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .list-more-btn {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-muted-color);
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .1s ease;
+        }
+
+        .list-more-btn:hover {
+            background-color: var(--three-dots-hover-bg);
+            border-color: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .list-more-btn:active {
+            transform: scale(.96);
+        }
+
+
+        /* list popover */
+        .list-actions-popover {
+            position: fixed;
+            z-index: 1003;
+            display: none;
+            min-width: 200px;
+            padding: 8px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 8px 24px var(--card-shadow);
+        }
+
+        .list-actions-popover.active {
+            display: block;
+        }
+
+        .list-actions-popover .menu-item {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            border: none;
+            background: transparent;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: .95em;
+        }
+
+        .list-actions-popover .menu-item:hover {
+            background: var(--three-dots-hover-bg);
+        }
+
+        .list-actions-popover .menu-item.danger:hover {
+            background: rgba(207, 102, 121, .18);
+        }
+
+        .sidebar-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .kebab-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color .2s ease, border-color .2s ease, transform .1s ease;
+        }
+
+        .kebab-btn:hover {
+            background-color: var(--three-dots-hover-bg);
+            border-color: var(--primary-light);
+        }
+
+        .kebab-btn:active {
+            transform: scale(.98);
+        }
+
+        #list-actions-menu {
+            position: absolute;
+            top: 48px;
+            right: 20px;
+            z-index: 1002;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 8px 24px var(--card-shadow);
+            padding: 8px;
+            display: none;
+            min-width: 220px;
+        }
+
+        #list-actions-menu.active {
+            display: block;
+        }
+
+        #list-actions-menu .menu-item {
+            width: 100%;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            border: none;
+            background: transparent;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: .95em;
+        }
+
+        #list-actions-menu .menu-item:hover {
+            background: var(--three-dots-hover-bg);
+        }
+
+        #list-actions-menu .menu-item.danger:hover {
+            background: rgba(207, 102, 121, .18);
+        }
+
+        /* Drag handle shown only in reorder mode */
+        #lists-container.reorder-active .list-drag-handle {
+            display: inline-flex;
+        }
+
+        .list-drag-handle {
+            display: none;
+            margin-right: 8px;
+            font-size: 1.1em;
+            color: var(--text-muted-color);
+            cursor: grab;
+            user-select: none;
+        }
+
+        /* List item layout tweak to fit drag handle */
+        .list-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid transparent;
+            transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+            text-align: left;
+            color: var(--text-color);
+
+
+        }
+
+        .list-label {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+        /* Auth icon chips */
+        .auth-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+        }
+
+        .auth-icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+        }
+
         .app-container {
             display: flex;
             width: 100%;
-            height: 100vh; /* Fixed height to viewport height */
-            overflow: hidden; /* Hide overflow for the container, let children manage their scroll */
+            height: 100vh;
+            /* Fixed height to viewport height */
+            overflow: hidden;
+            /* Hide overflow for the container, let children manage their scroll */
         }
 
         /* --- Sidebar --- */
@@ -143,8 +429,10 @@
             display: flex;
             flex-direction: column;
             z-index: 101;
-            height: 96%; /* Changed height as requested */
-            overflow-y: hidden; /* Prevent sidebar itself from scrolling */
+            height: auto;
+            /* Changed height as requested */
+            overflow-y: hidden;
+            /* Prevent sidebar itself from scrolling */
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
@@ -157,6 +445,7 @@
             border-bottom: 1px solid var(--border-color);
             color: var(--primary-color);
         }
+
         .sidebar-header h2 {
             margin: 0;
             font-size: 1.5em;
@@ -178,57 +467,100 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
             flex-shrink: 0;
         }
+
         .icon-btn:hover {
             background-color: var(--primary-light);
             transform: scale(1.05);
         }
+
         .icon-btn:active {
             transform: scale(0.98);
         }
 
         .lists-container {
-            flex-grow: 1; /* Allow it to take available height */
-            overflow-y: auto; /* Make only the lists-container scrollable */
+            flex-grow: 1;
+            /* Allow it to take available height */
+            overflow-y: auto;
+            /* Make only the lists-container scrollable */
             margin-bottom: 20px;
         }
 
-        .list-item {
-            display: block;
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border: none;
-            text-align: left;
-            background-color: transparent;
-            color: var(--text-color);
-            font-size: 1.05em;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            box-shadow: inset 0 0 0px transparent;
-        }
+
         /* Hover state for non-active list items */
-        .list-item:hover:not(.active) { 
-            background-color: var(--surface-color); 
-            box-shadow: inset 0 0 0px 1px var(--primary-light); 
-            color: var(--primary-light); 
+        .list-item:hover:not(.active) {
+            background-color: var(--surface-color);
+            border-color: var(--border-color);
+            color: var(--text-color);
         }
+
+
         /* Active list item styles */
         .list-item.active {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            background: rgba(99, 102, 241, 0.12);
+            /* subtle indigo tint */
+            border-color: var(--primary-light);
+            color: var(--text-color);
+            font-weight: 600;
         }
+
+        /* Temporary archived list look */
+        .list-item.temp-archived {
+            border-color: var(--archived-accent);
+            box-shadow: inset 3px 0 0 var(--archived-accent);
+        }
+
+        .list-item.temp-archived.active {
+            background: rgba(239, 68, 68, 0.12);
+            /* dark default */
+        }
+
+        body.light-theme .list-item.temp-archived.active,
+        @media (prefers-color-scheme: light) {
+            body:not(.dark-theme):not(.light-theme) .list-item.temp-archived.active {
+                background: rgba(220, 38, 38, 0.10);
+                /* light */
+            }
+        }
+
         /* Hover state for active list item */
-        .list-item.active:hover { 
-            background-color: var(--primary-light);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            color: white; 
+        .list-item.active:hover {
+            background: rgba(99, 102, 241, 0.18);
         }
+
+        .user-popover {
+            position: fixed;
+            z-index: 1003;
+            min-width: 240px;
+            padding: 12px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            box-shadow: 0 8px 24px var(--card-shadow);
+            display: none;
+        }
+
+        .user-popover.active {
+            display: block;
+        }
+
+        .user-popover .row {
+            margin: 6px 0;
+            font-size: 0.92em;
+            color: var(--text-muted-color);
+        }
+
+        .user-popover .name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .user-popover .actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
 
         .sidebar-footer {
             padding-top: 20px;
@@ -249,26 +581,34 @@
             border-bottom: 1px dashed var(--border-color);
             align-items: center;
         }
+
         .auth-controls span {
             font-size: 0.9em;
             color: var(--text-muted-color);
             text-align: center;
         }
+
         .auth-controls button {
-            width: 100%; /* Make auth buttons take full width */
+            width: 100%;
+            /* Make auth buttons take full width */
             box-sizing: border-box;
-            font-weight: normal; /* Override bold for general buttons */
+            font-weight: normal;
+            /* Override bold for general buttons */
         }
+
         /* Specific style for Google Sign-in button */
         #sign-in-google-btn {
-            background-color: #4285F4; /* Google Blue */
+            background-color: #4285F4;
+            /* Google Blue */
             border-color: #4285F4;
             color: white;
         }
+
         #sign-in-google-btn:hover {
             background-color: #357ae8;
             border-color: #357ae8;
         }
+
         /* End Auth Styles */
 
 
@@ -284,7 +624,8 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            overflow-y: auto; /* This element itself can scroll if its content overflows */
+            overflow-y: auto;
+            /* This element itself can scroll if its content overflows */
         }
 
         header {
@@ -319,11 +660,13 @@
             align-items: center;
             gap: 8px;
         }
+
         .size-slider-group label {
             font-size: 0.9em;
             color: var(--text-muted-color);
             white-space: nowrap;
         }
+
         #card-size-slider {
             width: 120px;
             -webkit-appearance: none;
@@ -334,6 +677,7 @@
             height: 5px;
             cursor: pointer;
         }
+
         #card-size-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -344,10 +688,12 @@
             cursor: grab;
             transition: background 0.2s ease, transform 0.2s ease;
         }
+
         #card-size-slider::-webkit-slider-thumb:active {
             transform: scale(1.2);
             cursor: grabbing;
         }
+
         #card-size-slider::-moz-range-thumb {
             width: 15px;
             height: 15px;
@@ -356,13 +702,17 @@
             cursor: grab;
             transition: background 0.2s ease, transform 0.2s ease;
         }
+
         #card-size-slider::-moz-range-thumb:active {
             transform: scale(1.2);
             cursor: grabbing;
         }
 
 
-        select, button, input[type="text"], textarea {
+        select,
+        button,
+        input[type="text"],
+        textarea {
             padding: 10px 15px;
             border-radius: 8px;
             border: 1px solid var(--border-color);
@@ -373,7 +723,9 @@
             outline: none;
         }
 
-        select:focus, input[type="text"]:focus, textarea:focus {
+        select:focus,
+        input[type="text"]:focus,
+        textarea:focus {
             border-color: var(--secondary-color);
             box-shadow: 0 0 8px var(--input-focus-shadow);
         }
@@ -389,7 +741,8 @@
         button:hover {
             background-color: var(--primary-light);
             border-color: var(--primary-light);
-            color: white; /* Keep white for primary light */
+            color: white;
+            /* Keep white for primary light */
         }
 
         button.outline {
@@ -397,9 +750,11 @@
             border: 1px solid var(--primary-light);
             color: var(--primary-light);
         }
+
         button.outline:hover {
             background-color: var(--primary-light);
-            color: white; /* Keep white for outline hover */
+            color: white;
+            /* Keep white for outline hover */
         }
 
         button.danger {
@@ -407,6 +762,7 @@
             border-color: var(--error-color);
             color: var(--text-light);
         }
+
         button.danger:hover {
             background-color: #b00020;
         }
@@ -414,7 +770,8 @@
         main {
             flex-grow: 1;
             padding: 20px;
-            overflow-y: auto; /* This element itself can scroll if its content overflows */
+            overflow-y: auto;
+            /* This element itself can scroll if its content overflows */
         }
 
         /* --- Video Grid Container (CSS Grid) --- */
@@ -435,8 +792,10 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px var(--card-shadow);
             overflow: hidden;
-            width: 100%; /* Take full width of grid cell */
-            max-width: var(--card-base-width); /* Restrict max width */
+            width: 100%;
+            /* Take full width of grid cell */
+            max-width: var(--card-base-width);
+            /* Restrict max width */
             display: flex;
             flex-direction: column;
             cursor: pointer;
@@ -444,6 +803,7 @@
             list-style: none;
             margin: 0;
         }
+
         .video-card:hover {
             box-shadow: 0 6px 15px var(--card-shadow);
         }
@@ -455,6 +815,7 @@
             background-color: transparent;
             box-shadow: none;
         }
+
         .video-card.sortable-drag {
             opacity: 1;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
@@ -463,13 +824,17 @@
         }
 
         .video-card-thumbnail {
-            position: relative; /* Crucial for absolute positioning of action buttons */
+            position: relative;
+            /* Crucial for absolute positioning of action buttons */
             width: 100%;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            padding-bottom: 56.25%;
+            /* 16:9 Aspect Ratio */
             overflow: hidden;
             border-bottom: 1px solid var(--youtube-thumbnail-border);
-            cursor: grab; /* Enable drag on thumbnail */
+            cursor: grab;
+            /* Enable drag on thumbnail */
         }
+
         .video-card-thumbnail img {
             position: absolute;
             top: 0;
@@ -480,6 +845,7 @@
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
         }
+
         .duration-overlay {
             position: absolute;
             bottom: 8px;
@@ -494,18 +860,28 @@
 
         /* --- Action Buttons (Note & Three Dots) --- */
         .video-card-action-buttons {
-            position: absolute; /* Position relative to .video-card-thumbnail */
-            top: 8px; /* Padding from top */
-            right: 8px; /* Padding from right */
-            z-index: 2; /* Ensure it's above thumbnail content */
+            position: absolute;
+            /* Position relative to .video-card-thumbnail */
+            top: 8px;
+            /* Padding from top */
+            right: 8px;
+            /* Padding from right */
+            z-index: 2;
+            /* Ensure it's above thumbnail content */
             display: flex;
-            flex-direction: column; /* Stack vertically */
-            align-items: flex-end; /* Align icons to the right within their column */
-            gap: 5px; /* Space between the two icon buttons */
+            flex-direction: column;
+            /* Stack vertically */
+            align-items: flex-end;
+            /* Align icons to the right within their column */
+            gap: 5px;
+            /* Space between the two icon buttons */
 
-            opacity: 0; /* Hidden by default */
-            visibility: hidden; /* Hidden by default */
-            transition: opacity 0.2s ease, visibility 0.2s ease; /* Smooth fade */
+            opacity: 0;
+            /* Hidden by default */
+            visibility: hidden;
+            /* Hidden by default */
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+            /* Smooth fade */
         }
 
         /* Show action buttons on hover over the entire video card */
@@ -527,7 +903,8 @@
             padding: 12px;
             align-items: flex-start;
             gap: 10px;
-            position: relative; /* For 3-dots menu overlay positioning */
+            position: relative;
+            /* For 3-dots menu overlay positioning */
         }
 
         .channel-avatar {
@@ -543,9 +920,12 @@
         .video-text-content {
             flex-grow: 1;
             overflow: hidden;
-            min-width: 0; /* Important for flex items */
-            display: flex; /* Made flex to stack children */
-            flex-direction: column; /* Stack children vertically */
+            min-width: 0;
+            /* Important for flex items */
+            display: flex;
+            /* Made flex to stack children */
+            flex-direction: column;
+            /* Stack children vertically */
         }
 
         .video-text-content h3 {
@@ -562,8 +942,10 @@
         }
 
         .video-card-meta {
-            line-height: 1.3; /* Adjust line height for meta info */
+            line-height: 1.3;
+            /* Adjust line height for meta info */
         }
+
         .video-card-meta p {
             margin: 0;
             font-size: 0.85em;
@@ -572,6 +954,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         .video-card-meta p.channel-name {
             font-weight: 500;
             color: var(--text-muted-color);
@@ -579,15 +962,21 @@
 
         /* --- Inline Note Button (Icon Only) --- */
         .inline-note-btn {
-            font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif; /* Ensure emoji renders */
-            font-size: 1.5em; /* Larger for icon */
-            width: 32px;    /* Fixed width for square button */
-            height: 32px;   /* Fixed height for square button */
+            font-family: 'Segoe UI Emoji', 'Noto Color Emoji', 'Apple Color Emoji', sans-serif;
+            /* Ensure emoji renders */
+            font-size: 1.5em;
+            /* Larger for icon */
+            width: 32px;
+            /* Fixed width for square button */
+            height: 32px;
+            /* Fixed height for square button */
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0; /* Remove padding for icon button */
-            border-radius: 25%; /* Changed from 50% to 25% */
+            padding: 0;
+            /* Remove padding for icon button */
+            border-radius: 25%;
+            /* Changed from 50% to 25% */
             cursor: pointer;
             transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
             box-sizing: border-box;
@@ -595,27 +984,32 @@
 
         /* "Add Note" button (no note) - simple white and black formatting */
         .inline-note-btn.add-note {
-            background-color: transparent; 
-            border: 1px solid var(--border-color); 
-            color: var(--text-muted-color); 
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted-color);
         }
+
         .inline-note-btn.add-note:hover {
-            background-color: var(--three-dots-hover-bg); 
-            color: var(--text-color); 
+            background-color: var(--three-dots-hover-bg);
+            color: var(--text-color);
             border-color: var(--text-color);
         }
 
         /* "Open Note" button (has note) - colored */
         .inline-note-btn.open-note {
-            background-color: var(--note-open-bg); /* Solid teal */
-            border: 1px solid var(--secondary-color); 
-            color: var(--note-open-text); /* White icon */
+            background-color: var(--note-open-bg);
+            /* Solid teal */
+            border: 1px solid var(--secondary-color);
+            color: var(--note-open-text);
+            /* White icon */
         }
+
         .inline-note-btn.open-note:hover {
-            background-color: var(--note-open-hover-bg); /* Darker solid teal */
-            color: var(--note-open-text); 
+            background-color: var(--note-open-hover-bg);
+            /* Darker solid teal */
+            color: var(--note-open-text);
         }
-        
+
         /* --- Three-dot menu button --- */
         .three-dots-menu-btn {
             background: none;
@@ -631,35 +1025,39 @@
             /* Margins removed, controlled by parent .video-card-action-buttons gap/flex */
             cursor: pointer;
             border-radius: 50%;
-            transition: background-color 0.2s ease, color 0.2s ease; /* Added color transition */
+            transition: background-color 0.2s ease, color 0.2s ease;
+            /* Added color transition */
             flex-shrink: 0;
-            position: relative; 
+            position: relative;
         }
+
         .three-dots-menu-btn:hover {
             background-color: var(--three-dots-hover-bg);
-            /* Solid color on hover */
-            background-color: var(--surface-color); 
-            color: var(--text-color); /* Change icon color on hover */
+            color: var(--text-color);
         }
+
         /* Specific hover for light theme to ensure dark text on light hover */
         body.light-theme .three-dots-menu-btn:hover,
         @media (prefers-color-scheme: light) {
             body:not(.dark-theme):not(.light-theme) .three-dots-menu-btn:hover {
-                background-color: var(--border-color); /* Lighter border for light theme hover */
-                color: var(--text-color); /* Dark text on light hover */
+                background-color: var(--border-color);
+                /* Lighter border for light theme hover */
+                color: var(--text-color);
+                /* Dark text on light hover */
             }
         }
+
         .three-dots-menu-btn:focus {
             outline: 2px solid var(--primary-light);
         }
 
 
         .video-menu-overlay {
-            position: fixed; 
+            position: fixed;
             background-color: var(--surface-color);
             border-radius: 8px;
             box-shadow: 0 4px 12px var(--card-shadow);
-            z-index: 1000; 
+            z-index: 1000;
             min-width: 150px;
             padding: 8px 0;
             display: none;
@@ -668,11 +1066,13 @@
             visibility: hidden;
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
         }
+
         .video-menu-overlay.active {
             display: flex;
             opacity: 1;
             visibility: visible;
         }
+
         .video-menu-overlay button.menu-item {
             display: block;
             width: 100%;
@@ -686,11 +1086,14 @@
             border-radius: 0;
             transition: background-color 0.2s ease;
         }
+
         .video-menu-overlay button.menu-item:hover {
-            background-color: rgba(var(--primary-light), 0.1);
+            background-color: var(--three-dots-hover-bg);
         }
+
         .video-menu-overlay button.menu-item.danger:hover {
-            background-color: rgba(var(--error-color), 0.2);
+            background: rgba(207, 102, 121, 0.18);
+            /* matches your --error-color tone */
         }
 
         /* --- Modals --- */
@@ -725,7 +1128,8 @@
             transform: translateY(-20px);
             transition: transform 0.3s ease, background-color 0.3s ease;
             color: var(--text-color);
-            position: relative; /* For the close button */
+            position: relative;
+            /* For the close button */
         }
 
         .modal-overlay.active .modal-content {
@@ -749,9 +1153,11 @@
 
         .modal-content input[type="text"],
         .modal-content textarea {
-            width: calc(100% - 24px); /* Account for padding */
+            width: calc(100% - 24px);
+            /* Account for padding */
             margin-bottom: 15px;
         }
+
         .modal-content textarea {
             min-height: 120px;
             resize: vertical;
@@ -782,6 +1188,7 @@
             padding: 5px;
             line-height: 1;
         }
+
         .modal-close-btn:hover {
             color: var(--primary-color);
         }
@@ -795,22 +1202,28 @@
             padding: 10px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            background-color: var(--bg-color); /* Slightly different from modal surface */
+            background-color: var(--bg-color);
+            /* Slightly different from modal surface */
         }
 
         .note-modal-video-preview-thumbnail {
-            width: 120px; /* Fixed small width */
-            height: 67.5px; /* 16:9 aspect ratio for 120px width */
+            width: 120px;
+            /* Fixed small width */
+            height: 67.5px;
+            /* 16:9 aspect ratio for 120px width */
             flex-shrink: 0;
             overflow: hidden;
             border-radius: 4px;
-            position: relative; /* For duration overlay */
+            position: relative;
+            /* For duration overlay */
         }
+
         .note-modal-video-preview-thumbnail img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
         .note-modal-video-preview-thumbnail .duration-overlay {
             /* Inherit existing duration-overlay styles */
             position: absolute;
@@ -824,13 +1237,16 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            min-width: 0; /* Important for flex-grow to work */
+            min-width: 0;
+            /* Important for flex-grow to work */
         }
+
         .note-modal-video-preview-info h3 {
             font-size: 1.1em;
             margin: 0 0 5px;
             line-height: 1.3;
-            max-height: 2.6em; /* 2 lines */
+            max-height: 2.6em;
+            /* 2 lines */
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -838,6 +1254,7 @@
             -webkit-box-orient: vertical;
             color: var(--text-color);
         }
+
         .note-modal-video-preview-info p {
             font-size: 0.8em;
             color: var(--text-muted-color);
@@ -846,6 +1263,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
         /* End Note Modal Video Preview */
 
 
@@ -916,8 +1334,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         /* --- Media Queries for Responsiveness --- */
@@ -927,23 +1350,31 @@
                 min-width: 180px;
                 padding: 15px;
             }
+
             .sidebar-header h2 {
                 font-size: 1.3em;
             }
+
             .list-item {
                 font-size: 1em;
                 padding: 10px 12px;
             }
+
             header h1 {
                 font-size: 1.5em;
             }
+
             .controls {
                 gap: 8px;
             }
-            select, button, input[type="text"] {
+
+            select,
+            button,
+            input[type="text"] {
                 padding: 8px 12px;
                 font-size: 0.85em;
             }
+
             .video-text-content h3 {
                 font-size: 1em;
             }
@@ -952,26 +1383,30 @@
         @media (max-width: 768px) {
             .app-container {
                 flex-direction: column;
-                height: auto; 
-                overflow: visible; 
+                height: auto;
+                overflow: visible;
             }
+
             body {
-                 min-height: 100vh; 
+                min-height: 100vh;
             }
+
             .sidebar {
                 width: 100%;
                 height: auto;
-                max-height: 180px; 
+                max-height: 180px;
                 padding: 15px 20px;
                 box-shadow: 0 2px 5px var(--card-shadow);
                 order: -1;
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
-                overflow-y: hidden; 
+                overflow-y: hidden;
             }
+
             .lists-container {
-                overflow-y: auto; 
+                overflow-y: auto;
             }
+
             .sidebar-header {
                 justify-content: center;
                 margin-bottom: 15px;
@@ -979,10 +1414,12 @@
                 border-bottom: 1px solid var(--border-color);
                 position: relative;
             }
+
             .sidebar-header h2 {
                 flex-grow: 1;
                 text-align: center;
             }
+
             .icon-btn {
                 position: absolute;
                 right: 20px;
@@ -991,6 +1428,7 @@
                 height: 36px;
                 font-size: 1.5em;
             }
+
             .lists-container {
                 display: flex;
                 flex-wrap: wrap;
@@ -998,6 +1436,7 @@
                 justify-content: center;
                 margin-bottom: 15px;
             }
+
             .list-item {
                 width: auto;
                 margin-bottom: 0;
@@ -1005,6 +1444,7 @@
                 font-size: 0.9em;
                 flex-shrink: 0;
             }
+
             .sidebar-footer {
                 flex-direction: row;
                 justify-content: space-between;
@@ -1012,15 +1452,19 @@
                 padding-top: 15px;
                 margin-top: 0;
             }
+
             .sidebar-footer button.danger {
                 order: 2;
             }
+
             .theme-selector {
                 order: 1;
             }
+
             .main-content {
                 width: 100%;
             }
+
             header {
                 padding: 10px;
                 flex-direction: column;
@@ -1028,15 +1472,18 @@
                 border-top-left-radius: 0;
                 border-top-right-radius: 0;
             }
+
             .controls {
                 width: 100%;
                 justify-content: center;
                 gap: 5px;
             }
+
             .size-slider-group {
                 width: 100%;
                 justify-content: center;
             }
+
             #message-container {
                 top: unset;
                 bottom: 20px;
@@ -1046,60 +1493,75 @@
                 max-width: 350px;
                 text-align: center;
             }
+
             #video-grid-container {
                 padding: 10px;
             }
+
             .video-card {
                 max-width: 100%;
             }
+
             .video-card-thumbnail {
                 cursor: pointer;
             }
+
             .video-card.sortable-drag {
                 cursor: grabbing;
             }
+
             /* Action buttons row on small screens */
             .video-card-action-buttons {
-                flex-direction: row; 
+                flex-direction: row;
                 justify-content: flex-end;
                 gap: 8px;
                 width: auto;
-                top: 5px; 
+                top: 5px;
                 right: 5px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="sidebar-header">
+            <div class="sidebar-header" style="position:relative;">
                 <h2>Your Lists</h2>
-                <button id="create-list-btn" class="icon-btn" title="Create New List">+</button>
+                <div class="sidebar-actions">
+                    <button id="create-list-btn" class="icon-btn" title="Create New List">+</button>
+                </div>
+
+
             </div>
+
             <div id="lists-container" class="lists-container">
                 <!-- Lists will be dynamically rendered here -->
             </div>
             <div class="sidebar-footer">
                 <!-- Authentication Controls -->
-                <div class="auth-controls">
-                    <span id="auth-status">Checking status...</span>
-                    <button id="sign-in-google-btn" style="display: none;">Sign In with Google</button>
-                    <button id="sign-out-btn" class="outline" style="display: none;">Sign Out</button>
+                <div class="footer-toolbar">
+                    <!-- Theme icon buttons -->
+                    <button id="theme-toggle-btn" class="icon-toggle" title="Theme" aria-label="Theme">🖥️</button>
+                    <button id="archive-lists-btn" class="icon-toggle" title="Archived Lists"
+                        aria-label="Archived Lists">🗃️</button>
+
+                    <div class="footer-spacer"></div>
+
+                    <!-- Small user chip (icon-only) + auth buttons as icons -->
+                    <span id="auth-status" class="auth-chip" title="Auth status">
+                        <svg class="auth-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path
+                                d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5z" />
+                        </svg>
+                        <span>…</span>
+                    </span>
+
+                    <button id="sign-in-google-btn" class="icon-toggle" style="display:none;"
+                        title="Sign in with Google" aria-label="Sign in with Google">🔑</button>
                 </div>
-                <!-- End Authentication Controls -->
-                
-                <button id="delete-list-btn" class="danger" style="display: none;">Delete Current List</button>
-                <button id="rename-list-btn" class="outline" style="display: none;">Rename Current List</button>
-                <div class="theme-selector">
-                    <label for="theme-mode-selector">Theme:</label>
-                    <select id="theme-mode-selector">
-                        <option value="system">System</option>
-                        <option value="dark">Dark</option>
-                        <option value="light">Light</option>
-                    </select>
-                </div>
+
             </div>
         </aside>
 
@@ -1113,7 +1575,7 @@
                         <label for="card-size-slider">Card Size:</label>
                         <input type="range" id="card-size-slider" min="250" max="450" value="320">
                     </div>
-                    <button id="add-video-button-header">Add Video</button>
+                    <button id="add-video-button-header" title="Add Video">➕ Add Video</button>
                 </div>
             </header>
 
@@ -1148,6 +1610,31 @@
             <div class="modal-actions">
                 <button class="outline cancel-btn">Cancel</button>
                 <button id="submit-list-btn">Create List</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Confirm Archive Modal -->
+    <div id="confirm-archive-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
+            <h2>Archive List</h2>
+            <p id="confirm-archive-message">Are you sure you want to archive this list?</p>
+            <div class="modal-actions">
+                <button class="outline cancel-btn">Cancel</button>
+                <button id="confirm-archive-btn">Archive</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEW: Archived Lists Modal -->
+    <div id="archived-lists-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
+            <h2>Archived Lists</h2>
+            <div id="archived-lists-container" style="max-height:300px; overflow:auto;"></div>
+            <div class="modal-actions">
+                <button class="outline cancel-btn">Close</button>
             </div>
         </div>
     </div>
@@ -1222,7 +1709,7 @@
         const auth = firebase.auth();
 
         // --- YouTube API Configuration ---
-        const YOUTUBE_API_KEY = 'AIzaSyAi9TmRbAeBiTxzxtUGoDiyVHOhW63GYNc'; 
+        const YOUTUBE_API_KEY = 'AIzaSyAi9TmRbAeBiTxzxtUGoDiyVHOhW63GYNc';
 
         // --- DOM Elements ---
         const videoGridContainer = document.getElementById('video-grid-container');
@@ -1233,8 +1720,6 @@
 
         const listsContainer = document.getElementById('lists-container');
         const createListBtn = document.getElementById('create-list-btn');
-        const deleteListBtn = document.getElementById('delete-list-btn');
-        const renameListBtn = document.getElementById('rename-list-btn'); // New
         const createListModal = document.getElementById('create-list-modal');
         const listNameInput = document.getElementById('list-name-input');
         const submitListBtn = document.getElementById('submit-list-btn');
@@ -1242,6 +1727,14 @@
         const confirmDeleteModal = document.getElementById('confirm-delete-modal');
         const confirmDeleteMessage = document.getElementById('confirm-delete-message');
         const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
+
+        const confirmArchiveModal = document.getElementById('confirm-archive-modal');
+        const confirmArchiveMessage = document.getElementById('confirm-archive-message');
+        const confirmArchiveBtn = document.getElementById('confirm-archive-btn');
+
+        const archivedListsModal = document.getElementById('archived-lists-modal');
+        const archivedListsContainer = document.getElementById('archived-lists-container');
+        const archiveListsBtn = document.getElementById('archive-lists-btn');
 
         const renameListModal = document.getElementById('rename-list-modal'); // New
         const renameListNameInput = document.getElementById('rename-list-name-input'); // New
@@ -1251,13 +1744,12 @@
         const messageContainer = document.getElementById('message-container');
         const loadingOverlay = document.getElementById('loading-overlay');
 
-        const themeModeSelector = document.getElementById('theme-mode-selector');
-        const cardSizeSlider = document.getElementById('card-size-slider'); 
+        const cardSizeSlider = document.getElementById('card-size-slider');
 
         // Note Modal Elements
         const noteEditModal = document.getElementById('note-edit-modal');
         const noteModalTitle = document.getElementById('note-modal-title');
-        const noteVideoDetails = document.getElementById('note-video-details'); 
+        const noteVideoDetails = document.getElementById('note-video-details');
         const noteTextareaModal = document.getElementById('note-textarea-modal');
         const saveNoteBtnModal = document.getElementById('save-note-btn-modal');
         const deleteNoteBtnModal = document.getElementById('delete-note-btn-modal');
@@ -1265,7 +1757,6 @@
         // Authentication DOM elements (NEW)
         const authStatusSpan = document.getElementById('auth-status');
         const signInGoogleBtn = document.getElementById('sign-in-google-btn');
-        const signOutBtn = document.getElementById('sign-out-btn');
 
 
         // --- Global State Variables ---
@@ -1273,11 +1764,34 @@
         let currentListId = null;
         let currentListName = null;
         let videoCards = {}; // Stores { videoId: { element: DOM_Element, data: Object } }
-        let sortableInstance = null; 
+        let sortableInstance = null;
         let currentMenu = null; // To store the currently open 3-dots menu element
         let currentNoteVideoId = null; // To track which video's note is being edited
+        let listsSortable = null;
+        let listSortMode = false;
+        let archivedLists = [];
+        let tempArchivedListId = null;
+        let tempArchivedListName = null;
+
 
         // --- Utility Functions ---
+        function stripLeadingEmoji(name = '') {
+            // if name starts with emoji + space, remove it from label to avoid double-emoji
+            // simple heuristic: if first char is surrogate pair or in emoji range
+            const m = name.match(/^(\p{Emoji_Presentation}|\p{Extended_Pictographic})\s+/u);
+            return m ? name.slice(m[0].length) : name;
+        }
+        function getListEmoji(name = '') {
+            const m = name.match(/^(\p{Emoji_Presentation}|\p{Extended_Pictographic})/u);
+            if (m) return m[1];
+            const n = name.toLowerCase();
+            if (n.includes('fav')) return '⭐';
+            if (n.includes('tutorial')) return '📘';
+            if (n.includes('music')) return '🎵';
+            if (n.includes('watch')) return '⏱️';
+            return '📂';
+        }
+
 
         function showMessage(text, type = 'info', duration = 3000) {
             const messageDiv = document.createElement('div');
@@ -1325,7 +1839,7 @@
 
         function debounce(func, delay) {
             let timeout;
-            return function(...args) {
+            return function (...args) {
                 const context = this;
                 clearTimeout(timeout);
                 timeout = setTimeout(() => func.apply(context, args), delay);
@@ -1334,11 +1848,30 @@
 
         // --- Theme Management ---
         const LOCAL_STORAGE_THEME_KEY = 'youtube_organizer_theme';
+        const themeToggleBtn = document.getElementById('theme-toggle-btn');
         let mediaQueryList = null;
+
+        function updateThemeToggleIcon(theme) {
+            if (!themeToggleBtn) return;
+            const map = { system: '🖥️', dark: '🌙', light: '☀️' };
+            themeToggleBtn.textContent = map[theme] || '🖥️';
+            themeToggleBtn.title = `Theme: ${theme}`;
+            themeToggleBtn.setAttribute('aria-label', `Theme: ${theme}`);
+        }
+
+
+        function handleSystemThemeChange(e) {
+            // Only react if the current mode is 'system'
+            if ((localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || 'system') === 'system') {
+                document.body.classList.toggle('light-theme', e.matches);
+                document.body.classList.toggle('dark-theme', !e.matches);
+            }
+        }
 
         function applyTheme(theme) {
             document.body.classList.remove('light-theme', 'dark-theme');
 
+            // Detach previous system listener
             if (mediaQueryList) {
                 mediaQueryList.removeEventListener('change', handleSystemThemeChange);
                 mediaQueryList = null;
@@ -1348,30 +1881,33 @@
                 document.body.classList.add('light-theme');
             } else if (theme === 'dark') {
                 document.body.classList.add('dark-theme');
-            } else { // System
+            } else { // 'system'
                 mediaQueryList = window.matchMedia('(prefers-color-scheme: light)');
                 mediaQueryList.addEventListener('change', handleSystemThemeChange);
-                handleSystemThemeChange(mediaQueryList);
+                handleSystemThemeChange(mediaQueryList); // set initial
             }
-            localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme);
-            themeModeSelector.value = theme;
-        }
 
-        function handleSystemThemeChange(e) {
-            if (themeModeSelector.value === 'system') {
-                if (e.matches) {
-                    document.body.classList.add('light-theme');
-                    document.body.classList.remove('dark-theme');
-                } else {
-                    document.body.classList.remove('light-theme');
-                    document.body.classList.add('dark-theme');
-                }
-            }
+            localStorage.setItem(LOCAL_STORAGE_THEME_KEY, theme);
+            updateThemeToggleIcon(theme);
         }
 
         // Initialize theme on page load
-        const savedTheme = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || 'system';
-        applyTheme(savedTheme);
+        applyTheme(localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || 'system');
+
+        // Hook up the icon buttons
+        function cycleTheme() {
+            const current = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) || 'system';
+            const sysLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+            const oppositeOfSystem = sysLight ? 'dark' : 'light';
+            const lastOne = sysLight ? 'light' : 'dark';
+            const order = ['system', oppositeOfSystem, lastOne];
+            const next = order[(order.indexOf(current) + 1) % order.length];
+            applyTheme(next);
+        }
+        if (themeToggleBtn) themeToggleBtn.addEventListener('click', cycleTheme);
+        // Hook up the icon buttons to cycle through themes
+        // --- End Theme Management ---
+
 
 
         // --- Card Size Management ---
@@ -1392,13 +1928,43 @@
 
 
         // --- Firebase Authentication ---
+
+        // Ensure auth state is persisted (requires cookies/localStorage)
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch((err) => {
+            console.warn('Auth persistence error:', err);
+            showMessage('Enable cookies/storage for sign-in to work.', 'error', 6000);
+        });
+
+        // Warn if running from file:// or an unsupported protocol
+        (function () {
+            const ok = ['http:', 'https:', 'chrome-extension:'];
+            if (!ok.includes(window.location.protocol)) {
+                showMessage(`This page is loaded via ${window.location.protocol} — sign-in requires http/https.`, 'error', 8000);
+            }
+        })();
         auth.onAuthStateChanged(user => {
+            // Handle result when returning from signInWithRedirect
+            auth.getRedirectResult()
+                .then((result) => {
+                    if (result && result.user) {
+                        showMessage(`Welcome, ${result.user.displayName || result.user.email}!`, 'success', 3000);
+                    }
+                })
+                .catch((error) => {
+                    if (error && error.message) {
+                        console.error('Redirect sign-in error:', error);
+                        showMessage(`Sign-in failed after redirect: ${error.message}`, 'error', 7000);
+                    }
+                });
+
             if (user) {
                 currentUserId = user.uid;
                 console.log("Firebase user logged in:", user.uid);
-                authStatusSpan.textContent = `Logged in as: ${user.displayName || user.email || 'Anonymous'}`;
+                {
+                    const chipText = authStatusSpan.querySelector('span');
+                    if (chipText) chipText.textContent = (user.displayName || user.email || 'Anonymous');
+                }
                 signInGoogleBtn.style.display = 'none';
-                signOutBtn.style.display = 'inline-block';
                 loadLists(); // Load data for the logged-in user
                 // Show list related buttons
                 createListBtn.style.display = 'inline-flex'; // Assuming this is an icon-btn
@@ -1407,19 +1973,20 @@
                 currentListId = null; // Clear selected list
                 currentListName = null;
                 console.log("No user logged in.");
-                authStatusSpan.textContent = 'Not logged in';
-                signInGoogleBtn.style.display = 'inline-block'; // Show sign-in button
-                signOutBtn.style.display = 'none';
-                
+                {
+                    const chipText = authStatusSpan.querySelector('span');
+                    if (chipText) chipText.textContent = 'Not logged in';
+                } signInGoogleBtn.style.display = 'inline-block'; // Show sign-in button
+                closeUserPopover();
+
+
                 // Clear UI and show messages
                 listsContainer.innerHTML = '<p style="text-align: center; color: var(--text-color); padding: 20px;">Please sign in to manage your lists.</p>';
                 videoGridContainer.innerHTML = '<p style="text-align: center; color: var(--text-color); grid-column: 1 / -1;">Please sign in to view videos.</p>';
-                
+
                 // Hide list management buttons
                 createListBtn.style.display = 'none';
-                deleteListBtn.style.display = 'none';
-                renameListBtn.style.display = 'none';
-                
+
                 // Destroy Sortable.js instance if any
                 if (sortableInstance) {
                     sortableInstance.destroy();
@@ -1428,29 +1995,48 @@
             }
         });
 
-        // New Google Sign-In Function
-        function signInWithGoogle() {
+
+
+
+        // New Google Sign-In Function (popup with smart redirect fallback)
+        async function signInWithGoogle() {
             showLoading();
             const provider = new firebase.auth.GoogleAuthProvider();
-            // Optional: You can add scopes if you need access to user's Google data beyond basic profile
-            // provider.addScope('https://www.googleapis.com/auth/youtube.readonly'); 
-            firebase.auth().signInWithPopup(provider)
-                .then((result) => {
-                    // Sign-in successful, onAuthStateChanged will handle the rest
-                    const user = result.user;
-                    console.log("Google Sign-in successful:", user.uid);
-                    showMessage(`Welcome, ${user.displayName || user.email}!`, 'success', 3000);
-                })
-                .catch((error) => {
-                    // Handle Errors here.
-                    const errorMessage = error.message;
-                    console.error("Google Sign-in failed:", errorMessage);
-                    showMessage(`Google Sign-in failed: ${errorMessage}. Please check console for details.`, 'error', 5000);
-                })
-                .finally(() => {
-                    hideLoading();
-                });
+            try {
+                await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+                const proto = window.location.protocol;
+                const canPopup = (proto === 'http:' || proto === 'https:' || proto === 'chrome-extension:');
+
+                if (canPopup) {
+                    try {
+                        const result = await firebase.auth().signInWithPopup(provider);
+                        const user = result.user;
+                        if (user) showMessage(`Welcome, ${user.displayName || user.email}!`, 'success', 3000);
+                    } catch (popupErr) {
+                        // Fallback to redirect for environments blocking popups or not supported
+                        if (
+                            popupErr?.code === 'auth/popup-blocked' ||
+                            popupErr?.code === 'auth/operation-not-supported-in-this-environment' ||
+                            popupErr?.code === 'auth/popup-closed-by-user'
+                        ) {
+                            await firebase.auth().signInWithRedirect(provider);
+                            return;
+                        }
+                        throw popupErr;
+                    }
+                } else {
+                    // Non-supported protocol -> use redirect (still requires http/https at final URL)
+                    await firebase.auth().signInWithRedirect(provider);
+                    return;
+                }
+            } catch (error) {
+                console.error('Google Sign-in failed:', error);
+                showMessage(`Google Sign-in failed: ${error.message}`, 'error', 7000);
+            } finally {
+                hideLoading();
+            }
         }
+
 
         // New Sign Out Function
         function signOutUser() {
@@ -1476,27 +2062,109 @@
             if (!currentUserId) return;
             showLoading();
             // Detach previous listener to avoid multiple callbacks
-            db.ref(`users/${currentUserId}/lists`).off('value'); 
+            db.ref(`users/${currentUserId}/lists`).off('value');
 
             db.ref(`users/${currentUserId}/lists`).on('value', snapshot => {
                 listsContainer.innerHTML = '';
+                document.querySelectorAll('.list-actions-popover').forEach(el => el.remove());
                 const lists = snapshot.val();
                 let hasLists = false;
                 let firstListId = null;
 
                 if (lists) {
-                    const sortedListKeys = Object.keys(lists).sort((a, b) => lists[a].name.localeCompare(lists[b].name));
-                    
-                    sortedListKeys.forEach(listId => {
+                    // build array and sort by 'order' (fallback to name)
+                    const listEntries = Object.entries(lists).map(([id, obj]) => ({ id, ...obj }));
+                    listEntries.sort((a, b) => {
+                        const ao = typeof a.order === 'number' ? a.order : Number.MAX_SAFE_INTEGER;
+                        const bo = typeof b.order === 'number' ? b.order : Number.MAX_SAFE_INTEGER;
+                        if (ao !== bo) return ao - bo;
+                        return (a.name || '').localeCompare(b.name || '');
+                    });
+
+                    archivedLists = [];
+                    listEntries.forEach(({ id: listId, name, isArchived }) => {
+                        if (isArchived) { archivedLists.push({ id: listId, name }); return; }
                         hasLists = true;
                         if (!firstListId) firstListId = listId;
+
                         const listItem = document.createElement('button');
                         listItem.classList.add('list-item');
                         listItem.setAttribute('data-id', listId);
-                        listItem.textContent = lists[listId].name;
-                        listItem.addEventListener('click', () => selectList(listId, lists[listId].name));
+
+                        // emoji + drag handle + label + trailing more
+                        const emoji = document.createElement('span');
+                        emoji.className = 'list-emoji';
+                        emoji.textContent = getListEmoji(name);
+
+                        const handle = document.createElement('span');
+                        handle.className = 'list-drag-handle';
+                        handle.title = 'Drag to reorder';
+                        handle.textContent = '⋮⋮';
+
+                        const label = document.createElement('span'); label.className = 'list-label';
+                        label.textContent = stripLeadingEmoji(name);
+
+                        const right = document.createElement('div');
+                        right.className = 'list-actions-right';
+                        const moreBtn = document.createElement('button');
+                        moreBtn.className = 'list-more-btn';
+                        moreBtn.title = 'List actions';
+                        moreBtn.setAttribute('aria-label', 'List actions');
+                        moreBtn.textContent = '⋯';
+                        right.appendChild(moreBtn);
+
+                        listItem.appendChild(emoji);
+                        listItem.appendChild(handle);
+                        listItem.appendChild(label);
+                        listItem.appendChild(right);
+
+                        // build a popover for this item
+                        const pop = document.createElement('div');
+                        pop.className = 'list-actions-popover';
+                        pop.innerHTML = `
+  <button class="menu-item" data-act="reorder"><span>↕</span><span>${listSortMode ? 'Done Reordering' : 'Reorder Lists'}</span></button>
+  <button class="menu-item" data-act="rename"><span>✏️</span><span>Rename Current List</span></button>
+  <button class="menu-item" data-act="emoji"><span>😊</span><span>Change List Emoji</span></button>
+  <button class="menu-item" data-act="archive"><span>📦</span><span>Archive Current List</span></button>
+  <button class="menu-item danger" data-act="delete"><span>🗑️</span><span>Delete Current List</span></button>
+`;
+
+                        document.body.appendChild(pop);
+
+                        // open menu, ensure this list is selected
+                        moreBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            if (currentListId !== listId) selectList(listId, name);
+                            closeAnyListMenus();
+                            const r = moreBtn.getBoundingClientRect();
+                            let left = Math.min(Math.max(10, r.right - 210), window.innerWidth - 210 - 10);
+                            let top = r.bottom + 6;
+                            if (top + 160 > window.innerHeight - 10) { top = r.top - 160 - 6; }
+                            pop.style.left = left + 'px';
+                            pop.style.top = top + 'px';
+                            pop.classList.add('active');
+                        });
+
+                        // actions
+                        pop.addEventListener('click', (e) => {
+                            const btn = e.target.closest('.menu-item'); if (!btn) return;
+                            const act = btn.dataset.act;
+                            if (act === 'reorder') { toggleListReorder(); pop.classList.remove('active'); }
+                            if (act === 'rename') { openRenameListModal(); pop.classList.remove('active'); }
+                            if (act === 'emoji') { changeCurrentListEmoji(); pop.classList.remove('active'); }
+                            if (act === 'archive') { openConfirmArchiveModal(); pop.classList.remove('active'); }
+                            if (act === 'delete') { deleteCurrentList(); pop.classList.remove('active'); }
+                        });
+
+
+                        listItem.addEventListener('click', () => selectList(listId, name));
                         listsContainer.appendChild(listItem);
                     });
+
+                    // ensure reorder UI state
+                    listsContainer.classList.toggle('reorder-active', listSortMode);
+                    initListsSortable();
+                    if (tempArchivedListId) { injectTempArchivedListIntoSidebar(); }
                 }
 
                 if (!hasLists) {
@@ -1519,12 +2187,19 @@
                 hideLoading();
             });
         }
+        let videoListenerRef = null;
 
         function selectList(listId, listName) {
+            // agar kisi aur list par jaa rahe ho to temporary archived item hata do
+            if (tempArchivedListId && listId !== tempArchivedListId) {
+                removeTempArchivedFromSidebar();
+            }
+
+
             // Only re-render if a different list is selected
-            if (currentListId === listId) { 
-                updateActiveListClass(listId); 
-                return; 
+            if (currentListId === listId) {
+                updateActiveListClass(listId);
+                return;
             }
 
             // Detach old video listener before changing list
@@ -1571,7 +2246,51 @@
             }).finally(() => {
                 hideLoading();
             });
+
         }
+        function changeCurrentListEmoji() {
+            if (!currentUserId || !currentListId) return;
+
+            const baseLabel = stripLeadingEmoji(currentListName || '').trim();
+            const suggested = getListEmoji(currentListName || '');
+            const input = prompt('Enter an emoji for this list (leave empty to auto-pick):', suggested);
+
+            if (input === null) return; // user cancelled
+
+            let emoji = '';
+            const val = (input || '').trim();
+            if (val === '') {
+                emoji = getListEmoji(baseLabel);
+            } else {
+                const m = val.match(/^(\p{Emoji_Presentation}|\p{Extended_Pictographic})/u);
+                if (!m) {
+                    showMessage('Please enter a valid emoji.', 'error');
+                    return;
+                }
+                emoji = m[1];
+            }
+
+            const newName = `${emoji} ${baseLabel}`.trim();
+            showLoading();
+            db.ref(`users/${currentUserId}/lists/${currentListId}`)
+                .update({ name: newName })
+                .then(() => {
+                    currentListName = newName;
+                    showMessage('List emoji updated!', 'success');
+                })
+                .catch(err => {
+                    console.error('Error updating emoji:', err);
+                    showMessage('Failed to update emoji.', 'error');
+                })
+                .finally(() => hideLoading());
+        }
+
+
+
+
+
+
+
 
         function deleteCurrentList() {
             if (!currentUserId || !currentListId) return;
@@ -1602,6 +2321,222 @@
                     });
             };
         }
+
+        // NEW: Archive flow
+        function openConfirmArchiveModal() {
+            if (!currentListId || !currentListName) {
+                showMessage("No list selected to archive.", 'error');
+                return;
+            }
+            confirmArchiveMessage.textContent = `Archive the list "${currentListName}"? You can view it later from Archived Lists.`;
+            showModal(confirmArchiveModal);
+            confirmArchiveBtn.onclick = () => {
+                archiveCurrentList();
+            };
+        }
+
+        function archiveCurrentList() {
+            if (!currentUserId || !currentListId) return;
+            showLoading();
+            db.ref(`users/${currentUserId}/lists/${currentListId}`).update({
+                isArchived: true,
+                archivedAt: firebase.database.ServerValue.TIMESTAMP
+            }).then(() => {
+                showMessage(`List "${currentListName}" archived.`, 'success');
+                hideModal(confirmArchiveModal);
+                // Selection reset; loadLists listener will re-render
+                currentListId = null;
+                currentListName = null;
+            }).catch(err => {
+                console.error('Error archiving list:', err);
+                showMessage('Failed to archive list.', 'error');
+            }).finally(() => hideLoading());
+        }
+
+        function openArchivedListsModal() {
+            renderArchivedListsModal(); // ensure fresh view
+            showModal(archivedListsModal);
+        }
+        function renderArchivedListsModal() {
+            function unarchiveListById(listId, listName) {
+                if (!currentUserId || !listId) return;
+                showLoading();
+                db.ref(`users/${currentUserId}/lists/${listId}`)
+                    .update({ isArchived: false, archivedAt: null })
+                    .then(() => {
+                        showMessage(`List "${stripLeadingEmoji(listName)}" unarchived.`, 'success');
+                        // Local UI turant refresh ke liye array se hata dein
+                        archivedLists = archivedLists.filter(l => l.id !== listId);
+                        renderArchivedListsModal();
+                    })
+                    .catch(err => {
+                        console.error('Error unarchiving list:', err);
+                        showMessage('Failed to unarchive list.', 'error');
+                    })
+                    .finally(() => hideLoading());
+            }
+
+            function deleteArchivedListById(listId, listName) {
+                if (!currentUserId || !listId) return;
+                confirmDeleteMessage.textContent = `Delete archived list "${stripLeadingEmoji(listName)}" and all its videos? This cannot be undone.`;
+                showModal(confirmDeleteModal);
+                confirmDeleteBtn.onclick = () => {
+                    showLoading();
+                    db.ref(`users/${currentUserId}/lists/${listId}`).remove()
+                        .then(() => {
+                            showMessage('Archived list deleted.', 'success');
+                            hideModal(confirmDeleteModal);
+                            // Local UI update
+                            archivedLists = archivedLists.filter(l => l.id !== listId);
+                            renderArchivedListsModal();
+                        })
+                        .catch(err => {
+                            console.error('Error deleting archived list:', err);
+                            showMessage('Failed to delete archived list.', 'error');
+                        })
+                        .finally(() => hideLoading());
+                };
+            }
+
+            archivedListsContainer.innerHTML = '';
+            if (!archivedLists || archivedLists.length === 0) {
+                archivedListsContainer.innerHTML = '<p style="color:var(--text-muted-color);">No archived lists.</p>';
+                return;
+            }
+
+            const list = document.createElement('div');
+            archivedLists.forEach(({ id, name }) => {
+                const row = document.createElement('div');
+                row.style.display = 'flex';
+                row.style.alignItems = 'center';
+                row.style.gap = '10px';
+                row.style.padding = '8px 0';
+                row.dataset.id = id;
+                row.dataset.name = name || '';
+
+                const emojiEl = document.createElement('span');
+                emojiEl.className = 'list-emoji';
+                emojiEl.textContent = getListEmoji(name || '');
+                const label = document.createElement('span');
+                label.className = 'list-label';
+                label.style.flex = '1';
+                label.textContent = stripLeadingEmoji(name || '(untitled)');
+
+                const openBtn = document.createElement('button');
+                openBtn.textContent = 'Open';
+                openBtn.dataset.act = 'open';
+
+                const unarchiveBtn = document.createElement('button');
+                unarchiveBtn.className = 'outline';
+                unarchiveBtn.textContent = 'Unarchive';
+                unarchiveBtn.dataset.act = 'unarchive';
+
+                const delBtn = document.createElement('button');
+                delBtn.className = 'danger';
+                delBtn.textContent = 'Delete';
+                delBtn.dataset.act = 'delete';
+
+                row.appendChild(emojiEl);
+                row.appendChild(label);
+                row.appendChild(openBtn);
+                row.appendChild(unarchiveBtn);
+                row.appendChild(delBtn);
+                list.appendChild(row);
+            });
+
+            archivedListsContainer.appendChild(list);
+
+            // Delegate clicks for Open/Unarchive/Delete
+            archivedListsContainer.onclick = (e) => {
+                const actBtn = e.target.closest('button');
+                if (!actBtn) return;
+                const row = actBtn.closest('div');
+                const id = row?.dataset.id;
+                const name = row?.dataset.name || '';
+                if (!id) return;
+
+               
+                if (actBtn.dataset.act === 'open') {
+                    window.openArchivedListInSidebar(id, name);
+                    hideModal(archivedListsModal); // <— yeh nayi line modal ko band kar degi
+                } else if (actBtn.dataset.act === 'unarchive') {
+                    unarchiveListById(id, name);
+                } else if (actBtn.dataset.act === 'delete') {
+                    deleteArchivedListById(id, name);
+}
+
+
+            };
+
+        }
+        // === Temporary Archived List Helpers ===
+        window.openArchivedListInSidebar = function (listId, listName) {
+            if (!currentUserId || !listId) return;
+
+            // agar koi aur temp laga hua hai aur different hai to pehle hata dein
+            if (tempArchivedListId && tempArchivedListId !== listId) {
+                removeTempArchivedFromSidebar();
+            }
+            tempArchivedListId = listId;
+            tempArchivedListName = listName || '';
+
+            injectTempArchivedListIntoSidebar();
+            // list ko select karo (DB me isArchived flag same rahega)
+            selectList(tempArchivedListId, tempArchivedListName);
+            showMessage(`Opened archived list "${stripLeadingEmoji(tempArchivedListName)}" temporarily.`, 'success', 2500);
+        };
+
+        function injectTempArchivedListIntoSidebar() {
+            if (!tempArchivedListId) return;
+
+            // agar already exist karta hai to bas class ensure karo
+            const exists = listsContainer.querySelector(`.list-item[data-id="${tempArchivedListId}"]`);
+            if (exists) {
+                exists.classList.add('temp-archived');
+                return;
+            }
+
+            const btn = document.createElement('button');
+            btn.className = 'list-item temp-archived';
+            btn.setAttribute('data-id', tempArchivedListId);
+
+            const emoji = document.createElement('span');
+            emoji.className = 'list-emoji';
+            emoji.textContent = getListEmoji(tempArchivedListName || '');
+
+            const handle = document.createElement('span');
+            handle.className = 'list-drag-handle';
+            handle.title = 'Drag to reorder';
+            handle.textContent = '⋮⋮';
+            handle.style.display = 'none'; // temp item draggable nahi
+
+            const label = document.createElement('span');
+            label.className = 'list-label';
+            label.textContent = stripLeadingEmoji(tempArchivedListName || '(untitled)');
+
+            const right = document.createElement('div');
+            right.className = 'list-actions-right';
+            // temp item ke liye koi kebab/menu nahi
+
+            btn.appendChild(emoji);
+            btn.appendChild(handle);
+            btn.appendChild(label);
+            btn.appendChild(right);
+
+            btn.addEventListener('click', () => selectList(tempArchivedListId, tempArchivedListName));
+
+            // sidebar ke top pe insert
+            listsContainer.prepend(btn);
+            updateActiveListClass(tempArchivedListId);
+        }
+
+        function removeTempArchivedFromSidebar() {
+            const tempNode = listsContainer.querySelector('.list-item.temp-archived');
+            if (tempNode) tempNode.remove();
+            tempArchivedListId = null;
+            tempArchivedListName = null;
+        }
+
 
         // Function to open rename modal (New)
         function openRenameListModal() {
@@ -1644,22 +2579,13 @@
         }
 
         function updateDeleteListButtonVisibility() {
-            // Show delete and rename buttons only if there's more than one list and one is selected
-            // Use listsContainer.children.length to accurately count rendered lists
-            const numLists = listsContainer.querySelectorAll('.list-item').length; 
-            if (currentUserId && numLists > 0 && currentListId) { // Ensure user is logged in
-                deleteListBtn.style.display = numLists > 1 ? 'inline-block' : 'none'; // Only show delete if > 1 list
-                renameListBtn.style.display = 'inline-block'; 
-            } else {
-                deleteListBtn.style.display = 'none';
-                renameListBtn.style.display = 'none'; 
-            }
+            /* managed by list menu now */
         }
 
         // --- Video Management & API Calls ---
 
         // Cache for channel thumbnails to reduce API calls
-        const channelThumbnailCache = {}; 
+        const channelThumbnailCache = {};
 
         // Utility to convert ISO 8601 duration (e.g., PT1H30M5S) to HH:MM:SS or MM:SS
         function formatDuration(isoDuration) {
@@ -1695,17 +2621,19 @@
             const now = new Date();
             const seconds = Math.floor((now - date) / 1000);
 
-            let interval = seconds / 31536000; // Years
-            if (interval > 1) return Math.floor(interval) + ' years ago';
-            interval = seconds / 2592000; // Months
-            if (interval > 1) return Math.floor(interval) + ' months ago';
-            interval = seconds / 86400; // Days
-            if (interval > 1) return Math.floor(interval) + ' days ago';
-            interval = seconds / 3600; // Hours
-            if (interval > 1) return Math.floor(interval) + ' hours ago';
-            interval = seconds / 60; // Minutes
-            if (interval > 1) return Math.floor(interval) + ' minutes ago';
-            return Math.floor(seconds) + ' seconds ago';
+            const units = [
+                { s: 31536000, name: 'year' },
+                { s: 2592000, name: 'month' },
+                { s: 86400, name: 'day' },
+                { s: 3600, name: 'hour' },
+                { s: 60, name: 'minute' }
+            ];
+            for (const u of units) {
+                const n = Math.floor(seconds / u.s);
+                if (n >= 1) return n + ' ' + u.name + (n === 1 ? ' ago' : 's ago');
+            }
+            const n = Math.floor(seconds);
+            return n + ' second' + (n === 1 ? ' ago' : 's ago');
         }
 
 
@@ -1771,7 +2699,7 @@
 
                 const channelId = snippet.channelId;
                 const channelThumbnail = await getChannelThumbnail(channelId);
-                
+
                 let subscriberCount = 'N/A';
                 try {
                     const channelStatsResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`);
@@ -1824,7 +2752,7 @@
                 newVideoRef.set({
                     ...videoDetails,
                     order: -(new Date().getTime()), // Using negative timestamp for initial top sorting
-                    timestamp: firebase.database.ServerValue.TIMESTAMP 
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
                 }).then(() => {
                     showMessage("Video added successfully! You can drag it to reorder.", 'success', 4000);
                 }).catch(error => {
@@ -1840,7 +2768,6 @@
             }
         }
 
-        let videoListenerRef = null;
 
         function renderVideos() {
             if (!currentUserId || !currentListId) {
@@ -1857,7 +2784,7 @@
             if (videoListenerRef) {
                 videoListenerRef.off('value'); // Detach old listener
             }
-            
+
             showLoading();
             const currentVideosRef = db.ref(`users/${currentUserId}/lists/${currentListId}/videos`);
             videoListenerRef = currentVideosRef;
@@ -1865,7 +2792,7 @@
             currentVideosRef.orderByChild('order').on('value', snapshot => {
                 // Clear all children. All videos will be re-added below.
                 Array.from(videoGridContainer.children).forEach(child => {
-                    child.remove(); 
+                    child.remove();
                 });
                 videoCards = {}; // Reset for fresh render
 
@@ -1874,7 +2801,7 @@
                     const data = childSnapshot.val();
                     // Ensure 'order' field exists, assign a default negative timestamp if not
                     if (typeof data.order !== 'number' || data.order === null) {
-                        data.order = data.timestamp ? -(new Date(data.timestamp).getTime()) : -(Date.now()); 
+                        data.order = data.timestamp ? -(new Date(data.timestamp).getTime()) : -(Date.now());
                         childSnapshot.ref.update({ order: data.order }); // Update Firebase
                     }
                     videos.push({ id: childSnapshot.key, ...data });
@@ -1882,7 +2809,7 @@
 
                 if (videos.length > 0) {
                     // Sorting is handled by Firebase orderByChild, but client-side sort for safety
-                    videos.sort((a, b) => a.order - b.order); 
+                    videos.sort((a, b) => a.order - b.order);
 
                     videos.forEach(video => {
                         const cardElement = createVideoCardElement(video.id, video);
@@ -1918,7 +2845,7 @@
             card.setAttribute('data-title', (videoData.title || '').toLowerCase());
             card.setAttribute('data-channel', (videoData.channelName || '').toLowerCase());
             card.setAttribute('data-link', `https://www.youtube.com/watch?v=${videoData.youtubeId}`);
-            
+
             const uploadedTime = videoData.publishedAt ? timeAgo(videoData.publishedAt) : 'N/A';
             const viewsText = videoData.views ? `${videoData.views} views` : 'N/A views';
             const subscribersText = videoData.subscribers ? `${videoData.subscribers} subs` : 'N/A subs';
@@ -1929,7 +2856,7 @@
             const noteButtonClass = hasNote ? 'open-note' : 'add-note';
 
             // Add 'has-note' class to the main card if a note exists for CSS visibility logic
-            if (hasNote) { 
+            if (hasNote) {
                 card.classList.add('has-note');
             }
 
@@ -1940,11 +2867,11 @@
                     
                     <!-- Action buttons (Note & Three Dots) are now INSIDE thumbnail for positioning -->
                     <div class="video-card-action-buttons">
-                        <button class="inline-note-btn ${noteButtonClass}" data-id="${videoId}" title="${hasNote ? 'Open Note' : 'Add Note'}">&#x1F4DD;</button>
-                        <button class="three-dots-menu-btn" title="More options">...</button>
+<button class="inline-note-btn ${noteButtonClass}" data-id="${videoId}" title="${hasNote ? 'Open Note' : 'Add Note'}" aria-label="${hasNote ? 'Open note' : 'Add note'}">&#x1F4DD;</button>
+<button class="three-dots-menu-btn" title="More options" aria-label="More options">...</button>
                     </div>
                 </div>
-                <div class="video-card-info-wrapper">
+<div class="video-card-info-wrapper" id="video-info-${videoId}">
                     <img class="channel-avatar" src="${channelAvatarSrc}" alt="${videoData.channelName} avatar" ${hideAvatar}>
                     <div class="video-text-content">
                         <h3>${videoData.title}</h3>
@@ -1967,7 +2894,8 @@
                 if (e.target.closest('.video-card-action-buttons')) {
                     return;
                 }
-                window.open(`https://www.youtube.com/watch?v=${videoData.youtubeId}`, '_blank');
+                const w = window.open(`https://www.youtube.com/watch?v=${videoData.youtubeId}`, '_blank', 'noopener');
+                if (w) w.opener = null;
             });
 
 
@@ -1983,41 +2911,42 @@
                         // When detaching, return menu to its original parent
                         const previousParent = currentMenu.dataset.originalParentId ? document.getElementById(currentMenu.dataset.originalParentId) : null;
                         if (previousParent) {
-                             previousParent.appendChild(currentMenu);
-                             currentMenu.removeAttribute('data-original-parent-id');
+                            previousParent.appendChild(currentMenu);
+                            currentMenu.removeAttribute('data-original-parent-id');
                         }
                     }
-                    
+
                     // Position the menu
                     const rect = menuButton.getBoundingClientRect();
                     // Calculate position relative to the viewport
-                    let menuLeft = rect.left; 
-                    let menuTop = rect.bottom + 5; 
+                    let menuLeft = rect.left;
+                    let menuTop = rect.bottom + 5;
 
                     // Ensure menu doesn't go off screen to the right
-                    if (menuLeft + menuOverlay.offsetWidth > window.innerWidth - 10) { 
+                    if (menuLeft + menuOverlay.offsetWidth > window.innerWidth - 10) {
                         menuLeft = window.innerWidth - menuOverlay.offsetWidth - 10;
                     }
                     // Ensure menu doesn't go off screen to the left
                     if (menuLeft < 10) {
                         menuLeft = 10;
                     }
-                    
+
                     // Ensure menu doesn't go off screen to the bottom
-                    if (menuTop + menuOverlay.offsetHeight > window.innerHeight - 10) { 
-                         // Try to open upwards if space below is insufficient
-                         menuTop = rect.top - menuOverlay.offsetHeight - 5;
-                         // If still not enough space, or if it goes off top, fallback to 10px from top
-                         if (menuTop < 10) { 
+                    if (menuTop + menuOverlay.offsetHeight > window.innerHeight - 10) {
+                        // Try to open upwards if space below is insufficient
+                        menuTop = rect.top - menuOverlay.offsetHeight - 5;
+                        // If still not enough space, or if it goes off top, fallback to 10px from top
+                        if (menuTop < 10) {
                             menuTop = 10;
-                         }
+                        }
                     }
 
                     menuOverlay.style.top = `${menuTop}px`;
                     menuOverlay.style.left = `${menuLeft}px`;
 
                     // Temporarily append to body to ensure it's on top and not cut off by card overflow
-                    menuOverlay.dataset.originalParentId = menuOverlay.parentElement.id || ''; 
+                    const infoWrapper = card.querySelector('.video-card-info-wrapper');
+                    menuOverlay.dataset.originalParentId = infoWrapper ? infoWrapper.id : '';
                     document.body.appendChild(menuOverlay);
                     menuOverlay.classList.toggle('active');
                     currentMenu = menuOverlay.classList.contains('active') ? menuOverlay : null;
@@ -2031,7 +2960,8 @@
                     const previousParent = currentMenu.dataset.originalParentId ? document.getElementById(currentMenu.dataset.originalParentId) : null;
                     if (previousParent) { previousParent.appendChild(currentMenu); currentMenu.removeAttribute('data-original-parent-id'); }
                 }
-                window.open(`https://www.youtube.com/watch?v=${e.target.dataset.videoid}`, '_blank');
+                const w2 = window.open(`https://www.youtube.com/watch?v=${e.target.dataset.videoid}`, '_blank', 'noopener');
+                if (w2) w2.opener = null;
             });
 
             card.querySelector('.delete-btn').addEventListener('click', (e) => {
@@ -2186,6 +3116,44 @@
 
 
         // --- Sortable.js Initialization and Update Logic ---
+
+        function initListsSortable() {
+            if (!listSortMode) {
+                if (listsSortable) { listsSortable.destroy(); listsSortable = null; }
+                return;
+            }
+            if (listsSortable) { listsSortable.destroy(); }
+
+            listsSortable = Sortable.create(listsContainer, {
+                animation: 150,
+                draggable: '.list-item',
+                handle: '.list-drag-handle',
+                onUpdate: function () {
+                    if (!currentUserId) return;
+                    const ids = Array.from(listsContainer.querySelectorAll('.list-item'))
+                        .filter(el => !el.classList.contains('temp-archived'))
+                        .map(el => el.dataset.id);
+                    const updates = {};
+                    ids.forEach((id, idx) => { updates[`${id}/order`] = idx; });
+                    db.ref(`users/${currentUserId}/lists`).update(updates).catch(err => {
+                        console.error('Failed to update list order:', err);
+                        showMessage('Failed to save list order.', 'error');
+                    });
+                }
+            });
+        }
+        function toggleListReorder() {
+            listSortMode = !listSortMode;
+            // Toggle visual state
+            listsContainer.classList.toggle('reorder-active', listSortMode);
+            // (Re)initialize Sortable for lists
+            initListsSortable();
+            // Update the popover label text on all menus (so it flips to Done / Reorder)
+            document.querySelectorAll('.list-actions-popover .menu-item[data-act="reorder"] span:last-child')
+                .forEach(el => el.textContent = listSortMode ? 'Done Reordering' : 'Reorder Lists');
+        }
+
+
         function initializeSortable() {
             if (sortableInstance) {
                 sortableInstance.destroy();
@@ -2194,11 +3162,11 @@
             sortableInstance = Sortable.create(videoGridContainer, {
                 animation: 150,
                 group: 'videos',
-                draggable: '.video-card', 
+                draggable: '.video-card',
                 handle: '.video-card-thumbnail', // Only thumbnail area is draggable handle
                 filter: '.video-card-action-buttons', // Prevent dragging when clicking action buttons
                 preventOnFilter: true, // Prevent the default drag and drop on filter elements
-                
+
                 onUpdate: function (evt) {
                     if (!currentUserId || !currentListId) {
                         showMessage("User not authenticated or no list selected. Cannot reorder.", 'error');
@@ -2260,9 +3228,22 @@
 
         // --- Global Event Listeners ---
 
+        // --- List actions menu (kebab) ---
+
+
+        function closeAnyListMenus() {
+            document.querySelectorAll('.list-actions-popover.active').forEach(el => el.classList.remove('active'));
+        }
+        document.addEventListener('click', (e) => {
+            // close list popovers when clicking elsewhere
+            if (!e.target.closest('.list-actions-popover') && !e.target.closest('.list-more-btn')) {
+                closeAnyListMenus();
+            }
+        });
+
         // Close 3-dots menu if clicked outside
         document.addEventListener('click', (e) => {
-            if (currentMenu && !e.target.closest('.video-menu-overlay') && !e.target.classList.contains('three-dots-menu-btn')) {
+            if (currentMenu && !e.target.closest('.video-menu-overlay') && !e.target.closest('.three-dots-menu-btn')) {
                 currentMenu.classList.remove('active');
                 // When detaching, return menu to its original parent
                 const originalParentId = currentMenu.dataset.originalParentId;
@@ -2340,23 +3321,14 @@
             }
         });
 
-        // Delete Current List button
-        deleteListBtn.addEventListener('click', deleteCurrentList);
-
-        // Rename Current List button
-        renameListBtn.addEventListener('click', openRenameListModal); 
-        submitRenameListBtn.addEventListener('click', renameCurrentList); 
-        renameListNameInput.addEventListener('keydown', (e) => { 
+        submitRenameListBtn.addEventListener('click', renameCurrentList);
+        renameListNameInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 submitRenameListBtn.click();
             }
         });
 
-        // Theme selector
-        themeModeSelector.addEventListener('change', (e) => {
-            applyTheme(e.target.value);
-        });
 
         // Note modal buttons
         saveNoteBtnModal.addEventListener('click', saveNoteFromModal);
@@ -2368,9 +3340,65 @@
         });
         deleteNoteBtnModal.addEventListener('click', deleteNoteFromModal);
 
+
+        let userPopover = null;
+
+        function ensureUserPopover() {
+            if (userPopover) return userPopover;
+            userPopover = document.createElement('div');
+            userPopover.className = 'user-popover';
+            document.body.appendChild(userPopover);
+            return userPopover;
+        }
+        function openUserPopover() {
+            if (!currentUserId) return;
+            const chipRect = authStatusSpan.getBoundingClientRect();
+            const up = ensureUserPopover();
+            const displayName = (auth.currentUser && (auth.currentUser.displayName || auth.currentUser.email)) || 'User';
+            up.innerHTML = `
+        <div class="name">${displayName}</div>
+        <div class="row">UID: ${currentUserId}</div>
+        <div class="actions">
+            <button class="outline" id="logout-pop-btn">Logout</button>
+        </div>
+    `;
+            const left = Math.min(Math.max(10, chipRect.left), window.innerWidth - 260);
+            let top = chipRect.bottom + 8;
+            if (top + 130 > window.innerHeight - 10) top = chipRect.top - 130 - 8;
+            up.style.left = left + 'px';
+            up.style.top = top + 'px';
+            up.classList.add('active');
+            up.querySelector('#logout-pop-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeUserPopover();
+                signOutUser();
+            }, { once: true });
+        }
+        function closeUserPopover() {
+            if (userPopover) userPopover.classList.remove('active');
+        }
+        // Toggle on user chip click
+        authStatusSpan.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!currentUserId) return;
+            if (userPopover && userPopover.classList.contains('active')) {
+                closeUserPopover();
+            } else {
+                openUserPopover();
+            }
+        });
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (userPopover && userPopover.classList.contains('active') &&
+                !e.target.closest('.user-popover') && !e.target.closest('#auth-status')) {
+                closeUserPopover();
+            }
+        });
+
+
         // Event Listeners for NEW authentication buttons
         signInGoogleBtn.addEventListener('click', signInWithGoogle);
-        signOutBtn.addEventListener('click', signOutUser);
+        archiveListsBtn.addEventListener('click', openArchivedListsModal);
 
 
         // --- Global Paste Listener (Ctrl+V functionality) ---
@@ -2382,7 +3410,7 @@
             }
 
             const pastedText = (e.clipboardData || window.clipboardData).getData('text');
-            const youtubeUrlRegex = /(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|)([\w-]{11})(?:\S+)?/i; 
+            const youtubeUrlRegex = /(?:https?:\/\/)?(?:www\.)?(?:m\.)?(?:youtube\.com|youtu\.be)\/(?:watch\?v=|embed\/|v\/|)([\w-]{11})(?:\S+)?/i;
 
             if (youtubeUrlRegex.test(pastedText)) {
                 e.preventDefault(); // Prevent default paste if it's a YouTube URL
@@ -2413,4 +3441,5 @@
         // Initial render logic will be triggered by auth state change
     </script>
 </body>
+
 </html>
