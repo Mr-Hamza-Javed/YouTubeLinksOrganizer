@@ -420,6 +420,30 @@
         }
 
         /* --- Sidebar --- */
+
+        /* Ensure list items (buttons) render with our border/background cleanly */
+        .list-item {
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+
+        /* Drop target highlight for lists when dragging a video card */
+        /* Stronger drop target highlight (beats :hover / .active) */
+        .list-item.drop-hover,
+        .list-item.drop-hover:hover,
+        .list-item.drop-hover.active {
+            background: rgba(99, 102, 241, 0.18) !important;
+            border-color: var(--primary-light) !important;
+            box-shadow: inset 0 0 0 2px var(--primary-light) !important;
+        }
+
+        /* Subtle global cue while dragging a video */
+        body.dragging-video .sidebar {
+            box-shadow: inset 0 0 0 2px var(--primary-light);
+        }
+
         .sidebar {
             width: 280px;
             min-width: 250px;
@@ -929,10 +953,13 @@
         }
 
         .video-text-content h3 {
-            font-size: 1.05em;
-            margin: 0 0 4px;
-            line-height: 1.3;
-            max-height: 2.6em;
+            font-size: 0.95em;
+            /* smaller */
+            font-weight: 500;
+            /* or 400 for normal weight */
+            margin: 0 0 3px;
+            line-height: 1.25;
+            max-height: 2.5em;
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -1772,6 +1799,9 @@
         let archivedLists = [];
         let tempArchivedListId = null;
         let tempArchivedListName = null;
+        let isDraggingVideo = false;
+        let currentDragPayload = null;
+
 
 
         // --- Utility Functions ---
@@ -2117,6 +2147,66 @@
                         listItem.appendChild(handle);
                         listItem.appendChild(label);
                         listItem.appendChild(right);
+                        // Make sidebar list items act as drop targets for video cards
+
+                        // Drag depth counter to avoid flicker when moving over child nodes
+                        let dragDepth = 0;
+
+                        listItem.addEventListener('dragenter', (e) => {
+                            if (!isDraggingVideo) return;
+                            dragDepth++;
+                            listItem.classList.add('drop-hover');
+                        });
+
+                        listItem.addEventListener('dragover', (e) => {
+                            // Always prevent default so the cursor is not "🚫"
+                            e.preventDefault();
+                            // Only show move cursor if we are dragging a video
+                            e.dataTransfer.dropEffect = isDraggingVideo ? 'move' : 'none';
+
+                            if (isDraggingVideo) {
+                                listItem.classList.add('drop-hover');
+                            } else {
+                                listItem.classList.remove('drop-hover');
+                            }
+                        });
+
+                        listItem.addEventListener('dragleave', () => {
+                            dragDepth = Math.max(0, dragDepth - 1);
+                            if (dragDepth === 0) listItem.classList.remove('drop-hover');
+                        });
+
+                        listItem.addEventListener('drop', async (e) => {
+                            e.preventDefault();
+                            dragDepth = 0;
+                            listItem.classList.remove('drop-hover');
+
+                            // Prefer live event data, but fall back to the dragstart payload
+                            let data = safeParseDragData(e);
+                            if (!data) data = currentDragPayload;
+
+                            if (!isDraggingVideo || !data || !data.videoId) return;
+
+                            const { videoId, fromListId } = data;
+                            const toListId = listId;
+
+                            if (!currentUserId || !videoId || !fromListId || !toListId) return;
+                            if (fromListId === toListId) return;
+
+                            try {
+                                await moveVideoBetweenLists(videoId, fromListId, toListId);
+                                showMessage(`Moved video to "${stripLeadingEmoji(name || '')}".`, 'success', 2500);
+                            } catch (err) {
+                                console.error('Drop error:', err);
+                                showMessage('Could not move video.', 'error');
+                            } finally {
+                                // reset guard just in case
+                                isDraggingVideo = false;
+                                currentDragPayload = null;
+                            }
+                        });
+
+
 
                         // build a popover for this item
                         const pop = document.createElement('div');
@@ -2455,7 +2545,7 @@
                 const name = row?.dataset.name || '';
                 if (!id) return;
 
-               
+
                 if (actBtn.dataset.act === 'open') {
                     window.openArchivedListInSidebar(id, name);
                     hideModal(archivedListsModal); // <— yeh nayi line modal ko band kar degi
@@ -2463,7 +2553,7 @@
                     unarchiveListById(id, name);
                 } else if (actBtn.dataset.act === 'delete') {
                     deleteArchivedListById(id, name);
-}
+                }
 
 
             };
@@ -2583,6 +2673,72 @@
         }
 
         // --- Video Management & API Calls ---
+        // Robust extractor for drag data set in dragstart above
+        function safeParseDragData(e) {
+            try {
+                // 1) Prefer our custom MIME
+                const custom = e.dataTransfer.getData('application/x-yto-video');
+                if (custom) return JSON.parse(custom);
+            } catch { }
+
+            try {
+                // 2) Fallback: text/plain with our marker
+                const txt = e.dataTransfer.getData('text/plain') || '';
+                if (txt.startsWith('YTO:')) {
+                    return JSON.parse(txt.slice(4));
+                }
+                // 3) Last resort: extract {...} substring only (in case text/plain has extra text)
+                const start = txt.indexOf('{');
+                const end = txt.lastIndexOf('}');
+                if (start !== -1 && end !== -1 && end > start) {
+                    const maybeJson = txt.slice(start, end + 1);
+                    return JSON.parse(maybeJson);
+                }
+            } catch { }
+
+            return null; // unable to parse safely
+        }
+
+
+        // Move a video document from one list to another
+        async function moveVideoBetweenLists(videoId, fromListId, toListId) {
+            showLoading();
+            try {
+                const fromRef = db.ref(`users/${currentUserId}/lists/${fromListId}/videos/${videoId}`);
+                const snap = await fromRef.once('value');
+                if (!snap.exists()) throw new Error('Source video not found.');
+
+                const data = snap.val() || {};
+                // Ensure order puts it at top of target list
+                const orderTop = 0;
+                // Option 1: keep same key (videoId) to avoid duplicates
+                const toRef = db.ref(`users/${currentUserId}/lists/${toListId}/videos/${videoId}`);
+
+                // Normalize fields as needed
+                const movedData = {
+                    ...data,
+                    order: orderTop,
+                    timestamp: data.timestamp || firebase.database.ServerValue.TIMESTAMP
+                };
+
+                // Write to target, then remove from source
+                await toRef.set(movedData);
+                await fromRef.remove();
+
+                // Re-index target list orders so new one sits at top (optional nice-to-have)
+                const targetVideosRef = db.ref(`users/${currentUserId}/lists/${toListId}/videos`);
+                const targetSnap = await targetVideosRef.orderByChild('order').once('value');
+                const updates = {};
+                let idx = 0;
+                targetSnap.forEach(child => {
+                    updates[child.key + '/order'] = idx++;
+                });
+                await targetVideosRef.update(updates);
+
+            } finally {
+                hideLoading();
+            }
+        }
 
         // Cache for channel thumbnails to reduce API calls
         const channelThumbnailCache = {};
@@ -2840,6 +2996,34 @@
 
         function createVideoCardElement(videoId, videoData) {
             const card = document.createElement('div');
+            // Enable native drag to drop onto sidebar lists
+            card.setAttribute('draggable', 'true');
+
+            card.addEventListener('dragstart', (e) => {
+                const payload = { videoId, fromListId: currentListId };
+                const json = JSON.stringify(payload);
+
+                // Save for browsers that hide dataTransfer during dragover
+                currentDragPayload = payload;
+                isDraggingVideo = true;
+
+                e.dataTransfer.setData('application/x-yto-video', json);
+                e.dataTransfer.setData('text/plain', 'YTO:' + json);
+                e.dataTransfer.effectAllowed = 'move';
+
+                document.body.classList.add('dragging-video');
+                card.style.opacity = '0.6';
+            });
+
+            card.addEventListener('dragend', () => {
+                isDraggingVideo = false;
+                currentDragPayload = null;
+
+                document.body.classList.remove('dragging-video');
+                card.style.opacity = '';
+                document.querySelectorAll('.list-item.drop-hover').forEach(el => el.classList.remove('drop-hover'));
+            });
+
             card.classList.add('video-card');
             card.setAttribute('data-id', videoId);
             card.setAttribute('data-title', (videoData.title || '').toLowerCase());
