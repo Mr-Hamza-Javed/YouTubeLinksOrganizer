@@ -18,7 +18,7 @@
             /* Indigo 500 */
             --primary-light: #A5B4FC;
             /* Indigo 300 */
-            --secondary-color: #06B6D4;
+            --secondary-color: #06090a;
             /* Cyan 500 */
             --error-color: #EF4444;
             /* Archived accent (dark) */
@@ -1547,7 +1547,284 @@
                 right: 5px;
             }
         }
-    </style>
+
+        /* --- Full Screen Note Modal Styles --- */
+        .fullscreen-content {
+            background-color: var(--surface-color);
+            width: 100%;
+            /* Change to 100% */
+            height: 100%;
+            /* Change to 100% */
+            border-radius: 0;
+            /* Remove radius */
+            box-shadow: none;
+            /* Remove shadow */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 15px;
+            color: var(--text-color);
+        }
+
+        .fs-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Left Sidebar */
+        .fs-sidebar {
+            width: 300px;
+            border-right: 1px solid var(--border-color);
+            padding-right: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .fs-sidebar h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        #fs-video-list {
+            overflow-y: auto;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Sidebar Video Card Item */
+        .fs-video-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .fs-video-item:hover {
+            background: var(--three-dots-hover-bg);
+            border-color: var(--primary-light);
+        }
+
+        .fs-video-item.active {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .fs-video-item img {
+            width: 80px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .fs-video-item-info {
+            overflow: hidden;
+        }
+
+        .fs-video-item-info h4 {
+            margin: 0;
+            font-size: 0.9em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-color);
+        }
+
+        /* Right Main Area */
+        .fs-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #fs-note-textarea {
+            flex: 1;
+            width: 100%;
+            margin-top: 10px;
+            resize: none;
+            padding: 15px;
+            font-size: 1.1em;
+            line-height: 1.5;
+        }
+
+/* --- Notion-Style Editor --- */
+
+/* 1. Editor Container - Notion Font & Spacing */
+.fs-editor-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 60px; /* Notion has wider padding */
+    background-color: var(--surface-color);
+    cursor: text;
+    position: relative;
+    /* Notion Font Stack */
+    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+/* Source Mode Textarea (Ctrl+A) */
+#fs-source-textarea {
+    width: 100%;
+    height: 100%;
+    background: var(--surface-color);
+    border: none;
+    color: var(--text-color);
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+    resize: none;
+    outline: none;
+    display: none;
+    white-space: pre-wrap;
+    padding: 20px 60px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+/* Individual Line Blocks */
+.editor-block {
+    min-height: 1.5em; /* Standard Notion line height */
+    position: relative;
+    margin-bottom: 2px; /* Tight spacing like Notion */
+}
+
+/* --- VIEW MODE (Rendering) --- */
+.editor-block .view-mode {
+    display: block;
+    cursor: text;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--text-color);
+    padding: 3px 2px; /* Visual balance */
+}
+
+/* Notion Typography */
+
+/* Headings: Clean, Bold, No Color (unless standard text color) */
+.editor-block .view-mode h1 { 
+    font-size: 1.875em; 
+    font-weight: 600; 
+    margin: 0.5em 0 0.2em 0; 
+    line-height: 1.3; 
+    color: var(--text-color); 
+}
+.editor-block .view-mode h2 { 
+    font-size: 1.5em; 
+    font-weight: 600; 
+    margin: 0.4em 0 0.2em 0; 
+    line-height: 1.3; 
+    color: var(--text-color); 
+}
+.editor-block .view-mode h3 { 
+    font-size: 1.25em; 
+    font-weight: 600; 
+    margin: 0.3em 0 0.2em 0; 
+    line-height: 1.3; 
+    color: var(--text-color); 
+}
+
+/* Lists */
+.editor-block .view-mode li { 
+    margin-left: 1.5em; 
+    list-style-type: disc; 
+    display: list-item; 
+    padding-left: 0.2em;
+}
+
+/* Quotes - Notion Style (Black thick border, normal text) */
+.editor-block .view-mode blockquote { 
+    border-left: 3px solid var(--text-color); /* Match text color */
+    padding-left: 14px; 
+    margin: 0;
+    font-style: normal; /* Notion quotes are rarely italic */
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+/* Inline Code - Notion Style (Grey bg, red text, rounded) */
+.editor-block .view-mode code { 
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    background: rgba(135, 131, 120, 0.15); /* Light grey tint */
+    color: #EB5757; /* Notion Red */
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 85%;
+}
+
+/* Bold & Italic */
+.editor-block .view-mode strong { font-weight: 700; color: inherit; }
+.editor-block .view-mode em { font-style: italic; }
+
+/* --- EDIT MODE (Live Syntax Styling) --- */
+.editor-block textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--text-color);
+    font-family: inherit; /* Inherit Notion sans-serif */
+    font-size: 1em; /* Match default text size */
+    line-height: 1.5;
+    padding: 3px 2px;
+    resize: none;
+    overflow: hidden;
+    display: none;
+}
+
+/* Active Line Styling - MATCHING View Mode */
+.editor-block textarea.md-h1 { 
+    font-size: 1.875em; 
+    font-weight: 600; 
+    margin-top: 0.5em;
+    line-height: 1.3;
+}
+.editor-block textarea.md-h2 { 
+    font-size: 1.5em; 
+    font-weight: 600; 
+    margin-top: 0.4em;
+    line-height: 1.3;
+}
+.editor-block textarea.md-h3 { 
+    font-size: 1.25em; 
+    font-weight: 600; 
+    margin-top: 0.3em;
+    line-height: 1.3;
+}
+.editor-block textarea.md-quote { 
+    border-left: 3px solid var(--text-color); 
+    padding-left: 14px; 
+    opacity: 0.8;
+}
+.editor-block textarea.md-list { 
+    padding-left: 1.5em; /* Simulate Indent */
+}
+
+/* Placeholder for empty block */
+.editor-block textarea::placeholder {
+    color: var(--text-muted-color);
+    opacity: 0.5;
+    font-style: italic;
+}
+
+/* Toggle Logic */
+.editor-block.active .view-mode { display: none; }
+.editor-block.active textarea { display: block; }
+
+
+</style>
 </head>
 
 <body>
@@ -1694,9 +1971,9 @@
     <!-- New Note Edit Modal -->
     <div id="note-edit-modal" class="modal-overlay">
         <div class="modal-content">
+            <button id="expand-note-btn" class="modal-close-btn" style="right: 50px;" title="Full Screen">⤢</button>
             <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
-            <h2 id="note-modal-title">Edit Note</h2>
-            <!-- Video Preview section within the note modal -->
+            <h2 id="note-modal-title">Edit Note</h2> <!-- Video Preview section within the note modal -->
             <div id="note-video-details" class="note-modal-video-preview">
                 <!-- Video details will be dynamically loaded here -->
             </div>
@@ -1709,7 +1986,27 @@
             </div>
         </div>
     </div>
-
+    <div id="fullscreen-note-modal" class="modal-overlay">
+        <div class="fullscreen-content">
+            <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
+            <div class="fs-container">
+                <div class="fs-sidebar">
+                    <h3>Folder Videos</h3>
+                    <div id="fs-video-list"></div>
+                </div>
+                <div class="fs-main">
+                    <div id="fs-video-preview" class="note-modal-video-preview"></div>
+                    <div class="fs-editor-container">
+                        <div id="fs-editor-blocks"></div>
+                        <textarea id="fs-source-textarea"></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button id="fs-save-btn">Save Note</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Message Container -->
     <div id="message-container"></div>
 
@@ -1801,7 +2098,444 @@
         let tempArchivedListName = null;
         let isDraggingVideo = false;
         let currentDragPayload = null;
+        let currentNoteLines = [];
 
+        // --- ALL FULL SCREEN VARIABLES DEFINED HERE ---
+        const fsEditorBlocks = document.getElementById('fs-editor-blocks');
+        const fsSourceTextarea = document.getElementById('fs-source-textarea');
+        const expandNoteBtn = document.getElementById('expand-note-btn');
+        const fullscreenModal = document.getElementById('fullscreen-note-modal');
+        const fsVideoList = document.getElementById('fs-video-list');
+        const fsVideoPreview = document.getElementById('fs-video-preview');
+        const fsSaveBtn = document.getElementById('fs-save-btn');
+
+// 1. Render all blocks (With Live Styling)
+// 1. Render all blocks (With Robust Switching)
+function renderBlockEditor() {
+    fsEditorBlocks.style.display = 'block';
+    fsSourceTextarea.style.display = 'none';
+    fsEditorBlocks.innerHTML = ''; 
+
+    currentNoteLines.forEach((lineText, index) => {
+        const blockDiv = document.createElement('div');
+        blockDiv.className = 'editor-block';
+        blockDiv.dataset.index = index;
+
+        // View Mode (Displayed by default)
+        const viewDiv = document.createElement('div');
+        viewDiv.className = 'view-mode';
+        viewDiv.innerHTML = parseMarkdownLine(lineText);
+
+        // Edit Mode (Hidden by default)
+        const textarea = document.createElement('textarea');
+        textarea.value = lineText;
+        textarea.rows = 1; 
+
+        // Auto-Resize Logic
+        const autoResize = () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        };
+
+        // --- Logic: Click to Edit ---
+        blockDiv.addEventListener('click', (e) => {
+            // Prevent bubbling so the container click doesn't immediately close it
+            e.stopPropagation();
+
+            // If already editing this block, do nothing
+            if (blockDiv.classList.contains('active')) return;
+
+            // 1. Save and Close ANY other active block first
+            saveAllBlocks();
+
+            // 2. Activate THIS block
+            blockDiv.classList.add('active');
+            updateInputStyle(); // Apply styles (H1, Quote, etc.)
+            
+            // 3. Setup textarea
+            autoResize(); 
+            textarea.focus();
+        });
+
+        // --- Function to apply Live Styles ---
+        const updateInputStyle = () => {
+            textarea.className = ''; 
+            const v = textarea.value;
+            if (v.startsWith('# ')) textarea.classList.add('md-h1');
+            else if (v.startsWith('## ')) textarea.classList.add('md-h2');
+            else if (v.startsWith('### ')) textarea.classList.add('md-h3');
+            else if (v.startsWith('> ')) textarea.classList.add('md-quote');
+            else if (v.startsWith('- ')) textarea.classList.add('md-list');
+            
+            autoResize();
+        };
+
+        // --- Key Navigation ---
+        textarea.addEventListener('keydown', (e) => {
+            // ENTER: Create new line
+            if (e.key === 'Enter' && !e.shiftKey) { 
+                e.preventDefault();
+                saveAllBlocks(); // Save current
+                currentNoteLines.splice(index + 1, 0, ""); // Insert new
+                renderBlockEditor(); // Re-render all
+                setTimeout(() => focusBlock(index + 1), 0);
+            }
+            // BACKSPACE: Merge with previous
+            if (e.key === 'Backspace' && textarea.selectionStart === 0 && textarea.selectionEnd === 0 && index > 0) {
+                e.preventDefault();
+                const prevLineLength = currentNoteLines[index - 1].length;
+                currentNoteLines[index - 1] += currentNoteLines[index];
+                currentNoteLines.splice(index, 1);
+                renderBlockEditor();
+                setTimeout(() => {
+                    focusBlock(index - 1);
+                    // Restore cursor position
+                    const prevBlock = fsEditorBlocks.children[index - 1];
+                    if (prevBlock) {
+                        const prevTa = prevBlock.querySelector('textarea');
+                        prevTa.selectionStart = prevTa.selectionEnd = prevLineLength;
+                    }
+                }, 0);
+            }
+            // ARROW UP
+            if (e.key === 'ArrowUp') {
+                if (textarea.selectionStart === 0 && index > 0) {
+                    e.preventDefault();
+                    saveAllBlocks();
+                    focusBlock(index - 1);
+                }
+            }
+            // ARROW DOWN
+            if (e.key === 'ArrowDown') {
+                if (textarea.selectionStart === textarea.value.length && index < currentNoteLines.length - 1) {
+                    e.preventDefault();
+                    saveAllBlocks();
+                    focusBlock(index + 1);
+                }
+            }
+            
+            requestAnimationFrame(updateInputStyle);
+        });
+
+        textarea.addEventListener('input', updateInputStyle);
+
+        blockDiv.appendChild(viewDiv);
+        blockDiv.appendChild(textarea);
+        fsEditorBlocks.appendChild(blockDiv);
+    });
+}
+
+// --- Global Click to Close Edit Mode ---
+// If user clicks on the grey area (fs-editor-container) but NOT on a block, close edit mode.
+fsEditorBlocks.parentElement.addEventListener('click', (e) => {
+    // If the click target is the container itself or the blocks wrapper (not a specific block)
+    if (e.target === fsEditorBlocks || e.target === fsEditorBlocks.parentElement) {
+        saveAllBlocks(); // This removes 'active' class and switches back to view mode
+    }
+});
+
+
+// Function to Exit Source Mode
+function exitSourceMode(targetIndex = -1) {
+    const raw = fsSourceTextarea.value;
+    currentNoteLines = raw.split('\n');
+    if (currentNoteLines.length === 0) currentNoteLines = [""];
+    
+    renderBlockEditor();
+
+    if (targetIndex >= 0) {
+        setTimeout(() => focusBlock(targetIndex), 0);
+    }
+}
+
+// 1. Leave Source Mode on Blur (Click Outside)
+fsSourceTextarea.addEventListener('blur', (e) => {
+    // Check relatedTarget to see if we clicked INSIDE the editor container
+    // If we clicked inside, the 'click' listener handles it. If outside, this handles it.
+    if (!e.relatedTarget && fsSourceTextarea.style.display === 'block') {
+       // Simple blur logic (can be loose)
+       // Let the click listener handle precise focus, 
+       // but if we tabbed out, ensure we save.
+       // For now, let's rely on click listener for inside-box clicks.
+    }
+});
+
+// 2. Leave Source Mode on Click (Deselect Logic Fixed)
+fsSourceTextarea.addEventListener('click', () => {
+    // Only exit if user clicked to place cursor (selectionStart == selectionEnd)
+    if (fsSourceTextarea.selectionStart === fsSourceTextarea.selectionEnd) {
+        const cursorPosition = fsSourceTextarea.selectionStart;
+        const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
+        const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+        exitSourceMode(lineIndex);
+    }
+});
+
+// 3. Leave Source Mode on Key Press
+fsSourceTextarea.addEventListener('keydown', (e) => {
+    if (e.ctrlKey || e.metaKey) return; 
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
+        setTimeout(() => {
+            const cursorPosition = fsSourceTextarea.selectionStart;
+            const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
+            const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+            exitSourceMode(lineIndex);
+        }, 10);
+    }
+});
+
+        // Helper to focus a specific block
+        function focusBlock(index) {
+            const block = fsEditorBlocks.children[index];
+            if (block) block.click();
+        }
+
+        // 2. Save Helper
+function saveAllBlocks() {
+    const blocks = fsEditorBlocks.querySelectorAll('.editor-block');
+    blocks.forEach(block => {
+        if (block.classList.contains('active')) {
+            const idx = parseInt(block.dataset.index);
+            const val = block.querySelector('textarea').value;
+            currentNoteLines[idx] = val; // Update Data
+
+            // Update View
+            block.querySelector('.view-mode').innerHTML = parseMarkdownLine(val);
+            
+            // Switch State
+            block.classList.remove('active');
+            // We do NOT hide textarea via style here, CSS handles .active class toggling
+        }
+    });
+}
+
+        // 3. CTRL+A Handler (Source Mode Switch)
+        // Attach this to the container or window
+        document.addEventListener('keydown', (e) => {
+            // Only if full screen modal is active
+            if (!fullscreenModal.classList.contains('active')) return;
+
+            if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+                // Check if we are inside the editor
+                if (e.target.closest('.fs-editor-container') || e.target.closest('.editor-block')) {
+                    e.preventDefault();
+                    enterSourceMode();
+                }
+            }
+        });
+
+        function enterSourceMode() {
+            saveAllBlocks(); // Save current block edits first
+
+            // Switch Views
+            fsEditorBlocks.style.display = 'none';
+            fsSourceTextarea.style.display = 'block';
+
+            // Fill content
+            fsSourceTextarea.value = currentNoteLines.join('\n');
+            fsSourceTextarea.focus();
+            fsSourceTextarea.select(); // Select All
+        }
+
+     // Leave Source Mode (on Blur)
+// Function to Exit Source Mode and go to specific line
+function exitSourceMode(targetIndex = -1) {
+    // Save Content
+    const raw = fsSourceTextarea.value;
+    currentNoteLines = raw.split('\n');
+    if (currentNoteLines.length === 0) currentNoteLines = [""];
+
+    // Switch View
+    renderBlockEditor();
+
+    // Focus on the specific line if clicked
+    if (targetIndex >= 0) {
+        setTimeout(() => focusBlock(targetIndex), 0);
+    }
+}
+
+// 1. Leave Source Mode on Blur (Click Outside)
+fsSourceTextarea.addEventListener('blur', () => {
+    // Only exit if we are not just clicking back into the editor blocks (prevent flickering)
+    if (fsSourceTextarea.style.display === 'block') {
+        exitSourceMode();
+    }
+});
+
+// 2. Leave Source Mode on Click Inside (Deselect)
+fsSourceTextarea.addEventListener('click', () => {
+    // Calculate which line the user clicked on
+    const cursorPosition = fsSourceTextarea.selectionStart;
+    const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
+    const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+
+    exitSourceMode(lineIndex);
+});
+
+// 3. Leave Source Mode on Key Press (Arrow keys, etc)
+fsSourceTextarea.addEventListener('keydown', (e) => {
+    // Allow Ctrl+A / Ctrl+C to work without exiting
+    if (e.ctrlKey || e.metaKey) return; 
+
+    // If user presses Arrow Keys or Enter, switch back to block mode at that position
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
+        // Let the default key press happen first to update cursor position
+        setTimeout(() => {
+            const cursorPosition = fsSourceTextarea.selectionStart;
+            const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
+            const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+            exitSourceMode(lineIndex);
+        }, 10);
+    }
+});
+
+        // 4. Improved Markdown Parser
+// 4. Improved Markdown Parser
+function parseMarkdownLine(text) {
+    if (!text) return '<br>'; 
+    
+    // HTML Escaping to prevent breaking layout
+    let html = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+    // 1. Headers
+    if (html.startsWith('# ')) return `<h1>${html.substring(2)}</h1>`;
+    if (html.startsWith('## ')) return `<h2>${html.substring(3)}</h2>`;
+    if (html.startsWith('### ')) return `<h3>${html.substring(4)}</h3>`;
+    
+    // 2. Blockquotes
+    if (html.startsWith('&gt; ')) return `<blockquote>${html.substring(5)}</blockquote>`;
+
+    // 3. Lists (Simple dash)
+    if (html.startsWith('- ')) return `<li>${html.substring(2)}</li>`;
+
+    // 4. Inline Code (`code`)
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // 5. Bold (**text**)
+    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    // 6. Italic (*text* or _text_)
+    html = html.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>');
+
+    return html;
+}
+
+
+
+
+        // 1. Event Listener for the Expand Button (Small modal -> Full Screen)
+        expandNoteBtn.addEventListener('click', () => {
+            if (!currentNoteVideoId) return;
+
+            // Close the small modal
+            hideModal(noteEditModal);
+
+            // Open the full screen modal
+            openFullscreenNoteMode(currentNoteVideoId);
+        });
+
+        // 2. Save button in Full Screen Mode
+        fsSaveBtn.addEventListener('click', () => {
+            saveFullscreenNote();
+        });
+        // 6. Save Function for Full Screen
+        function saveFullscreenNote(silent = false) {
+            if (!currentUserId || !currentListId || !currentNoteVideoId) return;
+
+            // --- FIX START ---
+            saveAllBlocks(); // Save any active edits to the array
+
+            // Join the array lines back into a single string
+            const noteContent = currentNoteLines.join('\n');
+            // --- FIX END ---
+
+            // Update UI immediately
+            if (videoCards[currentNoteVideoId]) {
+                videoCards[currentNoteVideoId].data.note = noteContent;
+                updateInlineNoteButton(currentNoteVideoId);
+            }
+
+            // Update Firebase
+            db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${currentNoteVideoId}/note`)
+                .set(noteContent === '' ? null : noteContent)
+                .then(() => {
+                    if (!silent) showMessage("Note saved!", 'success', 1000);
+                })
+                .catch(err => console.error(err));
+        }
+        // 3. Logic to Open Full Screen Mode
+        function openFullscreenNoteMode(videoId) {
+            currentNoteVideoId = videoId;
+            showModal(fullscreenModal);
+            renderFullscreenSidebar();
+            loadNoteInFullscreen(videoId);
+        }
+
+        // 4. Render the Sidebar List (Left Side)
+        function renderFullscreenSidebar() {
+            fsVideoList.innerHTML = '';
+
+            // Convert videoCards object to array and sort by order
+            const videos = Object.values(videoCards).map(vc => vc.data).sort((a, b) => a.order - b.order);
+
+            videos.forEach(video => {
+                const item = document.createElement('div');
+                item.className = 'fs-video-item';
+
+                // FIX 1: Compare video.id (Database ID) instead of youtubeId for the active class
+                if (video.id === currentNoteVideoId) {
+                    item.classList.add('active');
+                }
+
+                item.innerHTML = `
+            <img src="${video.thumbnail}" alt="thumb">
+            <div class="fs-video-item-info">
+                <h4>${video.title}</h4>
+            </div>
+        `;
+
+                item.addEventListener('click', () => {
+                    // Switch to clicked video
+                    document.querySelectorAll('.fs-video-item').forEach(el => el.classList.remove('active'));
+                    item.classList.add('active');
+
+                    // FIX 2: Use video.id (Database ID) to load the note
+                    currentNoteVideoId = video.id;
+                    loadNoteInFullscreen(currentNoteVideoId);
+                });
+
+                fsVideoList.appendChild(item);
+            });
+        }
+
+        // 5. Load Note Content into Main Area (Right Side)
+        function loadNoteInFullscreen(videoId) {
+            const videoCard = videoCards[videoId];
+            if (!videoCard) return;
+            const video = videoCard.data;
+
+            // Update Preview
+            const uploadedTime = video.publishedAt ? timeAgo(video.publishedAt) : 'N/A';
+            fsVideoPreview.innerHTML = `
+        <div class="note-modal-video-preview-thumbnail">
+            <img src="${video.thumbnail}" alt="${video.title}">
+            <span class="duration-overlay">${video.duration || ''}</span>
+        </div>
+        <div class="note-modal-video-preview-info">
+            <h3>${video.title}</h3>
+            <p>${video.channelName}</p>
+            <p>${uploadedTime}</p>
+        </div>
+    `;
+
+            // Load Note into Block Editor
+            const rawNote = video.note || '';
+            // Split by new line to create blocks
+            currentNoteLines = rawNote.split('\n');
+            if (currentNoteLines.length === 0) currentNoteLines = [""]; // Ensure at least one line
+
+            renderBlockEditor();
+        }
 
 
         // --- Utility Functions ---
