@@ -30,7 +30,8 @@
             /* Gray 900 */
             --text-color: #E5E7EB;
             /* Gray 200 */
-            --text-muted-color: #9CA3AF;
+            --text-muted-color: #D1D5DB;
+            /* UI UX: Text thora bright kiya taake easily parha jaye */
             /* Gray 400 */
             --border-color: #1F2937;
             /* Gray 800 */
@@ -56,7 +57,8 @@
             --bg-color: #F7F8FA;
             --surface-color: #FFFFFF;
             --text-color: #0F172A;
-            --text-muted-color: #64748B;
+            --text-muted-color: #475569;
+            /* UI UX: Light theme mein text thora dark kiya */
             /* Slate 500 */
             --border-color: #E5E7EB;
             /* Gray 200 */
@@ -368,20 +370,23 @@
         }
 
         /* List item layout tweak to fit drag handle */
+
+        /* List item layout tweak to fit drag handle */
         .list-item {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            /* Icon aur text k darmian space slim ki */
             width: 100%;
-            padding: 10px 12px;
-            border-radius: 10px;
+            padding: 6px 10px;
+            /* UI UX: Padding kam kar k lists sleek banai hain */
+            border-radius: 6px;
+            /* Modern radius */
             background: transparent;
             border: 1px solid transparent;
             transition: background-color .2s ease, border-color .2s ease, color .2s ease;
             text-align: left;
             color: var(--text-color);
-
-
         }
 
         .list-label {
@@ -445,34 +450,44 @@
         }
 
         .sidebar {
-            width: 280px;
-            min-width: 250px;
+            width: 240px;
+            /* UI UX: Width slim ki hai */
+            min-width: 240px;
             background-color: var(--surface-color);
             box-shadow: 2px 0 8px var(--card-shadow);
-            padding: 20px;
+            padding: 12px;
+            /* UI UX: Fazool padding 20px se 12px kar di */
             display: flex;
             flex-direction: column;
             z-index: 101;
             height: auto;
-            /* Changed height as requested */
             overflow-y: hidden;
-            /* Prevent sidebar itself from scrolling */
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, width 0.3s ease, min-width 0.3s ease, padding 0.3s ease;
         }
 
         .sidebar-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
+            gap: 10px;
+            /* Toggle button aur Heading k darmiyan space */
+            margin-bottom: 12px;
+            /* Bottom space compact ki */
+            padding-bottom: 10px;
             border-bottom: 1px solid var(--border-color);
             color: var(--primary-color);
         }
 
         .sidebar-header h2 {
             margin: 0;
-            font-size: 1.5em;
+            font-size: 1.1em;
+            /* UI UX: Font chota kar diya */
+            font-weight: 600;
+            white-space: nowrap;
+            /* UI UX: 2 lines pe tootny se rokega */
+            flex-grow: 1;
+            /* Bachi hui jagah automatically adjust kary ga */
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .icon-btn {
@@ -653,30 +668,44 @@
         }
 
         header {
-            background-color: var(--surface-color);
-            padding: 15px 25px;
-            box-shadow: 0 2px 5px var(--card-shadow);
+            position: sticky;
+            top: 0;
+            background-color: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 4px 12px;
+            /* UI UX: Header ki padding kam kar ke isey slim banaya */
+            min-height: 48px;
+            /* UI UX: Fixed compact height */
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: flex-end;
             flex-wrap: wrap;
-            gap: 15px;
-            z-index: 100;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            gap: 10px;
+            z-index: 999;
+            /* Z-index barha diya taake videos ke upar rahe */
+        }
+
+        body.light-theme header {
+            background-color: rgba(255, 255, 255, 0.85);
+            /* Light theme transparent background */
         }
 
         header h1 {
-            margin: 0;
-            font-size: 1.8em;
-            color: var(--primary-color);
-            text-shadow: 0 0 5px rgba(98, 0, 238, 0.3);
+            display: none;
+            /* UI UX: Fazol heading ko completely hide kar diya */
         }
 
         .controls {
             display: flex;
-            gap: 10px;
+            gap: 8px;
+            /* Items k darmiyan gap kam kar diya */
             flex-wrap: wrap;
             align-items: center;
+            width: 100%;
+            justify-content: space-between;
+            /* Search bar left, baqi items right */
         }
 
         .size-slider-group {
@@ -737,12 +766,15 @@
         button,
         input[type="text"],
         textarea {
-            padding: 10px 15px;
-            border-radius: 8px;
+            padding: 4px 10px;
+            /* UI UX: Padding mazeed kam ki height choti karne ke liye */
+            border-radius: 4px;
+            /* UI UX: Compact buttons */
             border: 1px solid var(--border-color);
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-size: 0.9em;
+            font-size: 0.85em;
+            /* Text thora sa adjust kiya */
             transition: all 0.3s ease;
             outline: none;
         }
@@ -793,39 +825,156 @@
 
         main {
             flex-grow: 1;
-            padding: 20px;
+            padding: 12px;
+            /* UI UX: Fazool 20px ki spacing hata kar 12px kar di */
             overflow-y: auto;
-            /* This element itself can scroll if its content overflows */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Status Bar Styles (VS Code Style Bottom Footer) --- */
+        .status-bar {
+            position: sticky;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            background: var(--surface-color);
+            padding: 4px 10px;
+            border-top: 1px solid var(--border-color);
+            /* margin-top: auto; yahan se nikal diya gaya hai taake faasla khatam ho */
+            gap: 8px;
+            transition: all 0.3s ease;
+            min-height: 32px;
+            z-index: 999;
+        }
+
+        .status-bar.hidden {
+            display: none;
+        }
+
+        .status-chips-container {
+            display: flex;
+            gap: 6px;
+            /* Items k darmiyan extra space remove ki */
+            flex-grow: 1;
+            flex-wrap: nowrap;
+            /* UI UX: Force kiya k hamesha aik line me rahy */
+            overflow-x: auto;
+            /* UI UX: Agar chips zyada hon to auto-scroll ban jaye */
+            scrollbar-width: none;
+            /* Firefox me scrollbar gayab karny k liye */
+        }
+
+        /* Chrome aur Safari me scrollbar gayab karny k liye */
+        .status-chips-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .status-chip {
+            background: rgba(99, 102, 241, 0.08);
+            /* Color halka sa soft kiya */
+            border: none;
+            /* UI UX: Fazool border remove kar diya */
+            color: var(--text-color);
+            padding: 3px 8px;
+            /* Size compact kiya */
+            border-radius: 6px;
+            /* Modern square-rounded look */
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+            /* Text tootay ga nahi */
+        }
+
+        .status-chip strong {
+            color: var(--primary-light);
+        }
+
+        .status-config-btn {
+            background: transparent;
+            border: none;
+            /* UI UX: Button ka apna border bhi hata diya */
+            color: var(--text-muted-color);
+            border-radius: 4px;
+            width: 26px;
+            /* Button ko chota kiya */
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .status-config-btn:hover {
+            background: var(--three-dots-hover-bg);
+            color: var(--text-color);
+        }
+
+        .config-list-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: grab;
+        }
+
+        .config-list-item.sortable-drag {
+            cursor: grabbing;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .config-list-item input[type="checkbox"] {
+            transform: scale(1.3);
+            cursor: pointer;
+        }
+
+        .config-list-item .drag-handle {
+            color: var(--text-muted-color);
+            font-size: 1.2em;
+            cursor: grab;
         }
 
         /* --- Video Grid Container (CSS Grid) --- */
+
+
         #video-grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(var(--card-base-width), 1fr));
+            /* Is line se cards proper responsive banenge aur bahar nahi niklenge */
+            grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-base-width, 320px)), 1fr));
             gap: 20px;
-            justify-items: center;
-            align-items: start;
+            align-items: stretch;
+            /* Cards ki height barabar rakhne k liye */
+            align-content: start;
+            /* Grid ko proper top se start karne k liye */
             padding: 10px;
+            width: 100%;
             box-sizing: border-box;
-            min-height: 100%;
         }
 
         /* --- Individual Video Card (YouTube-like) --- */
         .video-card {
             background-color: var(--surface-color);
-            border-radius: 8px;
+            border-radius: 4px;
             box-shadow: 0 4px 10px var(--card-shadow);
             overflow: hidden;
             width: 100%;
-            /* Take full width of grid cell */
-            max-width: var(--card-base-width);
-            /* Restrict max width */
             display: flex;
             flex-direction: column;
             cursor: pointer;
             transition: box-shadow 0.2s ease, transform 0.1s ease, background-color 0.3s ease;
             list-style: none;
             margin: 0;
+            position: relative;
+            /* Overlap se bachne ke liye */
+            height: 100%;
         }
 
         .video-card:hover {
@@ -857,6 +1006,8 @@
             border-bottom: 1px solid var(--youtube-thumbnail-border);
             cursor: grab;
             /* Enable drag on thumbnail */
+            flex-shrink: 0;
+            /* IMPORTANT: Yeh image ko chota hone aur overlap hone se rokega */
         }
 
         .video-card-thumbnail img {
@@ -1123,18 +1274,20 @@
             /* matches your --error-color tone */
         }
 
-        /* --- Modals --- */
+        /* --- Modals to Side Drawers --- */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.4);
+            /* Thora light shadow */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
+            justify-content: flex-end;
+            /* UI UX: Center ki jagah screen ke right edge par */
+            align-items: flex-start;
+            z-index: 2000;
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -1148,19 +1301,25 @@
         .modal-content {
             background-color: var(--surface-color);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px var(--modal-shadow);
-            width: 90%;
-            max-width: 500px;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            border-radius: 0;
+            /* UI UX: Drawers square hotay hain */
+            box-shadow: -5px 0 25px var(--modal-shadow);
+            width: 100%;
+            max-width: 420px;
+            /* Slim drawer */
+            height: 100vh;
+            /* Poori height */
+            overflow-y: auto;
+            transform: translateX(100%);
+            /* Right side ke bahar rakha hai */
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
             color: var(--text-color);
             position: relative;
-            /* For the close button */
         }
 
         .modal-overlay.active .modal-content {
-            transform: translateY(0);
+            transform: translateX(0);
+            /* Smoothly andar slide hoga */
         }
 
         .modal-content h2 {
@@ -1368,6 +1527,60 @@
             100% {
                 transform: rotate(360deg);
             }
+        }
+
+        /* --- Collapsible Sidebar Styles --- */
+        .sidebar.collapsed {
+            width: 64px;
+            /* UI UX: VS Code jaisa super thin sidebar */
+            min-width: 64px;
+            padding: 12px 6px;
+            /* IMPORTANT: align-items: center hata diya hai taake main layout kharab na ho */
+        }
+
+        .sidebar.collapsed .sidebar-header h2,
+        .sidebar.collapsed .list-label,
+        .sidebar.collapsed .list-drag-handle,
+        .sidebar.collapsed .list-actions-right,
+        .sidebar.collapsed #auth-status span {
+            display: none;
+            /* Text hide ho jaye ga */
+        }
+
+        .sidebar.collapsed .sidebar-header {
+            flex-direction: column;
+            gap: 15px;
+            border-bottom: none;
+            padding-bottom: 0;
+            align-items: center;
+            /* Sirf icons ko header me center kiya */
+        }
+
+        .sidebar.collapsed .lists-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Sirf lists k emojis ko container k andr center kiya */
+        }
+
+        .sidebar.collapsed .list-item {
+            padding: 8px 0;
+            justify-content: center;
+            width: 44px;
+            /* Icon k liye exact square shape */
+            height: 44px;
+        }
+
+        .sidebar.collapsed .list-emoji {
+            margin: 0;
+            font-size: 1.4em;
+            /* Emoji ko neat kar diya */
+        }
+
+        .sidebar.collapsed .footer-toolbar {
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
         }
 
         /* --- Media Queries for Responsiveness --- */
@@ -1657,174 +1870,225 @@
             line-height: 1.5;
         }
 
-/* --- Notion-Style Editor --- */
+        /* --- Notion-Style Editor --- */
 
-/* 1. Editor Container - Notion Font & Spacing */
-.fs-editor-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px 60px; /* Notion has wider padding */
-    background-color: var(--surface-color);
-    cursor: text;
-    position: relative;
-    /* Notion Font Stack */
-    font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-    color: var(--text-color);
-    line-height: 1.5;
-}
+        /* 1. Editor Container - Notion Font & Spacing */
+        .fs-editor-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 60px;
+            /* Notion has wider padding */
+            background-color: var(--surface-color);
+            cursor: text;
+            position: relative;
+            /* Notion Font Stack */
+            font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+            color: var(--text-color);
+            line-height: 1.5;
+        }
 
-/* Source Mode Textarea (Ctrl+A) */
-#fs-source-textarea {
-    width: 100%;
-    height: 100%;
-    background: var(--surface-color);
-    border: none;
-    color: var(--text-color);
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 0.9em;
-    line-height: 1.5;
-    resize: none;
-    outline: none;
-    display: none;
-    white-space: pre-wrap;
-    padding: 20px 60px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-}
+        /* Source Mode Textarea (Ctrl+A) */
+        #fs-source-textarea {
+            width: 100%;
+            height: 100%;
+            background: var(--surface-color);
+            border: none;
+            color: var(--text-color);
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            font-size: 0.9em;
+            line-height: 1.5;
+            resize: none;
+            outline: none;
+            display: none;
+            white-space: pre-wrap;
+            padding: 20px 60px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
 
-/* Individual Line Blocks */
-.editor-block {
-    min-height: 1.5em; /* Standard Notion line height */
-    position: relative;
-    margin-bottom: 2px; /* Tight spacing like Notion */
-}
+        /* Individual Line Blocks */
+        .editor-block {
+            min-height: 1.5em;
+            /* Standard Notion line height */
+            position: relative;
+            margin-bottom: 2px;
+            /* Tight spacing like Notion */
+        }
 
-/* --- VIEW MODE (Rendering) --- */
-.editor-block .view-mode {
-    display: block;
-    cursor: text;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    color: var(--text-color);
-    padding: 3px 2px; /* Visual balance */
-}
+        /* --- VIEW MODE (Rendering) --- */
+        .editor-block .view-mode {
+            display: block;
+            cursor: text;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: var(--text-color);
+            padding: 3px 2px;
+            /* Visual balance */
+        }
 
-/* Notion Typography */
+        /* Notion Typography */
 
-/* Headings: Clean, Bold, No Color (unless standard text color) */
-.editor-block .view-mode h1 { 
-    font-size: 1.875em; 
-    font-weight: 600; 
-    margin: 0.5em 0 0.2em 0; 
-    line-height: 1.3; 
-    color: var(--text-color); 
-}
-.editor-block .view-mode h2 { 
-    font-size: 1.5em; 
-    font-weight: 600; 
-    margin: 0.4em 0 0.2em 0; 
-    line-height: 1.3; 
-    color: var(--text-color); 
-}
-.editor-block .view-mode h3 { 
-    font-size: 1.25em; 
-    font-weight: 600; 
-    margin: 0.3em 0 0.2em 0; 
-    line-height: 1.3; 
-    color: var(--text-color); 
-}
+        /* Headings: Clean, Bold, No Color (unless standard text color) */
+        .editor-block .view-mode h1 {
+            font-size: 1.875em;
+            font-weight: 600;
+            margin: 0.5em 0 0.2em 0;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
 
-/* Lists */
-.editor-block .view-mode li { 
-    margin-left: 1.5em; 
-    list-style-type: disc; 
-    display: list-item; 
-    padding-left: 0.2em;
-}
+        .editor-block .view-mode h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin: 0.4em 0 0.2em 0;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
 
-/* Quotes - Notion Style (Black thick border, normal text) */
-.editor-block .view-mode blockquote { 
-    border-left: 3px solid var(--text-color); /* Match text color */
-    padding-left: 14px; 
-    margin: 0;
-    font-style: normal; /* Notion quotes are rarely italic */
-    color: var(--text-color);
-    opacity: 0.8;
-}
+        .editor-block .view-mode h3 {
+            font-size: 1.25em;
+            font-weight: 600;
+            margin: 0.3em 0 0.2em 0;
+            line-height: 1.3;
+            color: var(--text-color);
+        }
 
-/* Inline Code - Notion Style (Grey bg, red text, rounded) */
-.editor-block .view-mode code { 
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    background: rgba(135, 131, 120, 0.15); /* Light grey tint */
-    color: #EB5757; /* Notion Red */
-    padding: 0.2em 0.4em;
-    border-radius: 3px;
-    font-size: 85%;
-}
+        /* Lists */
+        .editor-block .view-mode li {
+            margin-left: 1.5em;
+            list-style-type: disc;
+            display: list-item;
+            padding-left: 0.2em;
+        }
 
-/* Bold & Italic */
-.editor-block .view-mode strong { font-weight: 700; color: inherit; }
-.editor-block .view-mode em { font-style: italic; }
+        /* Quotes - Notion Style (Black thick border, normal text) */
+        .editor-block .view-mode blockquote {
+            border-left: 3px solid var(--text-color);
+            /* Match text color */
+            padding-left: 14px;
+            margin: 0;
+            font-style: normal;
+            /* Notion quotes are rarely italic */
+            color: var(--text-color);
+            opacity: 0.8;
+        }
 
-/* --- EDIT MODE (Live Syntax Styling) --- */
-.editor-block textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: var(--text-color);
-    font-family: inherit; /* Inherit Notion sans-serif */
-    font-size: 1em; /* Match default text size */
-    line-height: 1.5;
-    padding: 3px 2px;
-    resize: none;
-    overflow: hidden;
-    display: none;
-}
+        /* Inline Code - Notion Style (Grey bg, red text, rounded) */
+        .editor-block .view-mode code {
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+            background: rgba(135, 131, 120, 0.15);
+            /* Light grey tint */
+            color: #EB5757;
+            /* Notion Red */
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 85%;
+        }
 
-/* Active Line Styling - MATCHING View Mode */
-.editor-block textarea.md-h1 { 
-    font-size: 1.875em; 
-    font-weight: 600; 
-    margin-top: 0.5em;
-    line-height: 1.3;
-}
-.editor-block textarea.md-h2 { 
-    font-size: 1.5em; 
-    font-weight: 600; 
-    margin-top: 0.4em;
-    line-height: 1.3;
-}
-.editor-block textarea.md-h3 { 
-    font-size: 1.25em; 
-    font-weight: 600; 
-    margin-top: 0.3em;
-    line-height: 1.3;
-}
-.editor-block textarea.md-quote { 
-    border-left: 3px solid var(--text-color); 
-    padding-left: 14px; 
-    opacity: 0.8;
-}
-.editor-block textarea.md-list { 
-    padding-left: 1.5em; /* Simulate Indent */
-}
+        /* Bold & Italic */
+        .editor-block .view-mode strong {
+            font-weight: 700;
+            color: inherit;
+        }
 
-/* Placeholder for empty block */
-.editor-block textarea::placeholder {
-    color: var(--text-muted-color);
-    opacity: 0.5;
-    font-style: italic;
-}
+        .editor-block .view-mode em {
+            font-style: italic;
+        }
 
-/* Toggle Logic */
-.editor-block.active .view-mode { display: none; }
-.editor-block.active textarea { display: block; }
+        /* --- EDIT MODE (Live Syntax Styling) --- */
+        .editor-block textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: var(--text-color);
+            font-family: inherit;
+            /* Inherit Notion sans-serif */
+            font-size: 1em;
+            /* Match default text size */
+            line-height: 1.5;
+            padding: 3px 2px;
+            resize: none;
+            overflow: hidden;
+            display: none;
+        }
 
+        /* Active Line Styling - MATCHING View Mode */
+        .editor-block textarea.md-h1 {
+            font-size: 1.875em;
+            font-weight: 600;
+            margin-top: 0.5em;
+            line-height: 1.3;
+        }
 
-</style>
+        .editor-block textarea.md-h2 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-top: 0.4em;
+            line-height: 1.3;
+        }
+
+        .editor-block textarea.md-h3 {
+            font-size: 1.25em;
+            font-weight: 600;
+            margin-top: 0.3em;
+            line-height: 1.3;
+        }
+
+        .editor-block textarea.md-quote {
+            border-left: 3px solid var(--text-color);
+            padding-left: 14px;
+            opacity: 0.8;
+        }
+
+        .editor-block textarea.md-list {
+            padding-left: 1.5em;
+            /* Simulate Indent */
+        }
+
+        /* Placeholder for empty block */
+        .editor-block textarea::placeholder {
+            color: var(--text-muted-color);
+            opacity: 0.5;
+            font-style: italic;
+        }
+
+        /* Toggle Logic */
+        .editor-block.active .view-mode {
+            display: none;
+        }
+
+        .editor-block.active textarea {
+            display: block;
+        }
+
+        /* --- Naya Code: Settings Dropdown ke liye --- */
+    /* --- Naya Code: Settings Dropdown ke liye --- */
+            .settings-dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            .settings-dropdown-content {
+                display: none;
+                position: absolute;
+                bottom: 120%; /* UI UX: Dropdown ab oopar ki taraf khulega */
+                left: 0;
+                background-color: var(--surface-color);
+                min-width: 160px;
+                box-shadow: 0px -4px 16px var(--modal-shadow);
+                padding: 12px;
+                border-radius: 8px;
+                z-index: 9999; /* UI UX: Z-index bohot high kar diya taake sab cheezon ke oopar rahay */
+                border: 1px solid var(--border-color);
+            }
+/* UI UX: Hover ki jagah ab .show class se open hoga */
+            .settings-dropdown-content.show {
+                display: flex;
+                flex-direction: column;
+            }
+    </style>
 </head>
 
 <body>
@@ -1832,12 +2096,12 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="sidebar-header" style="position:relative;">
+                <button id="toggle-sidebar-btn"
+                    style="background:transparent; border:none; color:var(--text-muted-color); font-size:1.5em; cursor:pointer; padding:0;">☰</button>
                 <h2>Your Lists</h2>
                 <div class="sidebar-actions">
                     <button id="create-list-btn" class="icon-btn" title="Create New List">+</button>
                 </div>
-
-
             </div>
 
             <div id="lists-container" class="lists-container">
@@ -1847,9 +2111,17 @@
                 <!-- Authentication Controls -->
                 <div class="footer-toolbar">
                     <!-- Theme icon buttons -->
-                    <button id="theme-toggle-btn" class="icon-toggle" title="Theme" aria-label="Theme">🖥️</button>
-                    <button id="archive-lists-btn" class="icon-toggle" title="Archived Lists"
-                        aria-label="Archived Lists">🗃️</button>
+<div class="settings-dropdown sidebar-settings">
+                        <button id="settings-gear-btn" class="icon-toggle" title="Settings" aria-label="Settings">⚙️</button>
+                        <div id="settings-dropdown-menu" class="settings-dropdown-content">
+                            <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                <button id="theme-toggle-btn" class="icon-toggle" title="Theme" aria-label="Theme">🖥️</button>
+                                <button id="archive-lists-btn" class="icon-toggle" title="Archived Lists" aria-label="Archived Lists">🗃️</button>
+                            </div>
+                            <label for="card-size-slider" style="font-size: 0.85em; margin-bottom: 4px; color: var(--text-color);">Card Size:</label>
+                            <input type="range" id="card-size-slider" min="250" max="450" value="320" style="width: 100%;">
+                        </div>
+                    </div>
 
                     <div class="footer-spacer"></div>
 
@@ -1875,18 +2147,21 @@
                 <h1>YouTube Link Organizer</h1>
                 <div class="controls">
                     <input type="text" id="search-input" placeholder="Search videos...">
-                    <div class="size-slider-group">
-                        <label for="card-size-slider">Card Size:</label>
-                        <input type="range" id="card-size-slider" min="250" max="450" value="320">
-                    </div>
+
                     <button id="add-video-button-header" title="Add Video">➕ Add Video</button>
                 </div>
             </header>
 
             <main>
-                <div id="video-grid-container">
-                    <!-- Video cards will be dynamically loaded here -->
+                <div id="list-status-bar" class="status-bar hidden">
+                    <div id="status-chips-container" class="status-chips-container">
+                    </div>
+                    <button id="status-config-btn" class="status-config-btn" title="Configure Status Bar">⚙️</button>
                 </div>
+
+                <div id="video-grid-container">
+                </div>
+
             </main>
         </div>
     </div>
@@ -1911,13 +2186,25 @@
             <h2>Create New List</h2>
             <label for="list-name-input">List Name:</label>
             <input type="text" id="list-name-input" placeholder="e.g., My Favorites, Tutorials">
+
+            <label for="playlist-link-input" style="margin-top: 15px;">(Optional) YouTube Playlist Link:</label>
+            <input type="text" id="playlist-link-input"
+                placeholder="e.g., https://www.youtube.com/playlist?list=XYZ...">
+
+            <label for="playlist-mode-select" style="margin-top: 15px;">Playlist Mode:</label>
+            <select id="playlist-mode-select" style="width: 100%; margin-bottom: 15px;">
+                <option value="none">None (Regular List)</option>
+                <option value="sync">Sync (Strictly match playlist, no manual add)</option>
+                <option value="pull">Pull (Bring new videos, keep deleted ones, manual add allowed)</option>
+            </select>
+
             <div class="modal-actions">
                 <button class="outline cancel-btn">Cancel</button>
                 <button id="submit-list-btn">Create List</button>
             </div>
+
         </div>
     </div>
-
     <!-- NEW: Confirm Archive Modal -->
     <div id="confirm-archive-modal" class="modal-overlay">
         <div class="modal-content">
@@ -2007,6 +2294,20 @@
             </div>
         </div>
     </div>
+
+    <div id="status-config-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
+            <h2>Configure Status Bar</h2>
+            <div id="status-config-list" style="margin-bottom: 15px; max-height: 300px; overflow-y: auto;">
+            </div>
+            <div class="modal-actions">
+                <button class="outline cancel-btn">Cancel</button>
+                <button id="save-status-config-btn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Message Container -->
     <div id="message-container"></div>
 
@@ -2046,7 +2347,10 @@
         const createListBtn = document.getElementById('create-list-btn');
         const createListModal = document.getElementById('create-list-modal');
         const listNameInput = document.getElementById('list-name-input');
+        const playlistLinkInput = document.getElementById('playlist-link-input');
+        const playlistModeSelect = document.getElementById('playlist-mode-select');
         const submitListBtn = document.getElementById('submit-list-btn');
+
 
         const confirmDeleteModal = document.getElementById('confirm-delete-modal');
         const confirmDeleteMessage = document.getElementById('confirm-delete-message');
@@ -2070,6 +2374,14 @@
 
         const cardSizeSlider = document.getElementById('card-size-slider');
 
+        // Status Bar Elements
+        const listStatusBar = document.getElementById('list-status-bar');
+        const statusChipsContainer = document.getElementById('status-chips-container');
+        const statusConfigBtn = document.getElementById('status-config-btn');
+        const statusConfigModal = document.getElementById('status-config-modal');
+        const statusConfigList = document.getElementById('status-config-list');
+        const saveStatusConfigBtn = document.getElementById('save-status-config-btn');
+
         // Note Modal Elements
         const noteEditModal = document.getElementById('note-edit-modal');
         const noteModalTitle = document.getElementById('note-modal-title');
@@ -2087,6 +2399,7 @@
         let currentUserId = null;
         let currentListId = null;
         let currentListName = null;
+        let currentListSyncMode = null; // Sync/Pull track karne ke liye
         let videoCards = {}; // Stores { videoId: { element: DOM_Element, data: Object } }
         let sortableInstance = null;
         let currentMenu = null; // To store the currently open 3-dots menu element
@@ -2100,6 +2413,18 @@
         let currentDragPayload = null;
         let currentNoteLines = [];
 
+        // Status Bar Data State
+        const defaultStatusProps = [
+            { id: 'mode', label: 'List Mode', icon: '🔄', active: true },
+            { id: 'videoCount', label: 'Total Videos', icon: '🎬', active: true },
+            { id: 'noteCount', label: 'Total Notes', icon: '📝', active: true },
+            { id: 'lastAdded', label: 'Last Video Added', icon: '🕒', active: true },
+            { id: 'lastNote', label: 'Last Note Updated', icon: '⏱️', active: false },
+            { id: 'totalDuration', label: 'Total Duration', icon: '⏳', active: false }
+        ];
+        let statusPropsOrder = JSON.parse(localStorage.getItem('yt_status_props')) || defaultStatusProps;
+        let statusConfigSortable = null;
+
         // --- ALL FULL SCREEN VARIABLES DEFINED HERE ---
         const fsEditorBlocks = document.getElementById('fs-editor-blocks');
         const fsSourceTextarea = document.getElementById('fs-source-textarea');
@@ -2109,180 +2434,180 @@
         const fsVideoPreview = document.getElementById('fs-video-preview');
         const fsSaveBtn = document.getElementById('fs-save-btn');
 
-// 1. Render all blocks (With Live Styling)
-// 1. Render all blocks (With Robust Switching)
-function renderBlockEditor() {
-    fsEditorBlocks.style.display = 'block';
-    fsSourceTextarea.style.display = 'none';
-    fsEditorBlocks.innerHTML = ''; 
+        // 1. Render all blocks (With Live Styling)
+        // 1. Render all blocks (With Robust Switching)
+        function renderBlockEditor() {
+            fsEditorBlocks.style.display = 'block';
+            fsSourceTextarea.style.display = 'none';
+            fsEditorBlocks.innerHTML = '';
 
-    currentNoteLines.forEach((lineText, index) => {
-        const blockDiv = document.createElement('div');
-        blockDiv.className = 'editor-block';
-        blockDiv.dataset.index = index;
+            currentNoteLines.forEach((lineText, index) => {
+                const blockDiv = document.createElement('div');
+                blockDiv.className = 'editor-block';
+                blockDiv.dataset.index = index;
 
-        // View Mode (Displayed by default)
-        const viewDiv = document.createElement('div');
-        viewDiv.className = 'view-mode';
-        viewDiv.innerHTML = parseMarkdownLine(lineText);
+                // View Mode (Displayed by default)
+                const viewDiv = document.createElement('div');
+                viewDiv.className = 'view-mode';
+                viewDiv.innerHTML = parseMarkdownLine(lineText);
 
-        // Edit Mode (Hidden by default)
-        const textarea = document.createElement('textarea');
-        textarea.value = lineText;
-        textarea.rows = 1; 
+                // Edit Mode (Hidden by default)
+                const textarea = document.createElement('textarea');
+                textarea.value = lineText;
+                textarea.rows = 1;
 
-        // Auto-Resize Logic
-        const autoResize = () => {
-            textarea.style.height = 'auto';
-            textarea.style.height = textarea.scrollHeight + 'px';
-        };
+                // Auto-Resize Logic
+                const autoResize = () => {
+                    textarea.style.height = 'auto';
+                    textarea.style.height = textarea.scrollHeight + 'px';
+                };
 
-        // --- Logic: Click to Edit ---
-        blockDiv.addEventListener('click', (e) => {
-            // Prevent bubbling so the container click doesn't immediately close it
-            e.stopPropagation();
+                // --- Logic: Click to Edit ---
+                blockDiv.addEventListener('click', (e) => {
+                    // Prevent bubbling so the container click doesn't immediately close it
+                    e.stopPropagation();
 
-            // If already editing this block, do nothing
-            if (blockDiv.classList.contains('active')) return;
+                    // If already editing this block, do nothing
+                    if (blockDiv.classList.contains('active')) return;
 
-            // 1. Save and Close ANY other active block first
-            saveAllBlocks();
+                    // 1. Save and Close ANY other active block first
+                    saveAllBlocks();
 
-            // 2. Activate THIS block
-            blockDiv.classList.add('active');
-            updateInputStyle(); // Apply styles (H1, Quote, etc.)
-            
-            // 3. Setup textarea
-            autoResize(); 
-            textarea.focus();
-        });
+                    // 2. Activate THIS block
+                    blockDiv.classList.add('active');
+                    updateInputStyle(); // Apply styles (H1, Quote, etc.)
 
-        // --- Function to apply Live Styles ---
-        const updateInputStyle = () => {
-            textarea.className = ''; 
-            const v = textarea.value;
-            if (v.startsWith('# ')) textarea.classList.add('md-h1');
-            else if (v.startsWith('## ')) textarea.classList.add('md-h2');
-            else if (v.startsWith('### ')) textarea.classList.add('md-h3');
-            else if (v.startsWith('> ')) textarea.classList.add('md-quote');
-            else if (v.startsWith('- ')) textarea.classList.add('md-list');
-            
-            autoResize();
-        };
+                    // 3. Setup textarea
+                    autoResize();
+                    textarea.focus();
+                });
 
-        // --- Key Navigation ---
-        textarea.addEventListener('keydown', (e) => {
-            // ENTER: Create new line
-            if (e.key === 'Enter' && !e.shiftKey) { 
-                e.preventDefault();
-                saveAllBlocks(); // Save current
-                currentNoteLines.splice(index + 1, 0, ""); // Insert new
-                renderBlockEditor(); // Re-render all
-                setTimeout(() => focusBlock(index + 1), 0);
-            }
-            // BACKSPACE: Merge with previous
-            if (e.key === 'Backspace' && textarea.selectionStart === 0 && textarea.selectionEnd === 0 && index > 0) {
-                e.preventDefault();
-                const prevLineLength = currentNoteLines[index - 1].length;
-                currentNoteLines[index - 1] += currentNoteLines[index];
-                currentNoteLines.splice(index, 1);
-                renderBlockEditor();
-                setTimeout(() => {
-                    focusBlock(index - 1);
-                    // Restore cursor position
-                    const prevBlock = fsEditorBlocks.children[index - 1];
-                    if (prevBlock) {
-                        const prevTa = prevBlock.querySelector('textarea');
-                        prevTa.selectionStart = prevTa.selectionEnd = prevLineLength;
+                // --- Function to apply Live Styles ---
+                const updateInputStyle = () => {
+                    textarea.className = '';
+                    const v = textarea.value;
+                    if (v.startsWith('# ')) textarea.classList.add('md-h1');
+                    else if (v.startsWith('## ')) textarea.classList.add('md-h2');
+                    else if (v.startsWith('### ')) textarea.classList.add('md-h3');
+                    else if (v.startsWith('> ')) textarea.classList.add('md-quote');
+                    else if (v.startsWith('- ')) textarea.classList.add('md-list');
+
+                    autoResize();
+                };
+
+                // --- Key Navigation ---
+                textarea.addEventListener('keydown', (e) => {
+                    // ENTER: Create new line
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        saveAllBlocks(); // Save current
+                        currentNoteLines.splice(index + 1, 0, ""); // Insert new
+                        renderBlockEditor(); // Re-render all
+                        setTimeout(() => focusBlock(index + 1), 0);
                     }
-                }, 0);
+                    // BACKSPACE: Merge with previous
+                    if (e.key === 'Backspace' && textarea.selectionStart === 0 && textarea.selectionEnd === 0 && index > 0) {
+                        e.preventDefault();
+                        const prevLineLength = currentNoteLines[index - 1].length;
+                        currentNoteLines[index - 1] += currentNoteLines[index];
+                        currentNoteLines.splice(index, 1);
+                        renderBlockEditor();
+                        setTimeout(() => {
+                            focusBlock(index - 1);
+                            // Restore cursor position
+                            const prevBlock = fsEditorBlocks.children[index - 1];
+                            if (prevBlock) {
+                                const prevTa = prevBlock.querySelector('textarea');
+                                prevTa.selectionStart = prevTa.selectionEnd = prevLineLength;
+                            }
+                        }, 0);
+                    }
+                    // ARROW UP
+                    if (e.key === 'ArrowUp') {
+                        if (textarea.selectionStart === 0 && index > 0) {
+                            e.preventDefault();
+                            saveAllBlocks();
+                            focusBlock(index - 1);
+                        }
+                    }
+                    // ARROW DOWN
+                    if (e.key === 'ArrowDown') {
+                        if (textarea.selectionStart === textarea.value.length && index < currentNoteLines.length - 1) {
+                            e.preventDefault();
+                            saveAllBlocks();
+                            focusBlock(index + 1);
+                        }
+                    }
+
+                    requestAnimationFrame(updateInputStyle);
+                });
+
+                textarea.addEventListener('input', updateInputStyle);
+
+                blockDiv.appendChild(viewDiv);
+                blockDiv.appendChild(textarea);
+                fsEditorBlocks.appendChild(blockDiv);
+            });
+        }
+
+        // --- Global Click to Close Edit Mode ---
+        // If user clicks on the grey area (fs-editor-container) but NOT on a block, close edit mode.
+        fsEditorBlocks.parentElement.addEventListener('click', (e) => {
+            // If the click target is the container itself or the blocks wrapper (not a specific block)
+            if (e.target === fsEditorBlocks || e.target === fsEditorBlocks.parentElement) {
+                saveAllBlocks(); // This removes 'active' class and switches back to view mode
             }
-            // ARROW UP
-            if (e.key === 'ArrowUp') {
-                if (textarea.selectionStart === 0 && index > 0) {
-                    e.preventDefault();
-                    saveAllBlocks();
-                    focusBlock(index - 1);
-                }
-            }
-            // ARROW DOWN
-            if (e.key === 'ArrowDown') {
-                if (textarea.selectionStart === textarea.value.length && index < currentNoteLines.length - 1) {
-                    e.preventDefault();
-                    saveAllBlocks();
-                    focusBlock(index + 1);
-                }
-            }
-            
-            requestAnimationFrame(updateInputStyle);
         });
 
-        textarea.addEventListener('input', updateInputStyle);
 
-        blockDiv.appendChild(viewDiv);
-        blockDiv.appendChild(textarea);
-        fsEditorBlocks.appendChild(blockDiv);
-    });
-}
+        // Function to Exit Source Mode
+        function exitSourceMode(targetIndex = -1) {
+            const raw = fsSourceTextarea.value;
+            currentNoteLines = raw.split('\n');
+            if (currentNoteLines.length === 0) currentNoteLines = [""];
 
-// --- Global Click to Close Edit Mode ---
-// If user clicks on the grey area (fs-editor-container) but NOT on a block, close edit mode.
-fsEditorBlocks.parentElement.addEventListener('click', (e) => {
-    // If the click target is the container itself or the blocks wrapper (not a specific block)
-    if (e.target === fsEditorBlocks || e.target === fsEditorBlocks.parentElement) {
-        saveAllBlocks(); // This removes 'active' class and switches back to view mode
-    }
-});
+            renderBlockEditor();
 
+            if (targetIndex >= 0) {
+                setTimeout(() => focusBlock(targetIndex), 0);
+            }
+        }
 
-// Function to Exit Source Mode
-function exitSourceMode(targetIndex = -1) {
-    const raw = fsSourceTextarea.value;
-    currentNoteLines = raw.split('\n');
-    if (currentNoteLines.length === 0) currentNoteLines = [""];
-    
-    renderBlockEditor();
+        // 1. Leave Source Mode on Blur (Click Outside)
+        fsSourceTextarea.addEventListener('blur', (e) => {
+            // Check relatedTarget to see if we clicked INSIDE the editor container
+            // If we clicked inside, the 'click' listener handles it. If outside, this handles it.
+            if (!e.relatedTarget && fsSourceTextarea.style.display === 'block') {
+                // Simple blur logic (can be loose)
+                // Let the click listener handle precise focus, 
+                // but if we tabbed out, ensure we save.
+                // For now, let's rely on click listener for inside-box clicks.
+            }
+        });
 
-    if (targetIndex >= 0) {
-        setTimeout(() => focusBlock(targetIndex), 0);
-    }
-}
+        // 2. Leave Source Mode on Click (Deselect Logic Fixed)
+        fsSourceTextarea.addEventListener('click', () => {
+            // Only exit if user clicked to place cursor (selectionStart == selectionEnd)
+            if (fsSourceTextarea.selectionStart === fsSourceTextarea.selectionEnd) {
+                const cursorPosition = fsSourceTextarea.selectionStart;
+                const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
+                const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+                exitSourceMode(lineIndex);
+            }
+        });
 
-// 1. Leave Source Mode on Blur (Click Outside)
-fsSourceTextarea.addEventListener('blur', (e) => {
-    // Check relatedTarget to see if we clicked INSIDE the editor container
-    // If we clicked inside, the 'click' listener handles it. If outside, this handles it.
-    if (!e.relatedTarget && fsSourceTextarea.style.display === 'block') {
-       // Simple blur logic (can be loose)
-       // Let the click listener handle precise focus, 
-       // but if we tabbed out, ensure we save.
-       // For now, let's rely on click listener for inside-box clicks.
-    }
-});
-
-// 2. Leave Source Mode on Click (Deselect Logic Fixed)
-fsSourceTextarea.addEventListener('click', () => {
-    // Only exit if user clicked to place cursor (selectionStart == selectionEnd)
-    if (fsSourceTextarea.selectionStart === fsSourceTextarea.selectionEnd) {
-        const cursorPosition = fsSourceTextarea.selectionStart;
-        const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
-        const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
-        exitSourceMode(lineIndex);
-    }
-});
-
-// 3. Leave Source Mode on Key Press
-fsSourceTextarea.addEventListener('keydown', (e) => {
-    if (e.ctrlKey || e.metaKey) return; 
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
-        setTimeout(() => {
-            const cursorPosition = fsSourceTextarea.selectionStart;
-            const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
-            const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
-            exitSourceMode(lineIndex);
-        }, 10);
-    }
-});
+        // 3. Leave Source Mode on Key Press
+        fsSourceTextarea.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) return;
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
+                setTimeout(() => {
+                    const cursorPosition = fsSourceTextarea.selectionStart;
+                    const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
+                    const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+                    exitSourceMode(lineIndex);
+                }, 10);
+            }
+        });
 
         // Helper to focus a specific block
         function focusBlock(index) {
@@ -2291,23 +2616,23 @@ fsSourceTextarea.addEventListener('keydown', (e) => {
         }
 
         // 2. Save Helper
-function saveAllBlocks() {
-    const blocks = fsEditorBlocks.querySelectorAll('.editor-block');
-    blocks.forEach(block => {
-        if (block.classList.contains('active')) {
-            const idx = parseInt(block.dataset.index);
-            const val = block.querySelector('textarea').value;
-            currentNoteLines[idx] = val; // Update Data
+        function saveAllBlocks() {
+            const blocks = fsEditorBlocks.querySelectorAll('.editor-block');
+            blocks.forEach(block => {
+                if (block.classList.contains('active')) {
+                    const idx = parseInt(block.dataset.index);
+                    const val = block.querySelector('textarea').value;
+                    currentNoteLines[idx] = val; // Update Data
 
-            // Update View
-            block.querySelector('.view-mode').innerHTML = parseMarkdownLine(val);
-            
-            // Switch State
-            block.classList.remove('active');
-            // We do NOT hide textarea via style here, CSS handles .active class toggling
+                    // Update View
+                    block.querySelector('.view-mode').innerHTML = parseMarkdownLine(val);
+
+                    // Switch State
+                    block.classList.remove('active');
+                    // We do NOT hide textarea via style here, CSS handles .active class toggling
+                }
+            });
         }
-    });
-}
 
         // 3. CTRL+A Handler (Source Mode Switch)
         // Attach this to the container or window
@@ -2337,88 +2662,88 @@ function saveAllBlocks() {
             fsSourceTextarea.select(); // Select All
         }
 
-     // Leave Source Mode (on Blur)
-// Function to Exit Source Mode and go to specific line
-function exitSourceMode(targetIndex = -1) {
-    // Save Content
-    const raw = fsSourceTextarea.value;
-    currentNoteLines = raw.split('\n');
-    if (currentNoteLines.length === 0) currentNoteLines = [""];
+        // Leave Source Mode (on Blur)
+        // Function to Exit Source Mode and go to specific line
+        function exitSourceMode(targetIndex = -1) {
+            // Save Content
+            const raw = fsSourceTextarea.value;
+            currentNoteLines = raw.split('\n');
+            if (currentNoteLines.length === 0) currentNoteLines = [""];
 
-    // Switch View
-    renderBlockEditor();
+            // Switch View
+            renderBlockEditor();
 
-    // Focus on the specific line if clicked
-    if (targetIndex >= 0) {
-        setTimeout(() => focusBlock(targetIndex), 0);
-    }
-}
+            // Focus on the specific line if clicked
+            if (targetIndex >= 0) {
+                setTimeout(() => focusBlock(targetIndex), 0);
+            }
+        }
 
-// 1. Leave Source Mode on Blur (Click Outside)
-fsSourceTextarea.addEventListener('blur', () => {
-    // Only exit if we are not just clicking back into the editor blocks (prevent flickering)
-    if (fsSourceTextarea.style.display === 'block') {
-        exitSourceMode();
-    }
-});
+        // 1. Leave Source Mode on Blur (Click Outside)
+        fsSourceTextarea.addEventListener('blur', () => {
+            // Only exit if we are not just clicking back into the editor blocks (prevent flickering)
+            if (fsSourceTextarea.style.display === 'block') {
+                exitSourceMode();
+            }
+        });
 
-// 2. Leave Source Mode on Click Inside (Deselect)
-fsSourceTextarea.addEventListener('click', () => {
-    // Calculate which line the user clicked on
-    const cursorPosition = fsSourceTextarea.selectionStart;
-    const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
-    const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
-
-    exitSourceMode(lineIndex);
-});
-
-// 3. Leave Source Mode on Key Press (Arrow keys, etc)
-fsSourceTextarea.addEventListener('keydown', (e) => {
-    // Allow Ctrl+A / Ctrl+C to work without exiting
-    if (e.ctrlKey || e.metaKey) return; 
-
-    // If user presses Arrow Keys or Enter, switch back to block mode at that position
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
-        // Let the default key press happen first to update cursor position
-        setTimeout(() => {
+        // 2. Leave Source Mode on Click Inside (Deselect)
+        fsSourceTextarea.addEventListener('click', () => {
+            // Calculate which line the user clicked on
             const cursorPosition = fsSourceTextarea.selectionStart;
             const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
             const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+
             exitSourceMode(lineIndex);
-        }, 10);
-    }
-});
+        });
+
+        // 3. Leave Source Mode on Key Press (Arrow keys, etc)
+        fsSourceTextarea.addEventListener('keydown', (e) => {
+            // Allow Ctrl+A / Ctrl+C to work without exiting
+            if (e.ctrlKey || e.metaKey) return;
+
+            // If user presses Arrow Keys or Enter, switch back to block mode at that position
+            if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter'].includes(e.key)) {
+                // Let the default key press happen first to update cursor position
+                setTimeout(() => {
+                    const cursorPosition = fsSourceTextarea.selectionStart;
+                    const textUpToCursor = fsSourceTextarea.value.substring(0, cursorPosition);
+                    const lineIndex = (textUpToCursor.match(/\n/g) || []).length;
+                    exitSourceMode(lineIndex);
+                }, 10);
+            }
+        });
 
         // 4. Improved Markdown Parser
-// 4. Improved Markdown Parser
-function parseMarkdownLine(text) {
-    if (!text) return '<br>'; 
-    
-    // HTML Escaping to prevent breaking layout
-    let html = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+        // 4. Improved Markdown Parser
+        function parseMarkdownLine(text) {
+            if (!text) return '<br>';
 
-    // 1. Headers
-    if (html.startsWith('# ')) return `<h1>${html.substring(2)}</h1>`;
-    if (html.startsWith('## ')) return `<h2>${html.substring(3)}</h2>`;
-    if (html.startsWith('### ')) return `<h3>${html.substring(4)}</h3>`;
-    
-    // 2. Blockquotes
-    if (html.startsWith('&gt; ')) return `<blockquote>${html.substring(5)}</blockquote>`;
+            // HTML Escaping to prevent breaking layout
+            let html = text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    // 3. Lists (Simple dash)
-    if (html.startsWith('- ')) return `<li>${html.substring(2)}</li>`;
+            // 1. Headers
+            if (html.startsWith('# ')) return `<h1>${html.substring(2)}</h1>`;
+            if (html.startsWith('## ')) return `<h2>${html.substring(3)}</h2>`;
+            if (html.startsWith('### ')) return `<h3>${html.substring(4)}</h3>`;
 
-    // 4. Inline Code (`code`)
-    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            // 2. Blockquotes
+            if (html.startsWith('&gt; ')) return `<blockquote>${html.substring(5)}</blockquote>`;
 
-    // 5. Bold (**text**)
-    html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // 3. Lists (Simple dash)
+            if (html.startsWith('- ')) return `<li>${html.substring(2)}</li>`;
 
-    // 6. Italic (*text* or _text_)
-    html = html.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>');
+            // 4. Inline Code (`code`)
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-    return html;
-}
+            // 5. Bold (**text**)
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+            // 6. Italic (*text* or _text_)
+            html = html.replace(/(\*|_)(.*?)\1/g, '<em>$2</em>');
+
+            return html;
+        }
 
 
 
@@ -2456,8 +2781,11 @@ function parseMarkdownLine(text) {
             }
 
             // Update Firebase
-            db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${currentNoteVideoId}/note`)
-                .set(noteContent === '' ? null : noteContent)
+            const updates = {
+                note: noteContent === '' ? null : noteContent,
+                noteTimestamp: noteContent === '' ? null : firebase.database.ServerValue.TIMESTAMP
+            };
+            db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${currentNoteVideoId}`).update(updates)
                 .then(() => {
                     if (!silent) showMessage("Note saved!", 'success', 1000);
                 })
@@ -3038,8 +3366,27 @@ function parseMarkdownLine(text) {
 
             currentListId = listId;
             currentListName = listName;
+            currentListSyncMode = null; // Loading state
+
             updateActiveListClass(listId);
             updateDeleteListButtonVisibility();
+
+            // Playlist mode check & Trigger Sync
+            db.ref(`users/${currentUserId}/lists/${listId}`).once('value').then(snap => {
+                const listData = snap.val();
+                if (listData) {
+                    currentListSyncMode = listData.syncMode || 'none';
+
+                    // --- NAYA CODE: Mode load hone ke baad status bar ko dobara refresh karein ---
+                    if (typeof updateStatusBar === 'function') updateStatusBar();
+                    // ----------------------------------------------------------------------------
+
+                    if (listData.playlistId && (listData.syncMode === 'sync' || listData.syncMode === 'pull')) {
+                        syncPlaylistVideos(listId, listData.playlistId, listData.syncMode);
+                    }
+                }
+            });
+
             renderVideos();
         }
 
@@ -3052,25 +3399,41 @@ function parseMarkdownLine(text) {
                 }
             });
         }
-
-        function createNewList(name) {
+        function createNewList(name, playlistLink = '', syncMode = 'none') {
             if (!currentUserId) return;
             showLoading();
+
+            let playlistId = null;
+            if (playlistLink) {
+                const match = playlistLink.match(/[?&]list=([^&]+)/);
+                if (match && match[1]) {
+                    playlistId = match[1];
+                } else if (playlistLink.length >= 10 && !playlistLink.includes('/')) {
+                    playlistId = playlistLink;
+                } else {
+                    showMessage("Invalid Playlist Link. Creating regular list.", 'error');
+                    syncMode = 'none';
+                }
+            }
+
             const newListRef = db.ref(`users/${currentUserId}/lists`).push();
             newListRef.set({
                 name: name,
+                playlistId: playlistId,
+                syncMode: syncMode,
                 createdAt: firebase.database.ServerValue.TIMESTAMP
             }).then(() => {
                 showMessage(`List "${name}" created successfully!`, 'success');
                 hideModal(createListModal);
                 listNameInput.value = '';
+                if (playlistLinkInput) playlistLinkInput.value = '';
+                if (playlistModeSelect) playlistModeSelect.value = 'none';
             }).catch(error => {
                 console.error("Error creating list:", error);
                 showMessage("Failed to create list.", 'error');
             }).finally(() => {
                 hideLoading();
             });
-
         }
         function changeCurrentListEmoji() {
             if (!currentUserId || !currentListId) return;
@@ -3111,12 +3474,7 @@ function parseMarkdownLine(text) {
 
 
 
-
-
-
-
-
-        function deleteCurrentList() {
+function deleteCurrentList() {
             if (!currentUserId || !currentListId) return;
 
             // Prevent deleting the last list
@@ -3126,15 +3484,27 @@ function parseMarkdownLine(text) {
                 return;
             }
 
-            confirmDeleteMessage.textContent = `Are you sure you want to delete the list "${currentListName}" and all its videos? This action cannot be undone.`;
+            // UI UX: Humne list ka naam aur ID delete hone se pehle mehfooz kar liya hai
+            const nameToDelete = currentListName; 
+            const listIdToDelete = currentListId; 
+
+            confirmDeleteMessage.textContent = `Are you sure you want to delete the list "${nameToDelete}" and all its videos? This action cannot be undone.`;
             showModal(confirmDeleteModal);
+            
             confirmDeleteBtn.onclick = () => {
+                // UI UX: Bulletproof Guard - Agar button already disabled hai, toh foran block kar do
+                if (confirmDeleteBtn.disabled) return; 
+
+                // Button ko foran lock kar do taake double click na ho sake
+                confirmDeleteBtn.disabled = true; 
+                confirmDeleteBtn.textContent = 'Deleting...'; 
+                confirmDeleteBtn.style.pointerEvents = 'none'; 
+
                 showLoading();
-                db.ref(`users/${currentUserId}/lists/${currentListId}`).remove()
+                db.ref(`users/${currentUserId}/lists/${listIdToDelete}`).remove()
                     .then(() => {
-                        showMessage(`List "${currentListName}" deleted.`, 'success');
+                        showMessage(`List "${nameToDelete}" deleted.`, 'success');
                         hideModal(confirmDeleteModal);
-                        // The list listener will automatically re-render and select a new list
                     })
                     .catch(error => {
                         console.error("Error deleting list:", error);
@@ -3142,9 +3512,16 @@ function parseMarkdownLine(text) {
                     })
                     .finally(() => {
                         hideLoading();
+                        // Modal band hone ke baad button ko wapas normal halat mein layein
+                        confirmDeleteBtn.disabled = false; 
+                        confirmDeleteBtn.textContent = 'Delete'; 
+                        confirmDeleteBtn.style.pointerEvents = 'auto';
                     });
             };
         }
+
+
+
 
         // NEW: Archive flow
         function openConfirmArchiveModal() {
@@ -3200,25 +3577,45 @@ function parseMarkdownLine(text) {
                     .finally(() => hideLoading());
             }
 
-            function deleteArchivedListById(listId, listName) {
+           function deleteArchivedListById(listId, listName) {
                 if (!currentUserId || !listId) return;
-                confirmDeleteMessage.textContent = `Delete archived list "${stripLeadingEmoji(listName)}" and all its videos? This cannot be undone.`;
+                
+                const cleanName = stripLeadingEmoji(listName);
+                confirmDeleteMessage.textContent = `Delete archived list "${cleanName}" and all its videos? This cannot be undone.`;
                 showModal(confirmDeleteModal);
+                
                 confirmDeleteBtn.onclick = () => {
+                    // Lock button to prevent double-click
+                    if (confirmDeleteBtn.disabled) return; 
+
+                    confirmDeleteBtn.disabled = true; 
+                    confirmDeleteBtn.textContent = 'Deleting...'; 
+                    confirmDeleteBtn.style.pointerEvents = 'none'; 
+                    
                     showLoading();
+                    
+                    // FIX 1: currentListId ki jagah listId lagaya hai
                     db.ref(`users/${currentUserId}/lists/${listId}`).remove()
                         .then(() => {
-                            showMessage('Archived list deleted.', 'success');
+                            // FIX 2: Sahi naam display karwaya hai
+                            showMessage(`Archived List "${cleanName}" deleted.`, 'success');
                             hideModal(confirmDeleteModal);
-                            // Local UI update
+                            
+                            // UI se foran remove karne ke liye
                             archivedLists = archivedLists.filter(l => l.id !== listId);
                             renderArchivedListsModal();
                         })
-                        .catch(err => {
-                            console.error('Error deleting archived list:', err);
-                            showMessage('Failed to delete archived list.', 'error');
+                        .catch(error => {
+                            console.error("Error deleting archived list:", error);
+                            showMessage("Failed to delete list.", 'error');
                         })
-                        .finally(() => hideLoading());
+                        .finally(() => {
+                            hideLoading();
+                            // Button ko wapas normal karein
+                            confirmDeleteBtn.disabled = false; 
+                            confirmDeleteBtn.textContent = 'Delete'; 
+                            confirmDeleteBtn.style.pointerEvents = 'auto';
+                        });
                 };
             }
 
@@ -3438,10 +3835,14 @@ function parseMarkdownLine(text) {
         async function moveVideoBetweenLists(videoId, fromListId, toListId) {
             showLoading();
             try {
+                const targetListSnap = await db.ref(`users/${currentUserId}/lists/${toListId}`).once('value');
+                if (targetListSnap.exists() && targetListSnap.val().syncMode === 'sync') {
+                    throw new Error('Cannot move video into a list that is in Sync mode.');
+                }
+
                 const fromRef = db.ref(`users/${currentUserId}/lists/${fromListId}/videos/${videoId}`);
                 const snap = await fromRef.once('value');
                 if (!snap.exists()) throw new Error('Source video not found.');
-
                 const data = snap.val() || {};
                 // Ensure order puts it at top of target list
                 const orderTop = 0;
@@ -3717,6 +4118,9 @@ function parseMarkdownLine(text) {
                 }
                 initializeSortable();
                 hideLoading();
+
+                // NAYA: Status bar ko update karo
+                if (typeof updateStatusBar === 'function') updateStatusBar();
                 // Apply search filter if active
                 if (searchInput.value.trim() !== '') {
                     triggerSearch();
@@ -3893,7 +4297,13 @@ function parseMarkdownLine(text) {
                 const videoIdToDelete = e.target.dataset.id;
                 confirmDeleteMessage.textContent = `Are you sure you want to delete "${videoData.title}"?`;
                 showModal(confirmDeleteModal);
-                confirmDeleteBtn.onclick = () => {
+confirmDeleteBtn.onclick = () => {
+                    // Lock button
+                    if (confirmDeleteBtn.disabled) return;
+                    confirmDeleteBtn.disabled = true;
+                    confirmDeleteBtn.textContent = 'Deleting...';
+                    confirmDeleteBtn.style.pointerEvents = 'none';
+
                     showLoading();
                     db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${videoIdToDelete}`).remove()
                         .then(() => {
@@ -3905,6 +4315,10 @@ function parseMarkdownLine(text) {
                             showMessage("Failed to delete video.", 'error');
                         }).finally(() => {
                             hideLoading();
+                            // Unlock button
+                            confirmDeleteBtn.disabled = false;
+                            confirmDeleteBtn.textContent = 'Delete';
+                            confirmDeleteBtn.style.pointerEvents = 'auto';
                         });
                 };
             });
@@ -3965,7 +4379,11 @@ function parseMarkdownLine(text) {
             }
             showLoading();
             const noteContent = noteTextareaModal.value.trim();
-            db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${currentNoteVideoId}/note`).set(noteContent === '' ? null : noteContent)
+            const updates = {
+                note: noteContent === '' ? null : noteContent,
+                noteTimestamp: noteContent === '' ? null : firebase.database.ServerValue.TIMESTAMP
+            };
+            db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${currentNoteVideoId}`).update(updates)
                 .then(() => {
                     if (videoCards[currentNoteVideoId]) {
                         videoCards[currentNoteVideoId].data.note = noteContent; // Update local data
@@ -3981,30 +4399,41 @@ function parseMarkdownLine(text) {
                 });
         }
 
-        function deleteNoteFromModal() {
+function deleteNoteFromModal() {
             if (!currentUserId || !currentListId || !currentNoteVideoId) {
                 showMessage("Error: Missing data to delete note.", 'error');
                 return;
             }
-            // Add confirmation for delete note action
+            
             confirmDeleteMessage.textContent = `Are you sure you want to delete the note for "${videoCards[currentNoteVideoId].data.title}"?`;
             showModal(confirmDeleteModal);
+            
             confirmDeleteBtn.onclick = () => {
+                // Lock button
+                if (confirmDeleteBtn.disabled) return;
+                confirmDeleteBtn.disabled = true;
+                confirmDeleteBtn.textContent = 'Deleting...';
+                confirmDeleteBtn.style.pointerEvents = 'none';
+
                 showLoading();
                 db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${currentNoteVideoId}/note`).remove()
                     .then(() => {
                         if (videoCards[currentNoteVideoId]) {
-                            videoCards[currentNoteVideoId].data.note = null; // Update local data
-                            updateInlineNoteButton(currentNoteVideoId); // Update the card's note button and its parent .has-note class
+                            videoCards[currentNoteVideoId].data.note = null; 
+                            updateInlineNoteButton(currentNoteVideoId); 
                         }
                         showMessage("Note deleted!", 'success', 1500);
-                        hideModal(noteEditModal); // Close note modal
-                        hideModal(confirmDeleteModal); // Close confirm modal
+                        hideModal(noteEditModal); 
+                        hideModal(confirmDeleteModal); 
                     }).catch(error => {
                         console.error("Error deleting note:", error);
                         showMessage("Failed to delete note.", 'error');
                     }).finally(() => {
                         hideLoading();
+                        // Unlock button
+                        confirmDeleteBtn.disabled = false;
+                        confirmDeleteBtn.textContent = 'Delete';
+                        confirmDeleteBtn.style.pointerEvents = 'auto';
                     });
             };
         }
@@ -4117,6 +4546,191 @@ function parseMarkdownLine(text) {
             });
         }
 
+        // --- NEW: Playlist Sync Engine ---
+        async function fetchAllPlaylistItems(playlistId) {
+            let items = [];
+            let nextPageToken = '';
+            do {
+                const res = await fetch(`https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&pageToken=${nextPageToken}&key=${YOUTUBE_API_KEY}`);
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error?.message || 'Failed to fetch playlist items');
+                items.push(...data.items);
+                nextPageToken = data.nextPageToken || '';
+            } while (nextPageToken);
+            return items;
+        }
+
+        async function syncPlaylistVideos(listId, playlistId, syncMode) {
+            try {
+                // 1. YouTube se playlist ke sary items mangwao
+                const ytItems = await fetchAllPlaylistItems(playlistId);
+                const ytVideoIds = ytItems.map(item => item.snippet.resourceId.videoId);
+
+                // 2. Database se is list ki mojuda videos dekho
+                const listVideosSnap = await db.ref(`users/${currentUserId}/lists/${listId}/videos`).once('value');
+                const existingVideos = listVideosSnap.val() || {};
+                const existingYtIds = Object.values(existingVideos).map(v => v.youtubeId);
+
+                const dbKeysByYtId = {};
+                Object.entries(existingVideos).forEach(([key, val]) => {
+                    dbKeysByYtId[val.youtubeId] = key;
+                });
+
+                // 3. Pata lagao konsi nayi aayi hain (jo YT pe hain magar database me nahi)
+                const videosToAdd = ytVideoIds.filter(id => !existingYtIds.includes(id));
+
+                // 4. Pata lagao konsi delete karni hain (Sirf tab agar SYNC mode ho)
+                const videosToRemove = (syncMode === 'sync')
+                    ? existingYtIds.filter(id => !ytVideoIds.includes(id))
+                    : [];
+
+                // 5. Delete Extra Videos (Sync Mode only)
+                if (videosToRemove.length > 0) {
+                    const updates = {};
+                    videosToRemove.forEach(ytId => { updates[dbKeysByYtId[ytId]] = null; });
+                    await db.ref(`users/${currentUserId}/lists/${listId}/videos`).update(updates);
+                }
+
+                // 6. Add Nayi Videos (50-50 ki batch me YouTube Videos API se data lenge duration k liye)
+                if (videosToAdd.length > 0) {
+                    for (let i = 0; i < videosToAdd.length; i += 50) {
+                        const batch = videosToAdd.slice(i, i + 50);
+                        const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics,contentDetails&id=${batch.join(',')}&key=${YOUTUBE_API_KEY}`);
+                        const data = await res.json();
+
+                        if (data.items) {
+                            for (const video of data.items) {
+                                const snippet = video.snippet;
+                                const channelId = snippet.channelId;
+                                const channelThumbnail = await getChannelThumbnail(channelId);
+
+                                const newVideoData = {
+                                    youtubeId: video.id,
+                                    title: snippet.title,
+                                    thumbnail: snippet.thumbnails.high ? snippet.thumbnails.high.url : snippet.thumbnails.default.url,
+                                    views: formatCount(video.statistics.viewCount),
+                                    channelName: snippet.channelTitle,
+                                    channelThumbnailUrl: channelThumbnail,
+                                    duration: formatDuration(video.contentDetails.duration),
+                                    publishedAt: snippet.publishedAt,
+                                    subscribers: 'N/A', // Auto-sync me sub-count check skip kiya hai API limit bachane k liye
+                                    order: -(new Date().getTime()), // Nayi video ko list ke sab se oopar layega
+                                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                                };
+                                await db.ref(`users/${currentUserId}/lists/${listId}/videos`).push(newVideoData);
+                            }
+                        }
+                    }
+                    showMessage("Playlist checked: New videos added to the top!", 'info', 3000);
+                }
+            } catch (error) {
+                console.error("Playlist sync error:", error);
+            }
+        }
+
+        // --- NEW: Status Bar Engine ---
+        function calculateTotalDuration(videos) {
+            let totalSeconds = 0;
+            videos.forEach(v => {
+                if (!v.duration) return;
+                const parts = v.duration.split(':').reverse();
+                let secs = parseInt(parts[0]) || 0;
+                let mins = parseInt(parts[1]) || 0;
+                let hrs = parseInt(parts[2]) || 0;
+                totalSeconds += secs + (mins * 60) + (hrs * 3600);
+            });
+
+            const h = Math.floor(totalSeconds / 3600);
+            const m = Math.floor((totalSeconds % 3600) / 60);
+            const s = totalSeconds % 60;
+            if (h > 0) return `${h}h ${m}m ${s}s`;
+            return `${m}m ${s}s`;
+        }
+
+        window.updateStatusBar = function () { // Make it global scope accessible if needed
+            if (!currentListId) {
+                listStatusBar.classList.add('hidden');
+                return;
+            }
+            listStatusBar.classList.remove('hidden');
+            const videos = Object.values(videoCards).map(v => v.data);
+
+            // Calculate Stats
+            const statsData = {
+                mode: currentListSyncMode === 'sync' ? 'Sync (Strict)' : (currentListSyncMode === 'pull' ? 'Pull (Auto-add)' : 'Regular'),
+                videoCount: videos.length.toString(),
+                noteCount: videos.filter(v => v.note && v.note.trim() !== '').length.toString(),
+                totalDuration: calculateTotalDuration(videos),
+                lastAdded: 'N/A',
+                lastNote: 'N/A'
+            };
+
+            if (videos.length > 0) {
+                const maxVideoTs = Math.max(...videos.map(v => v.timestamp || 0));
+                if (maxVideoTs > 0) statsData.lastAdded = timeAgo(maxVideoTs);
+
+                const noteVideos = videos.filter(v => v.noteTimestamp);
+                if (noteVideos.length > 0) {
+                    const maxNoteTs = Math.max(...noteVideos.map(v => v.noteTimestamp || 0));
+                    if (maxNoteTs > 0) statsData.lastNote = timeAgo(maxNoteTs);
+                }
+            }
+
+            // Render Active Chips based on saved order
+            statusChipsContainer.innerHTML = '';
+            statusPropsOrder.forEach(prop => {
+                if (prop.active) {
+                    const chip = document.createElement('div');
+                    chip.className = 'status-chip';
+                    chip.innerHTML = `<span>${prop.icon}</span> <span>${prop.label}: <strong>${statsData[prop.id]}</strong></span>`;
+                    statusChipsContainer.appendChild(chip);
+                }
+            });
+        };
+
+        // Open Config Menu
+        statusConfigBtn.addEventListener('click', () => {
+            renderStatusConfigList();
+            showModal(statusConfigModal);
+        });
+
+        function renderStatusConfigList() {
+            statusConfigList.innerHTML = '';
+            statusPropsOrder.forEach(prop => {
+                const item = document.createElement('div');
+                item.className = 'config-list-item';
+                item.dataset.id = prop.id;
+                item.innerHTML = `
+                    <span class="drag-handle">⋮⋮</span>
+                    <input type="checkbox" ${prop.active ? 'checked' : ''}>
+                    <span>${prop.icon} ${prop.label}</span>
+                `;
+                statusConfigList.appendChild(item);
+            });
+
+            if (statusConfigSortable) statusConfigSortable.destroy();
+            statusConfigSortable = Sortable.create(statusConfigList, {
+                animation: 150,
+                handle: '.drag-handle'
+            });
+        }
+
+        // Save Config changes
+        saveStatusConfigBtn.addEventListener('click', () => {
+            const newOrder = [];
+            Array.from(statusConfigList.children).forEach(item => {
+                const id = item.dataset.id;
+                const isActive = item.querySelector('input').checked;
+                const existingProp = statusPropsOrder.find(p => p.id === id);
+                newOrder.push({ ...existingProp, active: isActive });
+            });
+            statusPropsOrder = newOrder;
+            localStorage.setItem('yt_status_props', JSON.stringify(statusPropsOrder));
+
+            updateStatusBar();
+            hideModal(statusConfigModal);
+            showMessage("Status Bar settings saved!", 'success', 2000);
+        });
 
         // --- Search Functionality ---
         function triggerSearch() {
@@ -4190,6 +4804,14 @@ function parseMarkdownLine(text) {
                 showMessage("Please sign in to add videos.", 'error');
                 return;
             }
+            if (currentListSyncMode === null) {
+                showMessage("Loading list settings, please wait...", 'info');
+                return;
+            }
+            if (currentListSyncMode === 'sync') {
+                showMessage("This list is in Sync mode. You cannot manually add videos.", 'error');
+                return;
+            }
             videoLinkInput.value = ''; // Clear input on open
             showModal(addVideoModal);
             videoLinkInput.focus(); // Focus input for quick paste
@@ -4224,12 +4846,16 @@ function parseMarkdownLine(text) {
         // Submit List button in modal
         submitListBtn.addEventListener('click', () => {
             const listName = listNameInput.value.trim();
+            const plLink = playlistLinkInput.value.trim();
+            const plMode = playlistModeSelect.value;
+
             if (listName) {
-                createNewList(listName);
+                createNewList(listName, plLink, plMode);
             } else {
                 showMessage("List name cannot be empty.", 'error');
             }
         });
+
 
         // Enter key for creating list
         listNameInput.addEventListener('keydown', (e) => {
@@ -4344,6 +4970,12 @@ function parseMarkdownLine(text) {
                     showMessage("Please select or create a list first to add videos.", 'error', 3000);
                     return;
                 }
+                if (currentListSyncMode === 'sync') {
+                    showMessage("This list is in Sync mode. You cannot paste videos here.", 'error', 3000);
+                    return;
+                }
+
+                // Fill the input and show the modal
 
                 // Fill the input and show the modal
                 videoLinkInput.value = pastedText;
@@ -4354,7 +4986,34 @@ function parseMarkdownLine(text) {
                 // console.log("Pasted text is not a YouTube URL:", pastedText);
             }
         });
+        // --- Sidebar Toggle Logic ---
+        const toggleSidebarBtn = document.getElementById('toggle-sidebar-btn');
+        const sidebarElement = document.querySelector('.sidebar');
 
+        if (toggleSidebarBtn && sidebarElement) {
+            toggleSidebarBtn.addEventListener('click', () => {
+                sidebarElement.classList.toggle('collapsed');
+            });
+        }
+
+// --- Settings Menu Click Logic ---
+        const settingsGearBtn = document.getElementById('settings-gear-btn');
+        const settingsDropdownMenu = document.getElementById('settings-dropdown-menu');
+
+        if (settingsGearBtn && settingsDropdownMenu) {
+            // Gear button pe click karne se menu khulega ya band hoga
+            settingsGearBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // Click ko document tak jane se rokta hai
+                settingsDropdownMenu.classList.toggle('show');
+            });
+
+            // Agar screen pe kahin aur click ho, toh menu band ho jayega
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.settings-dropdown')) {
+                    settingsDropdownMenu.classList.remove('show');
+                }
+            });
+        }
 
         // Initial render logic will be triggered by auth state change
     </script>
