@@ -418,13 +418,12 @@
             display: inline-block;
         }
 
-        .app-container {
+.app-container {
             display: flex;
             width: 100%;
-            height: 100vh;
-            /* Fixed height to viewport height */
-            overflow: hidden;
-            /* Hide overflow for the container, let children manage their scroll */
+            min-height: 100vh;
+            /* Changed for Full Page Screenshot */
+            overflow: visible;
         }
 
         /* --- Sidebar --- */
@@ -452,18 +451,19 @@
             box-shadow: inset 0 0 0 2px var(--primary-light);
         }
 
-        .sidebar {
+.sidebar {
             width: 240px;
-            /* UI UX: Width slim ki hai */
             min-width: 240px;
             background-color: var(--surface-color);
             box-shadow: 2px 0 8px var(--card-shadow);
             padding: 12px;
-            /* UI UX: Fazool padding 20px se 12px kar di */
             display: flex;
             flex-direction: column;
             z-index: 101;
-            height: auto;
+            /* Changed for Full Page Screenshot - Make it Sticky */
+            position: sticky;
+            top: 0;
+            height: 100vh;
             overflow-y: hidden;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, width 0.3s ease, min-width 0.3s ease, padding 0.3s ease;
         }
@@ -662,12 +662,12 @@
         }
 
         /* --- Main Content Area --- */
-        .main-content {
+.main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
-            /* This element itself can scroll if its content overflows */
+            /* Changed for Full Page Screenshot */
+            overflow-y: visible;
         }
 
         header {
@@ -826,11 +826,11 @@
             background-color: #b00020;
         }
 
-        main {
+main {
             flex-grow: 1;
             padding: 12px;
-            /* UI UX: Fazool 20px ki spacing hata kar 12px kar di */
-            overflow-y: auto;
+            /* Changed for Full Page Screenshot */
+            overflow-y: visible;
             display: flex;
             flex-direction: column;
         }
@@ -1638,7 +1638,9 @@
                 min-height: 100vh;
             }
 
-            .sidebar {
+.sidebar {
+                /* Reset sticky for mobile screens */
+                position: relative;
                 width: 100%;
                 height: auto;
                 max-height: 180px;
@@ -1649,7 +1651,6 @@
                 border-bottom-right-radius: 0;
                 overflow-y: hidden;
             }
-
             .lists-container {
                 overflow-y: auto;
             }
