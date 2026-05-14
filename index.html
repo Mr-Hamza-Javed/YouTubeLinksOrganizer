@@ -5463,7 +5463,7 @@
             const lastUpdated = videoData.lastUpdated || 0;
             const hours48 = 48 * 60 * 60 * 1000;
 
-            if (now - lastUpdated < hours48) {
+            if (lastUpdated !== 0 && (now - lastUpdated < hours48)) {
                 return false; // 48h se kam time hua hai, isliye skip karega
             }
 
@@ -5530,7 +5530,7 @@
 
             const now = Date.now();
             const lastUpdated = videoData.lastUpdated || 0;
-            if (now - lastUpdated < 48 * 60 * 60 * 1000) {
+            if (lastUpdated !== 0 && (now - lastUpdated < 48 * 60 * 60 * 1000)) {
                 showMessage("Video is already up to date (updated less than 48 hours ago).", "info", 4000);
                 return;
             }
