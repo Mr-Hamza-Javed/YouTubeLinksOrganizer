@@ -418,12 +418,11 @@
             display: inline-block;
         }
 
-.app-container {
+        .app-container {
             display: flex;
             width: 100%;
-            min-height: 100vh;
-            /* Changed for Full Page Screenshot */
-            overflow: visible;
+            height: 100vh;
+            overflow: hidden;
         }
 
         /* --- Sidebar --- */
@@ -451,7 +450,7 @@
             box-shadow: inset 0 0 0 2px var(--primary-light);
         }
 
-.sidebar {
+        .sidebar {
             width: 240px;
             min-width: 240px;
             background-color: var(--surface-color);
@@ -460,12 +459,12 @@
             display: flex;
             flex-direction: column;
             z-index: 101;
-            /* Changed for Full Page Screenshot - Make it Sticky */
             position: sticky;
             top: 0;
             height: 100vh;
             overflow-y: hidden;
             transition: background-color 0.3s ease, box-shadow 0.3s ease, width 0.3s ease, min-width 0.3s ease, padding 0.3s ease;
+            box-sizing: border-box;
         }
 
         .sidebar-header {
@@ -556,7 +555,11 @@
             /* dark default */
         }
 
-        body.light-theme .list-item.temp-archived.active,
+        body.light-theme .list-item.temp-archived.active {
+            background: rgba(220, 38, 38, 0.10);
+            /* light */
+        }
+
         @media (prefers-color-scheme: light) {
             body:not(.dark-theme):not(.light-theme) .list-item.temp-archived.active {
                 background: rgba(220, 38, 38, 0.10);
@@ -662,12 +665,11 @@
         }
 
         /* --- Main Content Area --- */
-.main-content {
+        .main-content {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            /* Changed for Full Page Screenshot */
-            overflow-y: visible;
+            overflow: hidden;
         }
 
         header {
@@ -826,11 +828,10 @@
             background-color: #b00020;
         }
 
-main {
+        main {
             flex-grow: 1;
             padding: 12px;
-            /* Changed for Full Page Screenshot */
-            overflow-y: visible;
+            overflow-y: auto;
             display: flex;
             flex-direction: column;
         }
@@ -967,7 +968,7 @@ main {
             border: var(--card-border-color);
             border-width: thin;
             border-style: solid;
-            
+
             background-color: var(--surface-color);
             border-radius: 8px;
             box-shadow: 0 4px 10px var(--card-shadow);
@@ -1122,6 +1123,7 @@ main {
             text-overflow: ellipsis;
             display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             color: var(--text-color);
         }
@@ -1222,7 +1224,11 @@ main {
         }
 
         /* Specific hover for light theme to ensure dark text on light hover */
-        body.light-theme .three-dots-menu-btn:hover,
+        body.light-theme .three-dots-menu-btn:hover {
+            background-color: var(--border-color);
+            color: var(--text-color);
+        }
+
         @media (prefers-color-scheme: light) {
             body:not(.dark-theme):not(.light-theme) .three-dots-menu-btn:hover {
                 background-color: var(--border-color);
@@ -1244,7 +1250,8 @@ main {
             box-shadow: 0 4px 12px var(--card-shadow);
             z-index: 1000;
             min-width: 150px;
-            padding: 8px 0;
+            padding: 0;
+            overflow: hidden;
             display: none;
             flex-direction: column;
             opacity: 0;
@@ -1263,12 +1270,14 @@ main {
             width: 100%;
             text-align: left;
             padding: 10px 15px;
+            margin: 0 !important;
             background: none;
             border: none;
             color: var(--text-color);
             font-size: 0.9em;
             cursor: pointer;
             border-radius: 0;
+            min-height: auto;
             transition: background-color 0.2s ease;
         }
 
@@ -1309,19 +1318,18 @@ main {
             background-color: var(--surface-color);
             padding: 30px;
             border-radius: 0;
-            /* UI UX: Drawers square hotay hain */
             box-shadow: -5px 0 25px var(--modal-shadow);
             width: 100%;
             max-width: 420px;
-            /* Slim drawer */
             height: 100vh;
-            /* Poori height */
             overflow-y: auto;
             transform: translateX(100%);
-            /* Right side ke bahar rakha hai */
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s ease;
             color: var(--text-color);
             position: relative;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
 
         .modal-overlay.active .modal-content {
@@ -1353,14 +1361,16 @@ main {
 
         .modal-content textarea {
             min-height: 120px;
-            resize: vertical;
+            flex-grow: 1;
+            resize: none;
         }
 
         .modal-content .modal-actions {
             display: flex;
             justify-content: flex-end;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: auto;
+            padding-bottom: 10px;
         }
 
         .modal-content .modal-actions button {
@@ -1443,7 +1453,9 @@ main {
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
+            display: -webkit-box;
             -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             color: var(--text-color);
         }
@@ -1638,7 +1650,7 @@ main {
                 min-height: 100vh;
             }
 
-.sidebar {
+            .sidebar {
                 /* Reset sticky for mobile screens */
                 position: relative;
                 width: 100%;
@@ -1651,6 +1663,7 @@ main {
                 border-bottom-right-radius: 0;
                 overflow-y: hidden;
             }
+
             .lists-container {
                 overflow-y: auto;
             }
@@ -1773,18 +1786,16 @@ main {
         .fullscreen-content {
             background-color: var(--surface-color);
             width: 100%;
-            /* Change to 100% */
             height: 100%;
-            /* Change to 100% */
             border-radius: 0;
-            /* Remove radius */
             box-shadow: none;
-            /* Remove shadow */
             display: flex;
             flex-direction: column;
             position: relative;
             padding: 15px;
             color: var(--text-color);
+            box-sizing: border-box;
+            overflow: hidden;
         }
 
         .fs-container {
@@ -1866,6 +1877,7 @@ main {
             flex: 1;
             display: flex;
             flex-direction: column;
+            min-height: 0;
         }
 
         #fs-note-textarea {
@@ -1885,14 +1897,14 @@ main {
             flex: 1;
             overflow-y: auto;
             padding: 20px 60px;
-            /* Notion has wider padding */
             background-color: var(--surface-color);
             cursor: text;
             position: relative;
-            /* Notion Font Stack */
             font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
             color: var(--text-color);
             line-height: 1.5;
+            min-height: 0;
+            margin-bottom: 10px;
         }
 
         /* Source Mode Textarea (Ctrl+A) */
@@ -2073,29 +2085,104 @@ main {
         }
 
         /* --- Naya Code: Settings Dropdown ke liye --- */
-    /* --- Naya Code: Settings Dropdown ke liye --- */
-            .settings-dropdown {
-                position: relative;
-                display: inline-block;
-            }
-            .settings-dropdown-content {
-                display: none;
-                position: absolute;
-                bottom: 120%; /* UI UX: Dropdown ab oopar ki taraf khulega */
-                left: 0;
-                background-color: var(--surface-color);
-                min-width: 160px;
-                box-shadow: 0px -4px 16px var(--modal-shadow);
-                padding: 12px;
-                border-radius: 8px;
-                z-index: 9999; /* UI UX: Z-index bohot high kar diya taake sab cheezon ke oopar rahay */
-                border: 1px solid var(--border-color);
-            }
-/* UI UX: Hover ki jagah ab .show class se open hoga */
-            .settings-dropdown-content.show {
-                display: flex;
-                flex-direction: column;
-            }
+        /* --- Naya Code: Settings Dropdown ke liye --- */
+        .settings-dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .settings-dropdown-content {
+            display: none;
+            position: absolute;
+            bottom: 120%;
+            /* UI UX: Dropdown ab oopar ki taraf khulega */
+            left: 0;
+            background-color: var(--surface-color);
+            min-width: 160px;
+            box-shadow: 0px -4px 16px var(--modal-shadow);
+            padding: 12px;
+            border-radius: 8px;
+            z-index: 9999;
+            /* UI UX: Z-index bohot high kar diya taake sab cheezon ke oopar rahay */
+            border: 1px solid var(--border-color);
+        }
+
+        /* UI UX: Hover ki jagah ab .show class se open hoga */
+        .settings-dropdown-content.show {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Templates Menu CSS --- */
+        .template-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .template-item.inactive {
+            opacity: 0.6;
+        }
+
+        .template-info-col h4 {
+            margin: 0 0 5px 0;
+            font-size: 1em;
+            color: var(--text-color);
+        }
+
+        .template-info-col p {
+            margin: 0;
+            font-size: 0.8em;
+            color: var(--text-muted-color);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 250px;
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .template-actions button {
+            padding: 4px 8px;
+            font-size: 0.8em;
+        }
+
+        .has-submenu {
+            position: relative;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            right: 100%;
+            top: 0;
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            box-shadow: -4px 4px 12px var(--card-shadow);
+            border: 1px solid var(--border-color);
+            min-width: 160px;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+
+        .has-submenu:hover .submenu {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .submenu .menu-item {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 200px;
+        }
     </style>
 </head>
 
@@ -2119,15 +2206,23 @@ main {
                 <!-- Authentication Controls -->
                 <div class="footer-toolbar">
                     <!-- Theme icon buttons -->
-<div class="settings-dropdown sidebar-settings">
-                        <button id="settings-gear-btn" class="icon-toggle" title="Settings" aria-label="Settings">⚙️</button>
+                    <div class="settings-dropdown sidebar-settings">
+                        <button id="settings-gear-btn" class="icon-toggle" title="Settings"
+                            aria-label="Settings">⚙️</button>
                         <div id="settings-dropdown-menu" class="settings-dropdown-content">
                             <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                                <button id="theme-toggle-btn" class="icon-toggle" title="Theme" aria-label="Theme">🖥️</button>
-                                <button id="archive-lists-btn" class="icon-toggle" title="Archived Lists" aria-label="Archived Lists">🗃️</button>
+                                <button id="theme-toggle-btn" class="icon-toggle" title="Theme"
+                                    aria-label="Theme">🖥️</button>
+                                <button id="archive-lists-btn" class="icon-toggle" title="Archived Lists"
+                                    aria-label="Archived Lists">🗃️</button>
+                                <button id="manage-templates-btn" class="icon-toggle" title="Manage Templates"
+                                    aria-label="Manage Templates">📋</button>
                             </div>
-                            <label for="card-size-slider" style="font-size: 0.85em; margin-bottom: 4px; color: var(--text-color);">Card Size:</label>
-                            <input type="range" id="card-size-slider" min="250" max="450" value="320" style="width: 100%;">
+                            <label for="card-size-slider"
+                                style="font-size: 0.85em; margin-bottom: 4px; color: var(--text-color);">Card
+                                Size:</label>
+                            <input type="range" id="card-size-slider" min="250" max="450" value="320"
+                                style="width: 100%;">
                         </div>
                     </div>
 
@@ -2317,6 +2412,79 @@ main {
     </div>
 
     <!-- Message Container -->
+    <!-- Templates Manager Modal -->
+    <div id="templates-manage-modal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 500px;">
+            <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="margin: 0;">Manage Templates</h2>
+                <button id="template-info-btn" class="icon-toggle" title="How to use variables"
+                    style="border-radius: 50%;">ℹ️</button>
+            </div>
+
+            <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <input type="hidden" id="template-id-input">
+                <input type="text" id="template-name-input" placeholder="Template Name (e.g., Markdown Link)">
+                <textarea id="template-text-input" placeholder="Template text here... e.g., [!{title}](!{url})"
+                    style="min-height: 80px;"></textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <label
+                        style="display: flex; align-items: center; gap: 5px; cursor: pointer; font-weight: normal; margin: 0;">
+                        <input type="checkbox" id="template-active-checkbox" checked> Active
+                    </label>
+                    <button id="save-template-btn">Save Template</button>
+                </div>
+            </div>
+
+            <div id="templates-list-container"
+                style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
+                <!-- Templates will be listed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Info Guide Modal -->
+    <div id="template-info-modal" class="modal-overlay" style="z-index: 2001;">
+        <div class="modal-content">
+            <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
+            <h2>Template Guide</h2>
+            <p style="color: var(--text-muted-color); font-size: 0.9em;">Templates allow you to copy video details in
+                your desired format with a single click.</p>
+
+            <h3 style="margin-top: 15px; margin-bottom: 5px; color: var(--primary-light);">Available Variables:</h3>
+
+            <ul style="margin: 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6; color: var(--text-color);">
+                <li><code>!{title}</code> - Video Title</li>
+                <li><code>!{url}</code> - Video Link</li>
+                <li><code>!{channel}</code> - Channel Name</li>
+                <li><code>!{duration}</code> - Video Duration</li>
+                <li><code>!{views}</code> - View Count (e.g., 1.5M)</li>
+                <li><code>!{viewsRaw}</code> - View Count Exact (e.g., 1500000)</li>
+                <li><code>!{published}</code> - Upload Time Relative (e.g., 2 days ago)</li>
+                <li><code>!{publishedDate}</code> - Upload Date Exact (e.g., 10/25/2023)</li>
+                <li><code>!{subscribers}</code> - Channel Subscribers (e.g., 2M)</li>
+                <li><code>!{subscribersRaw}</code> - Channel Subscribers Exact (e.g., 2000000)</li>
+                <li><code>!{thumbnail}</code> - Thumbnail Image URL</li>
+                <li><code>!{note}</code> - Your saved note for this video</li>
+            </ul>
+
+            <h3 style="margin-top: 15px; margin-bottom: 5px; color: var(--primary-light);">JavaScript Snippets:</h3>
+            <p style="margin: 0; font-size: 0.9em; line-height: 1.6; color: var(--text-color);">
+                You can write multi-line JavaScript inside <code>!{ }</code>. Variables are resolved before the script
+                runs, so you can use them inside your code.<br>
+                <strong>Example (Convert views to K):</strong><br>
+                <code>!{ Math.round(!{viewsRaw} / 1000) + 'K' }</code>
+            </p>
+
+            <h3 style="margin-top: 15px; margin-bottom: 5px; color: var(--primary-light);">Full Example:</h3>
+            <div
+                style="background: var(--bg-color); padding: 10px; border-radius: 5px; border: 1px solid var(--border-color); font-family: monospace; font-size: 0.85em; color: var(--text-muted-color);">
+                Title: !{title}<br>
+                Link: !{url}<br>
+                Calculated Views: !{ Math.round(!{viewsRaw} / 1000000) }M
+            </div>
+        </div>
+    </div>
     <div id="message-container"></div>
 
     <!-- Loading Overlay -->
@@ -2417,6 +2585,7 @@ main {
         let archivedLists = [];
         let tempArchivedListId = null;
         let tempArchivedListName = null;
+        let userTemplates = {};
         let isDraggingVideo = false;
         let currentDragPayload = null;
         let currentNoteLines = [];
@@ -3066,6 +3235,7 @@ main {
                 }
                 signInGoogleBtn.style.display = 'none';
                 loadLists(); // Load data for the logged-in user
+                loadTemplates();
                 // Show list related buttons
                 createListBtn.style.display = 'inline-flex'; // Assuming this is an icon-btn
             } else {
@@ -3281,13 +3451,7 @@ main {
                         // build a popover for this item
                         const pop = document.createElement('div');
                         pop.className = 'list-actions-popover';
-                        pop.innerHTML = `
-  <button class="menu-item" data-act="reorder"><span>↕</span><span>${listSortMode ? 'Done Reordering' : 'Reorder Lists'}</span></button>
-  <button class="menu-item" data-act="rename"><span>✏️</span><span>Rename Current List</span></button>
-  <button class="menu-item" data-act="emoji"><span>😊</span><span>Change List Emoji</span></button>
-  <button class="menu-item" data-act="archive"><span>📦</span><span>Archive Current List</span></button>
-  <button class="menu-item danger" data-act="delete"><span>🗑️</span><span>Delete Current List</span></button>
-`;
+                       pop.innerHTML = `<button class="menu-item" data-act="refresh"><span>🔄</span><span>Refresh Data</span></button><button class="menu-item" data-act="reorder"><span>↕</span><span>${listSortMode ? 'Done Reordering' : 'Reorder Lists'}</span></button><button class="menu-item" data-act="rename"><span>✏️</span><span>Rename Current List</span></button><button class="menu-item" data-act="emoji"><span>😊</span><span>Change List Emoji</span></button><button class="menu-item" data-act="archive"><span>📦</span><span>Archive Current List</span></button><button class="menu-item danger" data-act="delete"><span>🗑️</span><span>Delete Current List</span></button>`;
 
                         document.body.appendChild(pop);
 
@@ -3309,8 +3473,8 @@ main {
                         pop.addEventListener('click', (e) => {
                             const btn = e.target.closest('.menu-item'); if (!btn) return;
                             const act = btn.dataset.act;
-                            if (act === 'reorder') { toggleListReorder(); pop.classList.remove('active'); }
-                            if (act === 'rename') { openRenameListModal(); pop.classList.remove('active'); }
+                            if (act === 'refresh') { refreshCurrentListData(listId); pop.classList.remove('active'); }
+                            if (act === 'reorder') { toggleListReorder(); pop.classList.remove('active'); } if (act === 'rename') { openRenameListModal(); pop.classList.remove('active'); }
                             if (act === 'emoji') { changeCurrentListEmoji(); pop.classList.remove('active'); }
                             if (act === 'archive') { openConfirmArchiveModal(); pop.classList.remove('active'); }
                             if (act === 'delete') { deleteCurrentList(); pop.classList.remove('active'); }
@@ -3482,7 +3646,7 @@ main {
 
 
 
-function deleteCurrentList() {
+        function deleteCurrentList() {
             if (!currentUserId || !currentListId) return;
 
             // Prevent deleting the last list
@@ -3493,20 +3657,20 @@ function deleteCurrentList() {
             }
 
             // UI UX: Humne list ka naam aur ID delete hone se pehle mehfooz kar liya hai
-            const nameToDelete = currentListName; 
-            const listIdToDelete = currentListId; 
+            const nameToDelete = currentListName;
+            const listIdToDelete = currentListId;
 
             confirmDeleteMessage.textContent = `Are you sure you want to delete the list "${nameToDelete}" and all its videos? This action cannot be undone.`;
             showModal(confirmDeleteModal);
-            
+
             confirmDeleteBtn.onclick = () => {
                 // UI UX: Bulletproof Guard - Agar button already disabled hai, toh foran block kar do
-                if (confirmDeleteBtn.disabled) return; 
+                if (confirmDeleteBtn.disabled) return;
 
                 // Button ko foran lock kar do taake double click na ho sake
-                confirmDeleteBtn.disabled = true; 
-                confirmDeleteBtn.textContent = 'Deleting...'; 
-                confirmDeleteBtn.style.pointerEvents = 'none'; 
+                confirmDeleteBtn.disabled = true;
+                confirmDeleteBtn.textContent = 'Deleting...';
+                confirmDeleteBtn.style.pointerEvents = 'none';
 
                 showLoading();
                 db.ref(`users/${currentUserId}/lists/${listIdToDelete}`).remove()
@@ -3521,8 +3685,8 @@ function deleteCurrentList() {
                     .finally(() => {
                         hideLoading();
                         // Modal band hone ke baad button ko wapas normal halat mein layein
-                        confirmDeleteBtn.disabled = false; 
-                        confirmDeleteBtn.textContent = 'Delete'; 
+                        confirmDeleteBtn.disabled = false;
+                        confirmDeleteBtn.textContent = 'Delete';
                         confirmDeleteBtn.style.pointerEvents = 'auto';
                     });
             };
@@ -3585,30 +3749,30 @@ function deleteCurrentList() {
                     .finally(() => hideLoading());
             }
 
-           function deleteArchivedListById(listId, listName) {
+            function deleteArchivedListById(listId, listName) {
                 if (!currentUserId || !listId) return;
-                
+
                 const cleanName = stripLeadingEmoji(listName);
                 confirmDeleteMessage.textContent = `Delete archived list "${cleanName}" and all its videos? This cannot be undone.`;
                 showModal(confirmDeleteModal);
-                
+
                 confirmDeleteBtn.onclick = () => {
                     // Lock button to prevent double-click
-                    if (confirmDeleteBtn.disabled) return; 
+                    if (confirmDeleteBtn.disabled) return;
 
-                    confirmDeleteBtn.disabled = true; 
-                    confirmDeleteBtn.textContent = 'Deleting...'; 
-                    confirmDeleteBtn.style.pointerEvents = 'none'; 
-                    
+                    confirmDeleteBtn.disabled = true;
+                    confirmDeleteBtn.textContent = 'Deleting...';
+                    confirmDeleteBtn.style.pointerEvents = 'none';
+
                     showLoading();
-                    
+
                     // FIX 1: currentListId ki jagah listId lagaya hai
                     db.ref(`users/${currentUserId}/lists/${listId}`).remove()
                         .then(() => {
                             // FIX 2: Sahi naam display karwaya hai
                             showMessage(`Archived List "${cleanName}" deleted.`, 'success');
                             hideModal(confirmDeleteModal);
-                            
+
                             // UI se foran remove karne ke liye
                             archivedLists = archivedLists.filter(l => l.id !== listId);
                             renderArchivedListsModal();
@@ -3620,8 +3784,8 @@ function deleteCurrentList() {
                         .finally(() => {
                             hideLoading();
                             // Button ko wapas normal karein
-                            confirmDeleteBtn.disabled = false; 
-                            confirmDeleteBtn.textContent = 'Delete'; 
+                            confirmDeleteBtn.disabled = false;
+                            confirmDeleteBtn.textContent = 'Delete';
                             confirmDeleteBtn.style.pointerEvents = 'auto';
                         });
                 };
@@ -4000,11 +4164,13 @@ function deleteCurrentList() {
                 const channelThumbnail = await getChannelThumbnail(channelId);
 
                 let subscriberCount = 'N/A';
+                let rawSubCount = 0;
                 try {
                     const channelStatsResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`);
                     const channelStatsData = await channelStatsResponse.json();
                     if (channelStatsResponse.ok && channelStatsData.items.length > 0 && channelStatsData.items[0].statistics && channelStatsData.items[0].statistics.subscriberCount) {
-                        subscriberCount = formatCount(parseInt(channelStatsData.items[0].statistics.subscriberCount));
+                        rawSubCount = parseInt(channelStatsData.items[0].statistics.subscriberCount);
+                        subscriberCount = formatCount(rawSubCount);
                     }
                 } catch (channelError) {
                     console.warn("Error fetching channel statistics for subscriber count:", channelError);
@@ -4015,11 +4181,14 @@ function deleteCurrentList() {
                     title: snippet.title,
                     thumbnail: snippet.thumbnails.high ? snippet.thumbnails.high.url : snippet.thumbnails.default.url,
                     views: formatCount(statistics.viewCount),
+                    viewCountRaw: statistics.viewCount,
                     channelName: snippet.channelTitle,
                     channelThumbnailUrl: channelThumbnail,
                     duration: formatDuration(contentDetails.duration),
                     publishedAt: snippet.publishedAt,
-                    subscribers: subscriberCount
+                    subscribers: subscriberCount,
+                    subscriberCountRaw: rawSubCount,
+                    rawApiData: video // Yeh YouTube ka poora original data save karega next time k liye
                 };
 
             } catch (error) {
@@ -4210,11 +4379,8 @@ function deleteCurrentList() {
                             <p>${viewsText} • ${subscribersText} • ${uploadedTime}</p>
                         </div>
                     </div>
-                    <!-- video-menu-overlay remains here, it's displayed as a fixed overlay -->
-                    <div class="video-menu-overlay">
-                        <button class="menu-item view-btn" data-videoid="${videoData.youtubeId}">View Video</button>
-                        <button class="menu-item delete-btn danger" data-id="${videoId}">Delete</button>
-                    </div>
+<!-- video-menu-overlay remains here, it's displayed as a fixed overlay -->
+<div class="video-menu-overlay"><button class="menu-item refresh-btn" data-id="${videoId}">Refresh Data</button><button class="menu-item view-btn" data-videoid="${videoData.youtubeId}">View Video</button><div class="has-submenu"><button class="menu-item" style="display: flex; justify-content: space-between; width: 100%;"><span>Copy Template</span> <span>◀</span></button><div class="submenu template-submenu-container" data-id="${videoId}"></div></div><button class="menu-item delete-btn danger" data-id="${videoId}">Delete</button></div>            
                 </div>
             `;
 
@@ -4282,7 +4448,15 @@ function deleteCurrentList() {
                     currentMenu = menuOverlay.classList.contains('active') ? menuOverlay : null;
                 });
             }
-
+            card.querySelector('.refresh-btn').addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (currentMenu) {
+                    currentMenu.classList.remove('active');
+                    const previousParent = currentMenu.dataset.originalParentId ? document.getElementById(currentMenu.dataset.originalParentId) : null;
+                    if (previousParent) { previousParent.appendChild(currentMenu); currentMenu.removeAttribute('data-original-parent-id'); }
+                }
+                handleVideoRefreshClick(e.target.dataset.id);
+            });
             card.querySelector('.view-btn').addEventListener('click', (e) => {
                 e.stopPropagation();
                 if (currentMenu) {
@@ -4305,7 +4479,7 @@ function deleteCurrentList() {
                 const videoIdToDelete = e.target.dataset.id;
                 confirmDeleteMessage.textContent = `Are you sure you want to delete "${videoData.title}"?`;
                 showModal(confirmDeleteModal);
-confirmDeleteBtn.onclick = () => {
+                confirmDeleteBtn.onclick = () => {
                     // Lock button
                     if (confirmDeleteBtn.disabled) return;
                     confirmDeleteBtn.disabled = true;
@@ -4407,15 +4581,15 @@ confirmDeleteBtn.onclick = () => {
                 });
         }
 
-function deleteNoteFromModal() {
+        function deleteNoteFromModal() {
             if (!currentUserId || !currentListId || !currentNoteVideoId) {
                 showMessage("Error: Missing data to delete note.", 'error');
                 return;
             }
-            
+
             confirmDeleteMessage.textContent = `Are you sure you want to delete the note for "${videoCards[currentNoteVideoId].data.title}"?`;
             showModal(confirmDeleteModal);
-            
+
             confirmDeleteBtn.onclick = () => {
                 // Lock button
                 if (confirmDeleteBtn.disabled) return;
@@ -4427,12 +4601,12 @@ function deleteNoteFromModal() {
                 db.ref(`users/${currentUserId}/lists/${currentListId}/videos/${currentNoteVideoId}/note`).remove()
                     .then(() => {
                         if (videoCards[currentNoteVideoId]) {
-                            videoCards[currentNoteVideoId].data.note = null; 
-                            updateInlineNoteButton(currentNoteVideoId); 
+                            videoCards[currentNoteVideoId].data.note = null;
+                            updateInlineNoteButton(currentNoteVideoId);
                         }
                         showMessage("Note deleted!", 'success', 1500);
-                        hideModal(noteEditModal); 
-                        hideModal(confirmDeleteModal); 
+                        hideModal(noteEditModal);
+                        hideModal(confirmDeleteModal);
                     }).catch(error => {
                         console.error("Error deleting note:", error);
                         showMessage("Failed to delete note.", 'error');
@@ -4617,14 +4791,19 @@ function deleteNoteFromModal() {
                                     title: snippet.title,
                                     thumbnail: snippet.thumbnails.high ? snippet.thumbnails.high.url : snippet.thumbnails.default.url,
                                     views: formatCount(video.statistics.viewCount),
+                                    viewCountRaw: video.statistics.viewCount,
                                     channelName: snippet.channelTitle,
                                     channelThumbnailUrl: channelThumbnail,
                                     duration: formatDuration(video.contentDetails.duration),
                                     publishedAt: snippet.publishedAt,
-                                    subscribers: 'N/A', // Auto-sync me sub-count check skip kiya hai API limit bachane k liye
-                                    order: -(new Date().getTime()), // Nayi video ko list ke sab se oopar layega
+                                    subscribers: 'N/A',
+                                    subscriberCountRaw: 0,
+                                    rawApiData: video, // YouTube ka poora raw data
+                                    order: -(new Date().getTime()),
                                     timestamp: firebase.database.ServerValue.TIMESTAMP
                                 };
+
+
                                 await db.ref(`users/${currentUserId}/lists/${listId}/videos`).push(newVideoData);
                             }
                         }
@@ -5004,7 +5183,7 @@ function deleteNoteFromModal() {
             });
         }
 
-// --- Settings Menu Click Logic ---
+        // --- Settings Menu Click Logic ---
         const settingsGearBtn = document.getElementById('settings-gear-btn');
         const settingsDropdownMenu = document.getElementById('settings-dropdown-menu');
 
@@ -5022,8 +5201,353 @@ function deleteNoteFromModal() {
                 }
             });
         }
+        // --- Templates Engine & Logic ---
+
+        const manageTemplatesBtn = document.getElementById('manage-templates-btn');
+        const templatesManageModal = document.getElementById('templates-manage-modal');
+        const templateInfoBtn = document.getElementById('template-info-btn');
+        const templateInfoModal = document.getElementById('template-info-modal');
+        const saveTemplateBtn = document.getElementById('save-template-btn');
+        const templatesListContainer = document.getElementById('templates-list-container');
+
+        // Open Manager
+        if (manageTemplatesBtn) {
+            manageTemplatesBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.getElementById('settings-dropdown-menu').classList.remove('show');
+                clearTemplateForm();
+                showModal(templatesManageModal);
+            });
+        }
+
+        // Open Info
+        if (templateInfoBtn) {
+            templateInfoBtn.addEventListener('click', () => showModal(templateInfoModal));
+        }
+
+        // Fetch Templates
+        function loadTemplates() {
+            if (!currentUserId) return;
+            db.ref(`users/${currentUserId}/templates`).on('value', snapshot => {
+                userTemplates = snapshot.val() || {};
+                renderTemplatesManager();
+                updateAllVideoCardMenus(); // Re-render menus on open cards
+            });
+        }
+
+        // Clear Form
+        function clearTemplateForm() {
+            document.getElementById('template-id-input').value = '';
+            document.getElementById('template-name-input').value = '';
+            document.getElementById('template-text-input').value = '';
+            document.getElementById('template-active-checkbox').checked = true;
+            saveTemplateBtn.textContent = "Save Template";
+        }
+
+        // Save Template
+        saveTemplateBtn.addEventListener('click', () => {
+            const id = document.getElementById('template-id-input').value;
+            const name = document.getElementById('template-name-input').value.trim();
+            const text = document.getElementById('template-text-input').value.trim();
+            const isActive = document.getElementById('template-active-checkbox').checked;
+
+            if (!name || !text) {
+                showMessage("Name and text are required.", "error");
+                return;
+            }
+
+            // Agar existing template update ho raha hai to purana order use karo, warna list ki length
+            let order = Object.keys(userTemplates).length;
+            if (id && userTemplates[id] && userTemplates[id].order !== undefined) {
+                order = userTemplates[id].order;
+            }
+
+            const templateData = { name, text, isActive, order, timestamp: firebase.database.ServerValue.TIMESTAMP };
+            showLoading();
+
+            const ref = id ? db.ref(`users/${currentUserId}/templates/${id}`) : db.ref(`users/${currentUserId}/templates`).push();
+            ref.set(templateData).then(() => {
+                showMessage("Template saved!", "success");
+                clearTemplateForm();
+            }).catch(err => showMessage("Error saving template", "error")).finally(() => hideLoading());
+        });
+
+        // Render List in Manager
+        // Render List in Manager
+        let templatesSortable = null;
+        function renderTemplatesManager() {
+            templatesListContainer.innerHTML = '';
+
+            // Order ke hisaab se sort karo, fallback me timestamp
+            const entries = Object.entries(userTemplates).sort((a, b) => {
+                const orderA = a[1].order !== undefined ? a[1].order : Number.MAX_SAFE_INTEGER;
+                const orderB = b[1].order !== undefined ? b[1].order : Number.MAX_SAFE_INTEGER;
+                if (orderA !== orderB) return orderA - orderB;
+                return (b[1].timestamp || 0) - (a[1].timestamp || 0);
+            });
+
+            if (entries.length === 0) {
+                templatesListContainer.innerHTML = '<p style="text-align: center; color: var(--text-muted-color); font-size: 0.9em;">No templates saved yet.</p>';
+                return;
+            }
+
+            entries.forEach(([id, tmpl]) => {
+                const div = document.createElement('div');
+                div.className = `template-item ${tmpl.isActive ? '' : 'inactive'}`;
+                div.dataset.id = id; // ID save karo sorting ke liye
+                div.innerHTML = `
+                    <span class="template-drag-handle" style="cursor: grab; color: var(--text-muted-color); margin-right: 10px; font-size: 1.2em;">⋮⋮</span>
+                    <div class="template-info-col" style="flex-grow: 1; overflow: hidden;">
+                        <h4>${tmpl.name} ${tmpl.isActive ? '' : '(Inactive)'}</h4>
+                        <p>${tmpl.text}</p>
+                    </div>
+                    <div class="template-actions">
+                        <button class="outline edit-tmpl-btn" data-id="${id}">Edit</button>
+                        <button class="danger del-tmpl-btn" data-id="${id}">Del</button>
+                    </div>
+                `;
+                templatesListContainer.appendChild(div);
+            });
+
+            // Initialize Sortable.js
+            if (templatesSortable) { templatesSortable.destroy(); }
+            templatesSortable = Sortable.create(templatesListContainer, {
+                animation: 150,
+                handle: '.template-drag-handle',
+                onUpdate: function () {
+                    if (!currentUserId) return;
+                    const updates = {};
+                    Array.from(templatesListContainer.children).forEach((child, index) => {
+                        const tId = child.dataset.id;
+                        if (tId) updates[`${tId}/order`] = index;
+                    });
+                    // Firebase update karein taake order mehfooz ho jaye
+                    db.ref(`users/${currentUserId}/templates`).update(updates).catch(console.error);
+                }
+            });
+
+            // Edit
+            document.querySelectorAll('.edit-tmpl-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = e.target.dataset.id;
+                    const tmpl = userTemplates[id];
+                    document.getElementById('template-id-input').value = id;
+                    document.getElementById('template-name-input').value = tmpl.name;
+                    document.getElementById('template-text-input').value = tmpl.text;
+                    document.getElementById('template-active-checkbox').checked = tmpl.isActive;
+                    saveTemplateBtn.textContent = "Update Template";
+                });
+            });
+
+            // Delete
+            document.querySelectorAll('.del-tmpl-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    if (confirm("Delete this template?")) {
+                        db.ref(`users/${currentUserId}/templates/${e.target.dataset.id}`).remove();
+                    }
+                });
+            });
+        }
+
+        // Update all existing video cards with active templates
+        function updateAllVideoCardMenus() {
+            document.querySelectorAll('.template-submenu-container').forEach(container => {
+                const videoId = container.dataset.id;
+                populateTemplateSubmenu(container, videoId);
+            });
+        }
+
+        // Populate 3-dot sub-menu
+        function populateTemplateSubmenu(container, videoId) {
+            container.innerHTML = '';
+            const activeTemplates = Object.entries(userTemplates)
+                .filter(([id, tmpl]) => tmpl.isActive)
+                .sort((a, b) => {
+                    const orderA = a[1].order !== undefined ? a[1].order : Number.MAX_SAFE_INTEGER;
+                    const orderB = b[1].order !== undefined ? b[1].order : Number.MAX_SAFE_INTEGER;
+                    if (orderA !== orderB) return orderA - orderB;
+                    return (b[1].timestamp || 0) - (a[1].timestamp || 0);
+                });
+
+            if (activeTemplates.length === 0) {
+                container.innerHTML = '<button class="menu-item" disabled style="opacity: 0.5; cursor: default;">No active templates</button>';
+                return;
+            }
+
+            activeTemplates.forEach(([id, tmpl]) => {
+                const btn = document.createElement('button');
+                btn.className = 'menu-item copy-template-btn';
+                btn.textContent = tmpl.name;
+                btn.title = tmpl.text; // Tooltip preview
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    executeAndCopyTemplate(tmpl.text, videoId);
+                    if (currentMenu) currentMenu.classList.remove('active');
+                });
+                container.appendChild(btn);
+            });
+        }
+
+        // DOM Mutation Observer: Auto-populate submenu when a new card is added to grid
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes) {
+                    mutation.addedNodes.forEach((node) => {
+                        if (node.nodeType === 1 && node.classList.contains('video-card')) {
+                            const submenu = node.querySelector('.template-submenu-container');
+                            if (submenu) populateTemplateSubmenu(submenu, submenu.dataset.id);
+                        }
+                    });
+                }
+            });
+        });
+        observer.observe(videoGridContainer, { childList: true });
+
+        // Parser Engine (Regex + Eval)
+        function executeAndCopyTemplate(templateText, videoId) {
+            const videoObj = videoCards[videoId];
+            if (!videoObj) return;
+            const vData = videoObj.data;
+
+            const variables = {
+                'title': vData.title || '',
+                'url': `https://www.youtube.com/watch?v=${vData.youtubeId}`,
+                'channel': vData.channelName || '',
+                'duration': vData.duration || '',
+                'views': vData.views ? String(vData.views).replace(' views', '') : '',
+                'viewsRaw': vData.viewCountRaw || '0', // Naya fix: Fallback to '0' agar purani video ho
+                'published': vData.publishedAt ? timeAgo(vData.publishedAt) : '',
+                'publishedDate': vData.publishedAt ? new Date(vData.publishedAt).toLocaleDateString() : '',
+                'subscribers': vData.subscribers ? String(vData.subscribers).replace(' subs', '') : '',
+                'subscribersRaw': vData.subscriberCountRaw || '0', // Naya fix: Fallback to '0'
+                'thumbnail': vData.thumbnail || '',
+                'note': vData.note || ''
+            };
+
+            let parsedText = templateText;
+
+            // 1. Sab se pehle exact variables ko replace karein (e.g. !{viewsRaw})
+            // Sirf alphanumeric aur underscore allow karega taake JS blocks skip ho jayein
+            parsedText = parsedText.replace(/!\{([a-zA-Z0-9_]+)\}/g, (match, varName) => {
+                return variables[varName] !== undefined ? variables[varName] : match;
+            });
+
+            // 2. Ab bachi hui !{ ... } blocks ko JavaScript samajh kar run karein
+            // [\s\S]*? use kiya hai taake multi-line code bhi parse ho sake
+            parsedText = parsedText.replace(/!\{([\s\S]*?)\}/g, (match, jsCode) => {
+                try {
+                    // Code ko execute kar ke return value nikalna
+                    const func = new Function('return (' + jsCode.trim() + ');');
+                    const result = func();
+                    return result !== undefined ? result : '';
+                } catch (err) {
+                    // Agar syntax error ho (yaani simple missing variable ho), toh original text wapas kar do
+                    console.warn("Template JS skipped or error:", err.message);
+                    return match;
+                }
+            });
+
+            // Copy to clipboard
+            navigator.clipboard.writeText(parsedText).then(() => {
+                showMessage("Copied via template!", "success");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+                showMessage("Failed to copy to clipboard", "error");
+            });
+        }
 
         // Initial render logic will be triggered by auth state change
+
+        // --- Refresh Data Engine ---
+        async function refreshSingleVideo(listId, videoId, videoData) {
+            const now = Date.now();
+            const lastUpdated = videoData.lastUpdated || 0;
+            const hours48 = 48 * 60 * 60 * 1000;
+
+            if (now - lastUpdated < hours48) {
+                return false; // 48h se kam time hua hai, isliye skip karega
+            }
+
+            try {
+                const freshData = await getVideoDetails(`https://www.youtube.com/watch?v=${videoData.youtubeId}`);
+                if (freshData) {
+                    const updates = {
+                        title: freshData.title,
+                        thumbnail: freshData.thumbnail,
+                        views: freshData.views,
+                        viewCountRaw: freshData.viewCountRaw,
+                        channelName: freshData.channelName,
+                        channelThumbnailUrl: freshData.channelThumbnailUrl,
+                        duration: freshData.duration,
+                        publishedAt: freshData.publishedAt,
+                        subscribers: freshData.subscribers,
+                        subscriberCountRaw: freshData.subscriberCountRaw,
+                        rawApiData: freshData.rawApiData,
+                        lastUpdated: firebase.database.ServerValue.TIMESTAMP
+                    };
+                    // Yeh existing info ko delete nahi karega (e.g., notes aur order safe rahenge)
+                    await db.ref(`users/${currentUserId}/lists/${listId}/videos/${videoId}`).update(updates);
+                    return true;
+                }
+            } catch (error) {
+                console.warn(`Could not refresh video ${videoData.title}. Keeping old data.`, error);
+                // Agar video delete ho chuka hai to usy update fail hoga, magar hum sirf timer update kar denge taake bar bar fetch na kare
+                await db.ref(`users/${currentUserId}/lists/${listId}/videos/${videoId}`).update({
+                    lastUpdated: firebase.database.ServerValue.TIMESTAMP
+                });
+                return false;
+            }
+        }
+
+        async function refreshCurrentListData(listId) {
+            if (!currentUserId) return;
+            const actualListId = listId || currentListId;
+            showLoading();
+            showMessage("Refreshing list videos... this might take a moment.", "info", 4000);
+            try {
+                const snap = await db.ref(`users/${currentUserId}/lists/${actualListId}/videos`).once('value');
+                if (snap.exists()) {
+                    const videos = snap.val();
+                    let updatedCount = 0;
+                    for (const videoId in videos) {
+                        const updated = await refreshSingleVideo(actualListId, videoId, videos[videoId]);
+                        if (updated) updatedCount++;
+                    }
+                    showMessage(`List refresh complete. Updated ${updatedCount} videos.`, "success", 5000);
+                } else {
+                    showMessage("No videos found to refresh.", "info");
+                }
+            } catch (error) {
+                console.error("Error refreshing list:", error);
+                showMessage("Error refreshing list.", "error");
+            } finally {
+                hideLoading();
+            }
+        }
+
+        async function handleVideoRefreshClick(videoId) {
+            if (!currentUserId || !currentListId) return;
+            const videoData = videoCards[videoId].data;
+
+            const now = Date.now();
+            const lastUpdated = videoData.lastUpdated || 0;
+            if (now - lastUpdated < 48 * 60 * 60 * 1000) {
+                showMessage("Video is already up to date (updated less than 48 hours ago).", "info", 4000);
+                return;
+            }
+
+            showLoading();
+            try {
+                const updated = await refreshSingleVideo(currentListId, videoId, videoData);
+                if (updated) {
+                    showMessage("Video data refreshed successfully!", "success");
+                } else {
+                    showMessage("Could not update. Video might be deleted from YouTube. Old data kept.", "info", 5000);
+                }
+            } finally {
+                hideLoading();
+            }
+        }
     </script>
 </body>
 
