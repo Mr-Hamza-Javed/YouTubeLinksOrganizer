@@ -4383,15 +4383,7 @@
                 </div>
             `;
 
-            // Open video on thumbnail click (excluding clicks on action buttons themselves)
-            card.querySelector('.video-card-thumbnail').addEventListener('click', (e) => {
-                // Prevent opening video if click originated from action buttons
-                if (e.target.closest('.video-card-action-buttons')) {
-                    return;
-                }
-                const w = window.open(`https://www.youtube.com/watch?v=${videoData.youtubeId}`, '_blank', 'noopener');
-                if (w) w.opener = null;
-            });
+
 
 
             const menuButton = card.querySelector('.three-dots-menu-btn');
