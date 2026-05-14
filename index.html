@@ -1202,18 +1202,24 @@
             background: none;
             border: none;
             color: var(--three-dots-color);
-            font-size: 1.5em;
-            width: 24px;
-            height: 24px;
+            font-size: 1.8em;
+            /* Dots ka size bara kiya */
+            width: 32px;
+            /* Button ki width barha di */
+            height: 32px;
+            /* Button ki height barha di */
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0;
+            padding-bottom: 8px;
+            /* Dots ko perfectly center me lane ke liye baseline fix */
+            letter-spacing: 1px;
+            /* Dots ke darmian thori si extra space */
             /* Margins removed, controlled by parent .video-card-action-buttons gap/flex */
             cursor: pointer;
             border-radius: 50%;
             transition: background-color 0.2s ease, color 0.2s ease;
-            /* Added color transition */
             flex-shrink: 0;
             position: relative;
         }
