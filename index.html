@@ -2419,32 +2419,70 @@
 
     <!-- Message Container -->
     <!-- Templates Manager Modal -->
+    <!-- Templates Manager Modal (Full Screen & Preview Mode) -->
     <div id="templates-manage-modal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 500px;">
+        <div class="fullscreen-content">
             <button class="modal-close-btn cancel-btn" title="Close">&times;</button>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h2 style="margin: 0;">Manage Templates</h2>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h2 style="margin: 0; color: var(--primary-color);">Manage Templates</h2>
                 <button id="template-info-btn" class="icon-toggle" title="How to use variables"
                     style="border-radius: 50%;">ℹ️</button>
             </div>
 
-            <div style="background: var(--bg-color); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                <input type="hidden" id="template-id-input">
-                <input type="text" id="template-name-input" placeholder="Template Name (e.g., Markdown Link)">
-                <textarea id="template-text-input" placeholder="Template text here... e.g., [!{title}](!{url})"
-                    style="min-height: 80px;"></textarea>
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <label
-                        style="display: flex; align-items: center; gap: 5px; cursor: pointer; font-weight: normal; margin: 0;">
-                        <input type="checkbox" id="template-active-checkbox" checked> Active
-                    </label>
-                    <button id="save-template-btn">Save Template</button>
-                </div>
-            </div>
+            <div class="fs-container" style="gap: 20px; margin-top: 0;">
 
-            <div id="templates-list-container"
-                style="max-height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px;">
-                <!-- Templates will be listed here -->
+                <!-- Left Main Area: Editor & Live Preview -->
+                <div class="fs-main" style="flex: 2; display: flex; flex-direction: column; gap: 15px;">
+
+                    <!-- Top Controls -->
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <input type="hidden" id="template-id-input">
+                        <input type="text" id="template-name-input" placeholder="Template Name (e.g., Markdown Link)"
+                            style="flex: 1; min-width: 200px; margin: 0;">
+                        <label
+                            style="display: flex; align-items: center; gap: 5px; cursor: pointer; margin: 0; color: var(--text-color);">
+                            <input type="checkbox" id="template-active-checkbox" checked style="transform: scale(1.2);">
+                            Active
+                        </label>
+                        <button id="save-template-btn">Save Template</button>
+                        <button id="clear-template-btn" class="outline">New</button>
+                    </div>
+
+                    <!-- Editor Area -->
+                    <div style="display: flex; flex-direction: column; flex: 1; min-height: 200px;">
+                        <label style="color: var(--text-muted-color); font-size: 0.9em; margin-bottom: 5px;">Template
+                            Code:</label>
+                        <textarea id="template-text-input"
+                            placeholder="Template text here... e.g., !%{title}%! - !%{url}%!"
+                            style="flex: 1; resize: none; width: 100%; margin: 0; padding: 15px; font-family: monospace; font-size: 1.1em; line-height: 1.5; box-sizing: border-box;"></textarea>
+                    </div>
+
+                    <!-- Live Preview Area -->
+                    <div
+                        style="display: flex; flex-direction: column; flex: 1; min-height: 150px; background: var(--bg-color); border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-bottom: 10px;">
+                            <span style="font-weight: bold; color: var(--text-color);">Live Preview</span>
+                            <select id="preview-video-select" style="max-width: 250px; margin: 0;">
+                                <option value="">Select a video...</option>
+                            </select>
+                        </div>
+                        <pre id="template-preview-output"
+                            style="flex: 1; margin: 0; overflow-y: auto; white-space: pre-wrap; color: var(--text-color); font-family: monospace; font-size: 0.95em;"></pre>
+                    </div>
+                </div>
+
+                <!-- Right Sidebar: Saved Templates List -->
+                <div class="fs-sidebar"
+                    style="flex: 1; border-left: 1px solid var(--border-color); border-right: none; padding-left: 15px; padding-right: 0;">
+                    <h3 style="margin-top: 0; color: var(--text-color);">Saved Templates</h3>
+                    <div id="templates-list-container"
+                        style="overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 10px; padding-right: 5px;">
+                        <!-- Templates will be listed here -->
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -2460,34 +2498,43 @@
             <h3 style="margin-top: 15px; margin-bottom: 5px; color: var(--primary-light);">Available Variables:</h3>
 
             <ul style="margin: 0; padding-left: 20px; font-size: 0.9em; line-height: 1.6; color: var(--text-color);">
-                <li><code>!{title}</code> - Video Title</li>
-                <li><code>!{url}</code> - Video Link</li>
-                <li><code>!{channel}</code> - Channel Name</li>
-                <li><code>!{duration}</code> - Video Duration</li>
-                <li><code>!{views}</code> - View Count (e.g., 1.5M)</li>
-                <li><code>!{viewsRaw}</code> - View Count Exact (e.g., 1500000)</li>
-                <li><code>!{published}</code> - Upload Time Relative (e.g., 2 days ago)</li>
-                <li><code>!{publishedDate}</code> - Upload Date Exact (e.g., 10/25/2023)</li>
-                <li><code>!{subscribers}</code> - Channel Subscribers (e.g., 2M)</li>
-                <li><code>!{subscribersRaw}</code> - Channel Subscribers Exact (e.g., 2000000)</li>
-                <li><code>!{thumbnail}</code> - Thumbnail Image URL</li>
-                <li><code>!{note}</code> - Your saved note for this video</li>
+                <li><code>!%{title}%!</code> - Video Title</li>
+                <li><code>!%{url}%!</code> - Video Link</li>
+                <li><code>!%{channel}%!</code> - Channel Name</li>
+                <li><code>!%{duration}%!</code> - Video Duration</li>
+                <li><code>!%{views}%!</code> - View Count (e.g., 1.5M)</li>
+                <li><code>!%{viewsRaw}%!</code> - View Count Exact (e.g., 1500000)</li>
+                <li><code>!%{published}%!</code> - Upload Time Relative (e.g., 2 days ago)</li>
+                <li><code>!%{publishedDate}%!</code> - Upload Date Exact (e.g., 10/25/2023)</li>
+                <li><code>!%{subscribers}%!</code> - Channel Subscribers (e.g., 2M)</li>
+                <li><code>!%{subscribersRaw}%!</code> - Channel Subscribers Exact (e.g., 2000000)</li>
+                <li><code>!%{thumbnail}%!</code> - Thumbnail Image URL</li>
+                <li><code>!%{note}%!</code> - Your saved note for this video</li>
             </ul>
 
-            <h3 style="margin-top: 15px; margin-bottom: 5px; color: var(--primary-light);">JavaScript Snippets:</h3>
+            <h3 style="margin-top: 15px; margin-bottom: 5px; color: var(--primary-light);">JavaScript Snippets & Error
+                Handling:</h3>
             <p style="margin: 0; font-size: 0.9em; line-height: 1.6; color: var(--text-color);">
-                You can write multi-line JavaScript inside <code>!{ }</code>. Variables are resolved before the script
-                runs, so you can use them inside your code.<br>
-                <strong>Example (Convert views to K):</strong><br>
-                <code>!{ Math.round(!{viewsRaw} / 1000) + 'K' }</code>
+                You can write multi-line JavaScript inside <code>!%{ }%!</code>. Variables are resolved before the
+                script runs.
+                <br><br><strong>Error Fallback:</strong> If your code fails, you can use the optional
+                <code>*!%{ }%!</code> fallback block right after it. The fallback block has access to an
+                <code>_error</code> variable which contains the error details.
+                <br><br><strong>Basic JS:</strong><br><code>!%{ Math.round(!%{viewsRaw}%! / 1000) + 'K' }%!</code>
+                <br><br><strong>With
+                    Fallback:</strong><br><code>!%{ someBrokenFunction() }%!*!%{ "Error: " + _error.message }%!</code>
             </p>
 
             <h3 style="margin-top: 15px; margin-bottom: 5px; color: var(--primary-light);">Full Example:</h3>
             <div
                 style="background: var(--bg-color); padding: 10px; border-radius: 5px; border: 1px solid var(--border-color); font-family: monospace; font-size: 0.85em; color: var(--text-muted-color);">
-                Title: !{title}<br>
-                Link: !{url}<br>
-                Calculated Views: !{ Math.round(!{viewsRaw} / 1000000) }M
+                Title: !%{title}%!<br>
+                Link: !%{url}%!<br>
+                Calculated Views: !%{ Math.round(!%{viewsRaw}%! / 1000000) }%!M<br>
+                Advanced JS: !%{ <br>
+                &nbsp;&nbsp;let d = new Date("!%{publishedDate}%!");<br>
+                &nbsp;&nbsp;return d.getFullYear();<br>
+                }%!*!%{ "Date Format Error" }%!
             </div>
         </div>
     </div>
@@ -5207,12 +5254,20 @@
         const saveTemplateBtn = document.getElementById('save-template-btn');
         const templatesListContainer = document.getElementById('templates-list-container');
 
-        // Open Manager
+
+        // Naye Preview elements
+        const previewVideoSelect = document.getElementById('preview-video-select');
+        const templatePreviewOutput = document.getElementById('template-preview-output');
+        const clearTemplateBtn = document.getElementById('clear-template-btn');
+
+
+// Open Manager
         if (manageTemplatesBtn) {
             manageTemplatesBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.getElementById('settings-dropdown-menu').classList.remove('show');
                 clearTemplateForm();
+                populatePreviewDropdown(); // Dropdown me videos load karein
                 showModal(templatesManageModal);
             });
         }
@@ -5222,13 +5277,16 @@
             templateInfoBtn.addEventListener('click', () => showModal(templateInfoModal));
         }
 
+        // New Button Listener
+        clearTemplateBtn.addEventListener('click', clearTemplateForm);
+
         // Fetch Templates
         function loadTemplates() {
             if (!currentUserId) return;
             db.ref(`users/${currentUserId}/templates`).on('value', snapshot => {
                 userTemplates = snapshot.val() || {};
                 renderTemplatesManager();
-                updateAllVideoCardMenus(); // Re-render menus on open cards
+                updateAllVideoCardMenus(); 
             });
         }
 
@@ -5239,8 +5297,8 @@
             document.getElementById('template-text-input').value = '';
             document.getElementById('template-active-checkbox').checked = true;
             saveTemplateBtn.textContent = "Save Template";
+            updateTemplatePreview(); // Preview clear karein
         }
-
         // Save Template
         saveTemplateBtn.addEventListener('click', () => {
             const id = document.getElementById('template-id-input').value;
@@ -5288,24 +5346,26 @@
                 return;
             }
 
-            entries.forEach(([id, tmpl]) => {
+entries.forEach(([id, tmpl]) => {
                 const div = document.createElement('div');
                 div.className = `template-item ${tmpl.isActive ? '' : 'inactive'}`;
-                div.dataset.id = id; // ID save karo sorting ke liye
+                div.dataset.id = id; 
+                div.style.cssText = "flex-direction: column; align-items: stretch; gap: 8px;"; 
                 div.innerHTML = `
-                    <span class="template-drag-handle" style="cursor: grab; color: var(--text-muted-color); margin-right: 10px; font-size: 1.2em;">⋮⋮</span>
-                    <div class="template-info-col" style="flex-grow: 1; overflow: hidden;">
-                        <h4>${tmpl.name} ${tmpl.isActive ? '' : '(Inactive)'}</h4>
-                        <p>${tmpl.text}</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div style="display: flex; align-items: center; overflow: hidden;">
+                            <span class="template-drag-handle" style="cursor: grab; color: var(--text-muted-color); margin-right: 8px;">⋮⋮</span>
+                            <h4 style="margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.95em; color: var(--text-color);">${tmpl.name}</h4>
+                        </div>
+                        <span style="font-size: 0.8em; color: var(--text-muted-color); flex-shrink: 0;">${tmpl.isActive ? 'Active' : 'Inactive'}</span>
                     </div>
-                    <div class="template-actions">
-                        <button class="outline edit-tmpl-btn" data-id="${id}">Edit</button>
-                        <button class="danger del-tmpl-btn" data-id="${id}">Del</button>
+                    <div class="template-actions" style="display: flex; gap: 5px;">
+                        <button class="outline edit-tmpl-btn" data-id="${id}" style="flex: 1; padding: 4px;">Edit</button>
+                        <button class="danger del-tmpl-btn" data-id="${id}" style="padding: 4px;">Del</button>
                     </div>
                 `;
                 templatesListContainer.appendChild(div);
             });
-
             // Initialize Sortable.js
             if (templatesSortable) { templatesSortable.destroy(); }
             templatesSortable = Sortable.create(templatesListContainer, {
@@ -5400,52 +5460,79 @@
         });
         observer.observe(videoGridContainer, { childList: true });
 
-        // Parser Engine (Regex + Eval)
-        function executeAndCopyTemplate(templateText, videoId) {
-            const videoObj = videoCards[videoId];
-            if (!videoObj) return;
-            const vData = videoObj.data;
-
+// Core Template Parser Engine (Ab isko alag function bana diya hai taake preview me use ho sake)
+        function compileTemplate(templateText, vData) {
+            if (!vData) return "";
+            
             const variables = {
                 'title': vData.title || '',
                 'url': `https://www.youtube.com/watch?v=${vData.youtubeId}`,
                 'channel': vData.channelName || '',
                 'duration': vData.duration || '',
                 'views': vData.views ? String(vData.views).replace(' views', '') : '',
-                'viewsRaw': vData.viewCountRaw || '0', // Naya fix: Fallback to '0' agar purani video ho
+                'viewsRaw': vData.viewCountRaw || '0',
                 'published': vData.publishedAt ? timeAgo(vData.publishedAt) : '',
                 'publishedDate': vData.publishedAt ? new Date(vData.publishedAt).toLocaleDateString() : '',
                 'subscribers': vData.subscribers ? String(vData.subscribers).replace(' subs', '') : '',
-                'subscribersRaw': vData.subscriberCountRaw || '0', // Naya fix: Fallback to '0'
+                'subscribersRaw': vData.subscriberCountRaw || '0',
                 'thumbnail': vData.thumbnail || '',
                 'note': vData.note || ''
             };
 
             let parsedText = templateText;
 
-            // 1. Sab se pehle exact variables ko replace karein (e.g. !{viewsRaw})
-            // Sirf alphanumeric aur underscore allow karega taake JS blocks skip ho jayein
-            parsedText = parsedText.replace(/!\{([a-zA-Z0-9_]+)\}/g, (match, varName) => {
+            // 1. Exact variables: !%{varName}%!
+            parsedText = parsedText.replace(/!%\{([a-zA-Z0-9_]+)\}%!/g, (match, varName) => {
                 return variables[varName] !== undefined ? variables[varName] : match;
             });
 
-            // 2. Ab bachi hui !{ ... } blocks ko JavaScript samajh kar run karein
-            // [\s\S]*? use kiya hai taake multi-line code bhi parse ho sake
-            parsedText = parsedText.replace(/!\{([\s\S]*?)\}/g, (match, jsCode) => {
+            // 2. JS Blocks with Fallback
+            const jsBlockRegex = /!%\{([\s\S]*?)\}%!(?:\*!%\{([\s\S]*?)\}%!)?/g;
+            parsedText = parsedText.replace(jsBlockRegex, (match, primaryCode, fallbackCode) => {
+                function runCode(code, errObj = null) {
+                    let c = code.trim();
+                    let func;
+                    if (!c.includes('return')) {
+                        if (c.endsWith(';')) c = c.slice(0, -1);
+                        try {
+                            func = new Function('_error', 'return (' + c + ');');
+                        } catch (e) {
+                            func = new Function('_error', c);
+                        }
+                    } else {
+                        func = new Function('_error', c);
+                    }
+                    return func(errObj);
+                }
+
                 try {
-                    // Code ko execute kar ke return value nikalna
-                    const func = new Function('return (' + jsCode.trim() + ');');
-                    const result = func();
+                    const result = runCode(primaryCode);
                     return result !== undefined ? result : '';
                 } catch (err) {
-                    // Agar syntax error ho (yaani simple missing variable ho), toh original text wapas kar do
-                    console.warn("Template JS skipped or error:", err.message);
-                    return match;
+                    if (fallbackCode !== undefined) {
+                        try {
+                            const fallbackResult = runCode(fallbackCode, err);
+                            return fallbackResult !== undefined ? fallbackResult : '';
+                        } catch (fallbackErr) {
+                            return `[Fallback Error: ${fallbackErr.message}]`;
+                        }
+                    } else {
+                        return `[Error: ${err.message}]`;
+                    }
                 }
             });
 
-            // Copy to clipboard
-            navigator.clipboard.writeText(parsedText).then(() => {
+            return parsedText;
+        }
+
+        // Execute & Copy (Ab `compileTemplate` use karta hai)
+        function executeAndCopyTemplate(templateText, videoId) {
+            const videoObj = videoCards[videoId];
+            if (!videoObj) return;
+            
+            const finalOutput = compileTemplate(templateText, videoObj.data);
+            
+            navigator.clipboard.writeText(finalOutput).then(() => {
                 showMessage("Copied via template!", "success");
             }).catch(err => {
                 console.error('Failed to copy: ', err);
@@ -5453,6 +5540,56 @@
             });
         }
 
+        // --- Live Preview Logic ---
+        function populatePreviewDropdown() {
+            previewVideoSelect.innerHTML = '<option value="">Select a video...</option>';
+            const videos = Object.values(videoCards).map(vc => vc.data);
+            
+            if(videos.length === 0) {
+                previewVideoSelect.innerHTML = '<option value="">No videos available</option>';
+                return;
+            }
+
+            videos.forEach(v => {
+                const opt = document.createElement('option');
+                opt.value = v.id || v.youtubeId; // Video ka unique id
+                opt.textContent = v.title;
+                previewVideoSelect.appendChild(opt);
+            });
+
+            // Automatically pehli video select kar lein
+            previewVideoSelect.value = videos[0].id || videos[0].youtubeId;
+            updateTemplatePreview();
+        }
+
+        function updateTemplatePreview() {
+            const tmplText = document.getElementById('template-text-input').value;
+            const videoId = previewVideoSelect.value;
+            
+            if(!tmplText.trim()) {
+                templatePreviewOutput.textContent = "Preview will appear here...";
+                return;
+            }
+            if(!videoId) {
+                templatePreviewOutput.textContent = "Please select a video from the dropdown.";
+                return;
+            }
+
+            // Find video data object
+            const videoObj = Object.values(videoCards).find(vc => vc.data.id === videoId || vc.data.youtubeId === videoId);
+            
+            if(!videoObj) {
+                templatePreviewOutput.textContent = "Selected video data not found.";
+                return;
+            }
+
+            const previewText = compileTemplate(tmplText, videoObj.data);
+            templatePreviewOutput.textContent = previewText;
+        }
+
+        // Event listeners for Live Preview
+        document.getElementById('template-text-input').addEventListener('input', updateTemplatePreview);
+        previewVideoSelect.addEventListener('change', updateTemplatePreview);
         // Initial render logic will be triggered by auth state change
 
         // --- Refresh Data Engine ---
